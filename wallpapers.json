@@ -1,0 +1,10 @@
+[
+  {"id":"w01","slug":"neon-night","title":"Neon Night","category":"Ville & Nuit","file":"/static/wallpapers/neon-night.svg","likes":98500,"tags":["cyberpunk","night","city"]},
+  {"id":"w02","slug":"midnight-drive","title":"Midnight Drive","category":"Voitures","file":"/static/wallpapers/midnight-drive.svg","likes":87200,"tags":["car","night","sport"]},
+  {"id":"w03","slug":"golden-king","title":"Golden King","category":"Animaux","file":"/static/wallpapers/golden-king.svg","likes":76100,"tags":["lion","animal","gold"]},
+  {"id":"w04","slug":"stadium-energy","title":"Stadium Energy","category":"Sport","file":"/static/wallpapers/stadium-energy.svg","likes":65400,"tags":["football","sport"]},
+  {"id":"w05","slug":"after-hours","title":"After Hours","category":"Musique","file":"/static/wallpapers/after-hours.svg","likes":59300,"tags":["music","purple","night"]},
+  {"id":"w06","slug":"liquid-violet","title":"Liquid Violet","category":"Aesthetic","file":"/static/wallpapers/liquid-violet.svg","likes":53200,"tags":["aesthetic","purple","abstract"]},
+  {"id":"w07","slug":"deep-forest","title":"Deep Forest","category":"Nature","file":"/static/wallpapers/deep-forest.svg","likes":48100,"tags":["nature","forest"]},
+  {"id":"w08","slug":"pure-black","title":"Pure Black","category":"Noir","file":"/static/wallpapers/pure-black.svg","likes":44500,"tags":["black","amoled","minimal"]}
+]
