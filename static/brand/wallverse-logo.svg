@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 260" role="img" aria-labelledby="title desc">
+  <title id="title">WALLVERSE</title>
+  <desc id="desc">Logo WALLVERSE avec grand W et petit losange lumineux placé derrière la dernière lettre.</desc>
+  <defs>
+    <linearGradient id="wv" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#5530ff"/>
+      <stop offset=".48" stop-color="#c144ff"/>
+      <stop offset="1" stop-color="#27d7ff"/>
+    </linearGradient>
+    <linearGradient id="diamond" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#684cff"/>
+      <stop offset=".5" stop-color="#55bfff"/>
+      <stop offset="1" stop-color="#c9f7ff"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <g fill="none" stroke="url(#wv)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M45 65 C62 65 76 78 82 98 L125 210 C131 226 152 227 158 211 L210 80 C215 66 234 66 240 80 L292 211 C298 227 319 226 325 210 L368 98 C374 78 388 65 405 65" stroke-width="48"/>
+  </g>
+  <text x="432" y="166" fill="url(#wv)" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="116" letter-spacing="1">WALLVERSE</text>
+  <g transform="translate(846 80)" filter="url(#glow)">
+    <path d="M0 -30 L30 0 L0 30 L-30 0 Z" fill="url(#diamond)"/>
+  </g>
+</svg>
