@@ -6,10 +6,9 @@
 .splash{opacity:1!important;visibility:visible!important;overflow:hidden}
 .splashScene{position:relative;width:min(94vw,980px);display:flex;flex-direction:column;align-items:center;justify-content:center}
 .splashW{display:block;width:min(55vw,330px);height:auto;margin:0 auto 20px;filter:drop-shadow(0 0 22px rgba(63,103,255,.32));opacity:1}
-#splashWPath{stroke-dasharray:1!important;stroke-dashoffset:1!important;opacity:0}
+#splashWPath{stroke-dasharray:1000!important;stroke-dashoffset:1000!important;opacity:0}
 .splash.phase-w #splashWPath{opacity:1;animation:splashWTrace .75s cubic-bezier(.2,.8,.2,1) forwards}
-@keyframes splashWTrace{from{stroke-dasharray:0 1;stroke-dashoffset:0;filter:drop-shadow(0 0 5px rgba(64,126,255,.2))}to{stroke-dasharray:1 0;stroke-dashoffset:0;filter:drop-shadow(0 0 24px rgba(70,115,255,.6))}}
-.splashW:after{content:"";position:absolute}
+@keyframes splashWTrace{from{stroke-dasharray:1000!important;stroke-dashoffset:1000!important;filter:drop-shadow(0 0 5px rgba(64,126,255,.2))}to{stroke-dasharray:1000!important;stroke-dashoffset:0!important;filter:drop-shadow(0 0 24px rgba(70,115,255,.6))}}
 .splashWord{position:relative;display:flex;align-items:center;justify-content:center;white-space:nowrap;line-height:1;min-height:90px}
 .splashWord .logoLetter{font-family:Manrope,system-ui,sans-serif;font-size:clamp(42px,7.2vw,86px);font-weight:800;letter-spacing:-.065em;opacity:0;transform:translate3d(-13px,7px,0) scale(.95);background:linear-gradient(100deg,#ff5bdb 0%,#7440ff 36%,#2b83ff 70%,#52e9ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 16px rgba(65,119,255,.1));transition:opacity .38s cubic-bezier(.2,.8,.2,1),transform .55s cubic-bezier(.2,.9,.2,1),filter .55s}
 .splash.phase-draw-word .logoLetter:first-child{opacity:.12}
@@ -24,7 +23,6 @@
 .splash.phase-travel .diamondTrail.traveling{opacity:.95;animation:splashTrailTravel 1.08s cubic-bezier(.18,.72,.18,1) forwards}
 @keyframes splashTrailTravel{0%{transform:translate3d(-60vw,-50%,0) scaleX(.2)}100%{transform:translate3d(33vw,-50%,0) scaleX(1)}}
 .splash.phase-settle .diamondTrail.traveling{opacity:0;transition:opacity .22s}
-.splash.phase-settle .splashWord:after{content:"";position:absolute;right:-24px;top:50%;width:36px;height:1px;background:linear-gradient(90deg,rgba(74,139,255,.0),rgba(74,139,255,.55));filter:blur(.3px);transform:translateY(-50%);opacity:.8}
 .splashTagline{margin-top:16px;letter-spacing:.17em;font-weight:500}
 .splashProgress{margin-top:7px}
 .splash.phase-out{opacity:0!important;visibility:hidden!important;transition:opacity .55s ease,visibility .55s ease}
