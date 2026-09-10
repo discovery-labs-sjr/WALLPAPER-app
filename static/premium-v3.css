@@ -1,0 +1,60 @@
+/* WALLVERSE video-reference refinement layer */
+.brand{width:176px;min-width:0;display:block}
+.brandLogoImage{display:block;width:100%;height:38px;object-fit:contain;object-position:left center;filter:drop-shadow(0 0 12px rgba(66,114,255,.18))}
+
+/* Splash choreography: W draw -> star travel -> letter reveal -> settle */
+.splash{opacity:1!important;visibility:visible!important;overflow:hidden}
+.splashScene{position:relative;width:min(94vw,980px);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.splashW{display:block;width:min(55vw,330px);height:auto;margin:0 auto 20px;filter:drop-shadow(0 0 22px rgba(63,103,255,.32));opacity:1}
+#splashWPath{stroke-dasharray:1!important;stroke-dashoffset:1!important;opacity:0}
+.splash.phase-w #splashWPath{opacity:1;animation:splashWTrace .75s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes splashWTrace{from{stroke-dasharray:0 1;stroke-dashoffset:0;filter:drop-shadow(0 0 5px rgba(64,126,255,.2))}to{stroke-dasharray:1 0;stroke-dashoffset:0;filter:drop-shadow(0 0 24px rgba(70,115,255,.6))}}
+.splashW:after{content:"";position:absolute}
+.splashWord{position:relative;display:flex;align-items:center;justify-content:center;white-space:nowrap;line-height:1;min-height:90px}
+.splashWord .logoLetter{font-family:Manrope,system-ui,sans-serif;font-size:clamp(42px,7.2vw,86px);font-weight:800;letter-spacing:-.065em;opacity:0;transform:translate3d(-13px,7px,0) scale(.95);background:linear-gradient(100deg,#ff5bdb 0%,#7440ff 36%,#2b83ff 70%,#52e9ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 16px rgba(65,119,255,.1));transition:opacity .38s cubic-bezier(.2,.8,.2,1),transform .55s cubic-bezier(.2,.9,.2,1),filter .55s}
+.splash.phase-draw-word .logoLetter:first-child{opacity:.12}
+.splash.phase-travel .logoLetter.revealed{opacity:1;transform:translate3d(0,0,0) scale(1);filter:drop-shadow(0 0 18px rgba(77,119,255,.18))}
+.splashWord .lastLetter{margin-right:3px}
+.splashDiamond{position:fixed!important;left:0!important;top:50%!important;right:auto!important;z-index:20;width:21px!important;height:21px!important;border:0!important;border-radius:4px!important;margin:0!important;opacity:0;background:linear-gradient(145deg,#ff6fdd,#7444ff 45%,#41e9ff)!important;box-shadow:0 0 30px rgba(77,123,255,.95),0 0 9px rgba(255,255,255,.35) inset!important;transform:translate3d(-60vw,-50%,0) rotate(45deg)!important}
+.splash.phase-travel .splashDiamond.traveling{opacity:1;animation:splashStarTravel 1.08s cubic-bezier(.18,.72,.18,1) forwards}
+.splash.phase-settle .splashDiamond.traveling{animation:splashStarSettle .48s cubic-bezier(.2,.9,.2,1) forwards}
+@keyframes splashStarTravel{0%{transform:translate3d(-60vw,-50%,0) rotate(45deg) scale(.6)}9%{transform:translate3d(-49vw,-50%,0) rotate(135deg) scale(1)}72%{transform:translate3d(38vw,-50%,0) rotate(405deg) scale(1.04)}100%{transform:translate3d(46vw,-50%,0) rotate(585deg) scale(1)}}
+@keyframes splashStarSettle{0%{transform:translate3d(46vw,-50%,0) rotate(585deg) scale(1)}55%{transform:translate3d(43.7vw,-50%,0) rotate(560deg) scale(1.06)}100%{transform:translate3d(44.4vw,-50%,0) rotate(585deg) scale(1)}}
+.diamondTrail{position:fixed!important;left:0!important;top:50%!important;width:26vw!important;max-width:280px!important;height:3px!important;border:0!important;margin:0!important;opacity:0;background:linear-gradient(90deg,transparent,rgba(97,136,255,.9),rgba(255,255,255,.9));filter:blur(1px) drop-shadow(0 0 9px rgba(67,133,255,.8));transform:translate3d(-60vw,-50%,0);z-index:19}
+.splash.phase-travel .diamondTrail.traveling{opacity:.95;animation:splashTrailTravel 1.08s cubic-bezier(.18,.72,.18,1) forwards}
+@keyframes splashTrailTravel{0%{transform:translate3d(-60vw,-50%,0) scaleX(.2)}100%{transform:translate3d(33vw,-50%,0) scaleX(1)}}
+.splash.phase-settle .diamondTrail.traveling{opacity:0;transition:opacity .22s}
+.splash.phase-settle .splashWord:after{content:"";position:absolute;right:-24px;top:50%;width:36px;height:1px;background:linear-gradient(90deg,rgba(74,139,255,.0),rgba(74,139,255,.55));filter:blur(.3px);transform:translateY(-50%);opacity:.8}
+.splashTagline{margin-top:16px;letter-spacing:.17em;font-weight:500}
+.splashProgress{margin-top:7px}
+.splash.phase-out{opacity:0!important;visibility:hidden!important;transition:opacity .55s ease,visibility .55s ease}
+
+/* Gallery trend energy without losing premium restraint */
+.sectionIntro h2{font-size:clamp(1.55rem,4vw,2.25rem)}
+.heroActions .primaryHeroBtn{box-shadow:0 10px 30px rgba(73,106,255,.22),0 0 0 1px rgba(255,255,255,.08) inset}
+.heroActions .ghostHeroBtn{border-color:rgba(132,161,255,.18);background:rgba(8,13,23,.34);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.card{transform:translateZ(0)}
+.card:before{content:"";position:absolute;inset:-40%;z-index:5;pointer-events:none;background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.1) 48%,transparent 54%);transform:translateX(-65%) rotate(8deg);transition:transform .8s ease}
+.card:hover:before{transform:translateX(65%) rotate(8deg)}
+.card:focus-visible,.navBtn:focus-visible,.iconBtn:focus-visible,.profileBtn:focus-visible,.outlineBtn:focus-visible{outline:2px solid rgba(78,193,255,.6);outline-offset:3px}
+
+/* Hero ambient uses the variable already produced by app.js */
+.heroAmbient{background-image:var(--hero-bg-image)}
+
+@media(max-width:700px){
+  .brand{width:130px}
+  .brandLogoImage{height:30px}
+  .splashScene{width:100vw;padding:0 10px}
+  .splashW{width:min(68vw,260px);margin-bottom:12px}
+  .splashWord{min-height:58px}
+  .splashWord .logoLetter{font-size:clamp(25px,7vw,42px);letter-spacing:-.07em}
+  .splashDiamond{width:15px!important;height:15px!important}
+  .splash.phase-settle .splashWord:after{right:-17px;width:24px}
+}
+@media(prefers-reduced-motion:reduce){
+  .splash.phase-w #splashWPath,.splash.phase-travel .splashDiamond.traveling,.splash.phase-travel .diamondTrail.traveling,.splash.phase-settle .splashDiamond.traveling{animation:none}
+  .splash.phase-w #splashWPath{opacity:1}
+  .splash.phase-travel .splashDiamond.traveling{opacity:1;transform:translate3d(44vw,-50%,0) rotate(45deg)}
+  .splash.phase-travel .diamondTrail.traveling{opacity:0}
+  .splash.phase-travel .logoLetter.revealed{opacity:1;transform:none}
+}
