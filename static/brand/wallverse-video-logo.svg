@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 320" role="img" aria-labelledby="title desc">
+  <title id="title">WALLVERSE</title>
+  <desc id="desc">WALLVERSE wordmark with a rounded capsule W and a four-point star.</desc>
+  <defs>
+    <linearGradient id="wv" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff4bd8"/>
+      <stop offset="0.38" stop-color="#7135ff"/>
+      <stop offset="0.72" stop-color="#1d72ff"/>
+      <stop offset="1" stop-color="#3be7ff"/>
+    </linearGradient>
+    <linearGradient id="wg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff73df"/>
+      <stop offset="0.45" stop-color="#5c31f4"/>
+      <stop offset="1" stop-color="#2ce8ff"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="10" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="smallGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <g filter="url(#glow)" fill="none" stroke="url(#wg)" stroke-width="48" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M36 84 C48 44 70 44 82 84 L132 236"/>
+    <path d="M82 84 L178 236"/>
+    <path d="M132 236 L232 64"/>
+  </g>
+  <g fill="none" stroke="url(#wg)" stroke-width="48" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M36 84 C48 44 70 44 82 84 L132 236"/>
+    <path d="M82 84 L178 236"/>
+    <path d="M132 236 L232 64"/>
+  </g>
+
+  <text x="305" y="205" fill="url(#wv)" font-family="Manrope, Arial, sans-serif" font-size="128" font-weight="800" letter-spacing="-5">WALLVERSE</text>
+
+  <g filter="url(#smallGlow)">
+    <rect x="1107" y="92" width="4" height="132" rx="2" fill="#ffffff" opacity=".95"/>
+    <path d="M1170 72 L1192 122 L1240 145 L1192 168 L1170 220 L1148 168 L1100 145 L1148 122 Z" fill="url(#wv)"/>
+  </g>
+</svg>
