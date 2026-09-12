@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+<title id="title">WALLVERSE</title>
+<desc id="desc">Rounded neon glass WALLVERSE app icon with a continuous W ribbon, orbital ring and star.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#080311"/><stop offset=".48" stop-color="#080A24"/><stop offset="1" stop-color="#020814"/>
+  </linearGradient>
+  <linearGradient id="edge" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#FF35DB"/><stop offset=".38" stop-color="#9248FF"/><stop offset=".68" stop-color="#427AFF"/><stop offset="1" stop-color="#35ECFF"/>
+  </linearGradient>
+  <linearGradient id="ribbon" x1="115" y1="150" x2="400" y2="365">
+    <stop offset="0" stop-color="#FF53E9"/><stop offset=".28" stop-color="#A649FF"/><stop offset=".58" stop-color="#4D77FF"/><stop offset=".82" stop-color="#20C8FF"/><stop offset="1" stop-color="#55F2FF"/>
+  </linearGradient>
+  <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="soft" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <linearGradient id="shine" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".34"/><stop offset=".34" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="1" stop-color="#FFFFFF" stop-opacity=".03"/></linearGradient>
+</defs>
+<rect x="10" y="10" width="492" height="492" rx="112" fill="url(#bg)" stroke="#12162C" stroke-width="3"/>
+<rect x="18" y="18" width="476" height="476" rx="104" fill="none" stroke="url(#edge)" stroke-width="3" opacity=".92" filter="url(#soft)"/>
+<path d="M72 170 C116 62 256 30 400 84 C462 108 486 156 486 156" fill="none" stroke="#ffffff" stroke-width="2" opacity=".08"/>
+<ellipse cx="255" cy="275" rx="188" ry="133" fill="#4054FF" opacity=".06" filter="url(#glow)"/>
+
+<!-- Continuous ribbon W -->
+<path d="M115 178 C141 132 181 128 203 171 L247 300 C254 320 271 323 281 303 L301 259 C307 246 320 246 326 259 L346 303 C356 323 373 320 380 300 L424 171 C446 128 486 132 512 178" transform="translate(-8 0)" fill="none" stroke="#050817" stroke-width="64" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M115 178 C141 132 181 128 203 171 L247 300 C254 320 271 323 281 303 L301 259 C307 246 320 246 326 259 L346 303 C356 323 373 320 380 300 L424 171 C446 128 486 132 512 178" transform="translate(-8 0)" fill="none" stroke="url(#ribbon)" stroke-width="48" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+<path d="M112 170 C139 130 178 132 198 170 L242 298" fill="none" stroke="#FFFFFF" stroke-width="5" opacity=".46" stroke-linecap="round"/>
+<path d="M330 300 L374 170 C394 132 433 130 460 170" fill="none" stroke="#FFFFFF" stroke-width="4" opacity=".34" stroke-linecap="round"/>
+
+<!-- Orbital ring -->
+<path d="M67 286 C123 190 356 166 446 231 C478 254 474 286 431 309 C344 357 144 354 77 312 C55 298 52 289 67 286Z" fill="none" stroke="url(#ribbon)" stroke-width="8" stroke-linecap="round" opacity=".88" filter="url(#soft)"/>
+<path d="M77 301 C151 333 330 334 415 302" fill="none" stroke="#8EDFFF" stroke-width="2" opacity=".28"/>
+
+<!-- Star -->
+<g transform="translate(399 126)" fill="url(#ribbon)" filter="url(#soft)">
+  <path d="M0-30 C4-13 13-4 30 0 C13 4 4 13 0 30 C-4 13 -13 4 -30 0 C-13-4 -4-13 0-30Z"/>
+  <circle r="3.3" fill="#fff"/>
+</g>
+
+<rect x="10" y="10" width="492" height="492" rx="112" fill="url(#shine)" opacity=".26"/>
+</svg>
