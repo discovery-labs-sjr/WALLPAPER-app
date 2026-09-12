@@ -1,0 +1,90 @@
+/* WALLVERSE final layout pass — shell stabilization only. Keep approved Hero / Explore behavior intact. */
+:root{
+  --wv-shell-max:1280px;
+  --wv-nav-gap:18px;
+}
+
+/* Desktop shell: full-width chrome, centered content. */
+@media (min-width:701px){
+  .topbar{
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    padding-left:max(24px,calc((100vw - var(--wv-shell-max))/2 + 24px))!important;
+    padding-right:max(24px,calc((100vw - var(--wv-shell-max))/2 + 24px))!important;
+  }
+  main{
+    width:min(100%,var(--wv-shell-max))!important;
+    max-width:var(--wv-shell-max)!important;
+    margin:0 auto!important;
+    padding-left:24px!important;
+    padding-right:24px!important;
+    padding-bottom:150px!important;
+  }
+  .hero{
+    grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr)!important;
+    gap:clamp(34px,5vw,76px)!important;
+    min-height:clamp(560px,68vh,720px)!important;
+    padding:58px 0 70px!important;
+    overflow:visible!important;
+  }
+  .heroCopy{max-width:720px!important}
+  .heroStage{min-height:540px!important}
+  .heroCard{width:min(100%,390px)!important}
+  .categories{margin-top:0!important}
+  .sectionIntro{margin-top:48px!important}
+  .gallery{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+  .bottomNav{
+    left:50%!important;
+    right:auto!important;
+    bottom:18px!important;
+    transform:translateX(-50%) translateZ(0)!important;
+    width:min(760px,calc(100vw - 48px))!important;
+    z-index:40!important;
+  }
+}
+
+/* Tablet: avoid cramped desktop columns. */
+@media (min-width:701px) and (max-width:1050px){
+  .topbar{grid-template-columns:minmax(150px,1fr) minmax(210px,1.25fr) minmax(150px,1fr)!important;gap:12px!important}
+  .hero{grid-template-columns:minmax(0,1fr) minmax(300px,.82fr)!important;gap:28px!important}
+  .hero h1{font-size:clamp(3rem,6.4vw,5rem)!important}
+  .gallery{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
+
+/* Mobile: preserve the approved Hero order, but keep the shell breathable. */
+@media (max-width:700px){
+  .topbar{
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    padding-left:14px!important;
+    padding-right:14px!important;
+  }
+  main{
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    padding-left:16px!important;
+    padding-right:16px!important;
+    padding-bottom:120px!important;
+  }
+  .hero{overflow:visible!important}
+  .heroCopy{max-width:none!important}
+  .categories{margin-left:-16px!important;margin-right:-16px!important;padding-left:16px!important;padding-right:16px!important}
+  .bottomNav{
+    left:8px!important;
+    right:8px!important;
+    width:auto!important;
+    max-width:none!important;
+    bottom:calc(8px + var(--safe-bottom))!important;
+    z-index:40!important;
+  }
+}
+
+/* Never let fixed bottom navigation sit on the end of the document. */
+#sections,#inspiration,#liveSection,#emptyState{scroll-margin-bottom:110px}
+
+/* Brand image should never inherit legacy text-logo sizing. */
+.brand.brandNative{width:auto!important;max-width:none!important}
+.brandNative .brandExactLogo{max-width:none!important;flex:0 0 auto!important}
