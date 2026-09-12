@@ -1,59 +1,93 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 280" role="img" aria-labelledby="title desc">
   <title id="title">WALLVERSE</title>
-  <desc id="desc">WALLVERSE logo with an intertwined glossy neon ribbon W, wordmark and four-point sparkle.</desc>
+  <desc id="desc">WALLVERSE futuristic neon ribbon W with glossy highlights, wordmark and four-point sparkle.</desc>
   <defs>
     <linearGradient id="wv" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#25E8FF"/>
-      <stop offset="0.28" stop-color="#148CFF"/>
-      <stop offset="0.55" stop-color="#6848FF"/>
-      <stop offset="0.78" stop-color="#C43CFF"/>
-      <stop offset="1" stop-color="#FF35E5"/>
+      <stop offset="0" stop-color="#19E7FF"/>
+      <stop offset=".22" stop-color="#148BFF"/>
+      <stop offset=".48" stop-color="#4A5BFF"/>
+      <stop offset=".72" stop-color="#9B36FF"/>
+      <stop offset="1" stop-color="#FF32DE"/>
     </linearGradient>
-    <linearGradient id="wv2" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#00DFFF"/>
-      <stop offset="0.5" stop-color="#5D48FF"/>
-      <stop offset="1" stop-color="#FF2EDC"/>
+    <linearGradient id="wvReverse" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FF38DF"/>
+      <stop offset=".32" stop-color="#8745FF"/>
+      <stop offset=".68" stop-color="#2F7BFF"/>
+      <stop offset="1" stop-color="#20E8FF"/>
+    </linearGradient>
+    <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset=".28" stop-color="#BEEFFF"/>
+      <stop offset=".55" stop-color="#8E7CFF"/>
+      <stop offset=".78" stop-color="#F4B5FF"/>
+      <stop offset="1" stop-color="#FFFFFF"/>
     </linearGradient>
     <linearGradient id="shine" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#FFFFFF" stop-opacity=".72"/>
-      <stop offset=".25" stop-color="#FFFFFF" stop-opacity=".12"/>
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity=".82"/>
+      <stop offset=".22" stop-color="#FFFFFF" stop-opacity=".18"/>
       <stop offset=".7" stop-color="#FFFFFF" stop-opacity="0"/>
-      <stop offset="1" stop-color="#FFFFFF" stop-opacity=".38"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity=".45"/>
     </linearGradient>
     <filter id="glow" x="-35%" y="-45%" width="170%" height="190%">
-      <feGaussianBlur stdDeviation="6" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-    <filter id="smallGlow" x="-100%" y="-100%" width="300%" height="300%">
-      <feGaussianBlur stdDeviation="2.5" result="b"/>
+    <filter id="softGlow" x="-50%" y="-80%" width="200%" height="260%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
 
-  <!-- New ribbon W: two overlapping trajectories create the intertwined construction. -->
+  <!-- SCULPTURAL W: broad ribbon trajectories, deliberately crossing and interlacing -->
   <g fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)">
-    <!-- rear ribbon -->
-    <path d="M112 56 C137 45 158 49 174 72 C193 100 201 143 216 178 C227 205 249 208 266 181 C282 156 289 104 307 72 C322 46 347 44 369 57 C390 70 399 104 414 145 C424 173 440 177 456 151 C469 130 478 92 490 62" stroke="url(#wv2)" stroke-width="31"/>
-    <!-- front ribbon -->
-    <path d="M126 63 C150 77 163 104 176 139 C188 172 199 205 221 213 C243 221 261 202 275 177 C290 150 301 102 315 76 C329 51 350 47 372 58 C393 69 405 100 417 136 C430 175 445 199 468 187 C486 178 497 145 506 112" stroke="url(#wv)" stroke-width="31"/>
+    <!-- cyan/blue ribbon, behind -->
+    <path d="M92 62
+             C112 43 143 43 161 61
+             C182 82 194 129 207 169
+             C216 197 235 211 252 201
+             C270 191 278 156 289 119
+             C301 78 318 54 343 52
+             C369 50 390 72 401 108
+             C414 151 421 190 443 198
+             C465 206 485 184 499 151
+             C509 126 516 94 522 67"
+          stroke="url(#wv)" stroke-width="38"/>
+
+    <!-- magenta/blue ribbon, crossing in front -->
+    <path d="M105 67
+             C129 75 145 100 157 133
+             C170 168 181 199 201 211
+             C221 223 242 210 256 184
+             C271 156 282 111 296 78
+             C308 49 331 39 354 50
+             C378 61 392 89 402 124
+             C414 166 430 198 451 194
+             C472 190 490 158 503 123"
+          stroke="url(#wvReverse)" stroke-width="38"/>
   </g>
 
-  <!-- crisp ribbon cores -->
+  <!-- crisp glossy ribbon cores -->
   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M112 56 C137 45 158 49 174 72 C193 100 201 143 216 178 C227 205 249 208 266 181 C282 156 289 104 307 72 C322 46 347 44 369 57 C390 70 399 104 414 145 C424 173 440 177 456 151 C469 130 478 92 490 62" stroke="url(#wv2)" stroke-width="19"/>
-    <path d="M126 63 C150 77 163 104 176 139 C188 172 199 205 221 213 C243 221 261 202 275 177 C290 150 301 102 315 76 C329 51 350 47 372 58 C393 69 405 100 417 136 C430 175 445 199 468 187 C486 178 497 145 506 112" stroke="url(#wv)" stroke-width="19"/>
+    <path d="M92 62 C112 43 143 43 161 61 C182 82 194 129 207 169 C216 197 235 211 252 201 C270 191 278 156 289 119 C301 78 318 54 343 52 C369 50 390 72 401 108 C414 151 421 190 443 198 C465 206 485 184 499 151 C509 126 516 94 522 67" stroke="url(#wv)" stroke-width="24"/>
+    <path d="M105 67 C129 75 145 100 157 133 C170 168 181 199 201 211 C221 223 242 210 256 184 C271 156 282 111 296 78 C308 49 331 39 354 50 C378 61 392 89 402 124 C414 166 430 198 451 194 C472 190 490 158 503 123" stroke="url(#wvReverse)" stroke-width="24"/>
   </g>
 
-  <!-- subtle glossy highlights -->
-  <path d="M112 56 C137 45 158 49 174 72 C193 100 201 143 216 178 C227 205 249 208 266 181" fill="none" stroke="url(#shine)" stroke-width="4" stroke-linecap="round" opacity=".7"/>
-  <path d="M315 76 C329 51 350 47 372 58 C393 69 405 100 417 136" fill="none" stroke="url(#shine)" stroke-width="4" stroke-linecap="round" opacity=".65"/>
+  <!-- thin specular edges give the ribbon a glass/metal surface -->
+  <path d="M92 62 C112 43 143 43 161 61 C182 82 194 129 207 169 C216 197 235 211 252 201" fill="none" stroke="url(#shine)" stroke-width="4" opacity=".9"/>
+  <path d="M296 78 C308 49 331 39 354 50 C378 61 392 89 402 124" fill="none" stroke="url(#shine)" stroke-width="4" opacity=".85"/>
+  <path d="M105 67 C129 75 145 100 157 133" fill="none" stroke="#FFFFFF" stroke-width="2.5" opacity=".5"/>
 
-  <!-- centered wordmark below the W -->
-  <text x="300" y="252" text-anchor="middle" fill="url(#wv)" font-family="Manrope,Montserrat,Poppins,Arial,sans-serif" font-size="43" font-weight="800" letter-spacing="3.2">WALLVERSE</text>
+  <!-- subtle orbital light line from the concept render -->
+  <path d="M73 171 C158 223 296 226 435 178 C488 160 522 141 532 119" fill="none" stroke="url(#wv)" stroke-width="2.5" opacity=".75" filter="url(#softGlow)"/>
 
-  <!-- compact four-point sparkle immediately after the E -->
-  <g transform="translate(545 239)" filter="url(#smallGlow)">
-    <path d="M0-18 C2-7 7-2 18 0 C7 2 2 7 0 18 C-2 7 -7 2 -18 0 C-7-2 -2-7 0-18Z" fill="url(#wv)"/>
-    <path d="M0-11 C1-4 4-1 11 0 C4 1 1 4 0 11 C-1 4 -4 1 -11 0 C-4-1 -1-4 0-11Z" fill="#FFFFFF" opacity=".18"/>
+  <!-- WALLVERSE wordmark -->
+  <text x="286" y="253" text-anchor="middle" fill="url(#chrome)"
+        font-family="Montserrat,Manrope,Poppins,Arial,sans-serif"
+        font-size="39" font-weight="900" letter-spacing="2.4">WALLVERSE</text>
+
+  <!-- four-point diamond sparkle immediately after E -->
+  <g transform="translate(548 239)" filter="url(#softGlow)">
+    <path d="M0-21 C2-8 8-2 21 0 C8 2 2 8 0 21 C-2 8 -8 2 -21 0 C-8-2 -2-8 0-21Z" fill="url(#wv)"/>
+    <path d="M0-12 C1-5 5-1 12 0 C5 1 1 5 0 12 C-1 5 -5 1 -12 0 C-5-1 -1-5 0-12Z" fill="#FFFFFF" opacity=".38"/>
   </g>
 </svg>
