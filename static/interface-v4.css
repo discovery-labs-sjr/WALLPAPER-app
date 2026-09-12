@@ -1,0 +1,29 @@
+/* WALLVERSE interface v4 — final motion hardening */
+.navBtn .navIcon svg{
+  display:block!important;
+  fill:none!important;
+  stroke:currentColor!important;
+  stroke-width:1.9!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+  overflow:visible!important;
+  backface-visibility:hidden!important;
+  -webkit-backface-visibility:hidden!important;
+  transform-style:preserve-3d!important;
+  will-change:transform,filter!important;
+}
+.navBtn .navIcon svg circle,.navBtn .navIcon svg path,.navBtn .navIconGrid svg rect{will-change:transform!important;backface-visibility:hidden!important;-webkit-backface-visibility:hidden!important}
+.navBtn .navIconGrid svg rect{fill:currentColor!important;stroke:none!important}
+.navBtn .navIconHeart svg path{fill:none!important}
+.navBtn.navPlay.navExplore .navIconSearch svg{perspective:120px}
+.navBtn.navPlay.navExplore .navIconSearch svg circle{transform-style:preserve-3d!important;backface-visibility:hidden!important}
+.navBtn.navPlay.navExplore .navIconSearch svg path{transform-origin:16.5px 17.5px!important}
+
+/* Keep the category rail visible without feeling like a container */
+@media(max-width:700px){
+  .categories{top:68px!important}
+  .categories .tab{backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important}
+}
+
+/* Prevent accidental tap selection during micro animations */
+.navBtn.navPlay{user-select:none!important;-webkit-user-select:none!important}
