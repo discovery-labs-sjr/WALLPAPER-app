@@ -41,3 +41,117 @@
 @media(max-width:430px){
   .brandLogoImage{width:116px!important}
 }
+
+/* WALLVERSE v6.4 — cinematic hero refinement */
+.hero{
+  min-height:620px!important;
+  padding:70px 0 78px!important;
+  gap:58px!important;
+}
+.heroAmbient{
+  opacity:.23!important;
+  filter:blur(44px) saturate(135%)!important;
+  transform:scale(1.17)!important;
+}
+.heroOverlay{
+  background:
+    radial-gradient(circle at 68% 48%,rgba(65,100,255,.10),transparent 26%),
+    radial-gradient(circle at 84% 72%,rgba(43,213,255,.07),transparent 24%),
+    linear-gradient(90deg,rgba(3,5,13,.99) 0%,rgba(3,5,13,.82) 42%,rgba(3,5,13,.25) 100%)!important;
+}
+.heroCopy{position:relative;z-index:3}
+.heroStage{
+  min-height:540px!important;
+}
+.heroGlow{
+  width:82%!important;
+  height:82%!important;
+  background:radial-gradient(circle,rgba(76,126,255,.34) 0%,rgba(48,83,255,.16) 34%,transparent 72%)!important;
+  filter:blur(38px)!important;
+}
+.heroCard{
+  width:min(100%,370px)!important;
+  border-radius:30px!important;
+  transform:rotateX(1deg) rotateY(-7deg) rotateZ(1.2deg)!important;
+  box-shadow:0 42px 110px rgba(0,0,0,.72),0 0 0 1px rgba(128,159,255,.16),0 0 70px rgba(59,105,255,.10)!important;
+}
+.heroCard:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:3;
+  pointer-events:none;
+  background:linear-gradient(125deg,rgba(255,255,255,.07),transparent 22%,transparent 70%,rgba(84,196,255,.07));
+  mix-blend-mode:screen;
+}
+.heroCardShade{
+  background:linear-gradient(180deg,rgba(0,0,0,.02) 42%,rgba(0,0,5,.18) 57%,rgba(0,0,5,.94) 100%)!important;
+}
+.heroCardLabel{
+  left:20px!important;
+  right:20px!important;
+  bottom:22px!important;
+}
+.heroCardLabel span{color:rgba(224,232,248,.78)!important}
+.heroCardLabel strong{font-size:22px!important;letter-spacing:-.035em!important}
+.heroCardLabel small{color:rgba(195,207,230,.76)!important}
+.heroDots{
+  left:20px!important;
+  right:20px!important;
+  top:19px!important;
+  gap:6px!important;
+}
+.heroDot{background:rgba(255,255,255,.24)!important}
+.heroDot.active{background:#fff!important}
+
+@media(max-width:700px){
+  .hero{
+    min-height:0!important;
+    padding:30px 0 36px!important;
+    gap:0!important;
+  }
+  .heroOverlay{
+    background:
+      radial-gradient(circle at 50% 25%,rgba(58,99,255,.12),transparent 30%),
+      linear-gradient(180deg,rgba(3,5,13,.10) 0%,rgba(3,5,13,.36) 45%,rgba(3,5,13,.96) 88%)!important;
+  }
+  .heroStage{
+    min-height:0!important;
+    padding:16px 0 28px!important;
+  }
+  .heroGlow{
+    width:98%!important;
+    height:92%!important;
+    filter:blur(42px)!important;
+  }
+  .heroCard{
+    width:min(86vw,348px)!important;
+    aspect-ratio:3/4.05!important;
+    border-radius:28px!important;
+    transform:rotateX(0) rotateY(-2deg) rotateZ(.7deg)!important;
+    box-shadow:0 30px 82px rgba(0,0,0,.70),0 0 0 1px rgba(128,159,255,.13),0 0 52px rgba(59,105,255,.11)!important;
+  }
+  .heroCardLabel{left:19px!important;right:19px!important;bottom:20px!important}
+  .heroCardLabel strong{font-size:21px!important}
+  .heroDots{left:19px!important;right:19px!important;top:18px!important}
+  .heroCopy{
+    padding:0 7px!important;
+  }
+  .heroCopy .eyebrow{margin-bottom:10px!important}
+  .hero h1{
+    font-size:clamp(3rem,14vw,4.3rem)!important;
+    line-height:.9!important;
+  }
+  .heroText{
+    margin:18px 0 21px!important;
+    max-width:34rem!important;
+    color:rgba(170,181,201,.88)!important;
+  }
+}
+
+@media(max-width:430px){
+  .heroStage{padding-top:10px!important}
+  .heroCard{width:min(88vw,338px)!important}
+  .heroCopy{padding:0 3px!important}
+  .hero h1{font-size:clamp(2.75rem,13.8vw,3.8rem)!important}
+}
