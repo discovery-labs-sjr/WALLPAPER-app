@@ -1,48 +1,38 @@
 /* WALLVERSE interface v4 — deterministic navigation triggers */
 (() => {
-  const SELECTORS = '.navBtn';
   let bound = false;
+  const NAV_CLASSES = ['navPlay','navHome','navExplore','navLive','navInspiration','navFavorites'];
 
-  function classesFor(tab) {
-    const key = String(tab || '');
-    return ['navPlay', 'navHome', 'navExplore', 'navLive', 'navInspiration', 'navFavorites'].filter(Boolean).concat(`nav${key.charAt(0).toUpperCase()}${key.slice(1)}`);
+  function play(button){
+    if(!button) return;
+    const buttons = [...document.querySelectorAll('.navBtn')];
+    buttons.forEach(btn => btn.classList.remove(...NAV_CLASSES));
+    const tab = String(button.dataset.tab || '');
+    const motion = `nav${tab.charAt(0).toUpperCase()}${tab.slice(1)}`;
+    if(NAV_CLASSES.includes(motion)) button.classList.add('navPlay', motion);
+    window.setTimeout(() => button.classList.remove(...NAV_CLASSES), 820);
   }
 
-  function play(button) {
-    if (!button) return;
-    const buttons = [...document.querySelectorAll(SELECTORS)];
-    buttons.forEach(btn => {
-      btn.classList.remove('navPlay','navHome','navExplore','navLive','navInspiration','navFavorites');
-    });
-    button.classList.add(...classesFor(button.dataset.tab));
-    window.setTimeout(() => {
-      button.classList.remove('navPlay','navHome','navExplore','navLive','navInspiration','navFavorites');
-    }, 900);
-  }
-
-  function bind() {
-    if (bound) return;
+  function bind(){
+    if(bound) return;
     bound = true;
     document.addEventListener('click', event => {
-      const button = event.target.closest(SELECTORS);
-      if (!button) return;
+      const button = event.target.closest('.navBtn');
+      if(!button) return;
       requestAnimationFrame(() => play(button));
-    }, { passive: true });
-
+    }, {passive:true});
     document.addEventListener('pointerdown', event => {
-      const button = event.target.closest(SELECTORS);
-      if (!button) return;
-      button.classList.add('navPressing');
-    }, { passive: true });
-
+      const button = event.target.closest('.navBtn');
+      if(button) button.classList.add('navPressing');
+    }, {passive:true});
     const release = event => {
-      const button = event.target.closest(SELECTORS);
-      if (button) button.classList.remove('navPressing');
+      const button = event.target.closest('.navBtn');
+      if(button) button.classList.remove('navPressing');
     };
-    document.addEventListener('pointerup', release, { passive: true });
-    document.addEventListener('pointercancel', release, { passive: true });
+    document.addEventListener('pointerup', release, {passive:true});
+    document.addEventListener('pointercancel', release, {passive:true});
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind, { once: true });
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind, {once:true});
   else bind();
 })();
