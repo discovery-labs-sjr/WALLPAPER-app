@@ -1,0 +1,33 @@
+/* WALLVERSE v6 — deterministic logo rendering */
+.brandLogoImage{
+  display:block!important;
+  width:196px!important;
+  height:auto!important;
+  max-width:100%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  opacity:1!important;
+  visibility:visible!important;
+  mix-blend-mode:normal!important;
+  filter:drop-shadow(0 0 14px rgba(69,110,255,.28))!important;
+}
+.splashLogoImage{
+  display:block;
+  width:min(420px,78vw);
+  height:auto;
+  max-height:260px;
+  object-fit:contain;
+  opacity:1;
+  filter:drop-shadow(0 0 28px rgba(70,100,255,.42));
+}
+.splashScene{
+  display:grid!important;
+  place-items:center!important;
+  align-content:center!important;
+  gap:12px!important;
+}
+.splashTagline{margin-top:2px!important}
+@media(max-width:700px){
+  .brandLogoImage{width:160px!important;max-height:56px!important}
+  .splashLogoImage{width:min(330px,82vw);max-height:190px}
+}
