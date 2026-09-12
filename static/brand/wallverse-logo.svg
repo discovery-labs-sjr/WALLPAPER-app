@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 280" role="img" aria-labelledby="title desc">
   <title id="title">WALLVERSE</title>
-  <desc id="desc">Clean premium WALLVERSE logo with a smooth neon ribbon W, futuristic wordmark and compact sparkle.</desc>
+  <desc id="desc">WALLVERSE logo with three thick intertwined neon ribbon strokes, futuristic wordmark and compact sparkle.</desc>
   <defs>
-    <linearGradient id="wv" gradientUnits="userSpaceOnUse" x1="120" y1="0" x2="480" y2="0">
+    <linearGradient id="wv" gradientUnits="userSpaceOnUse" x1="118" y1="52" x2="482" y2="206">
       <stop offset="0" stop-color="#FF32D8"/>
-      <stop offset=".30" stop-color="#9B3CFF"/>
-      <stop offset=".58" stop-color="#496CFF"/>
-      <stop offset=".82" stop-color="#1AAEFF"/>
-      <stop offset="1" stop-color="#28E8FF"/>
+      <stop offset=".28" stop-color="#A43CFF"/>
+      <stop offset=".55" stop-color="#596FFF"/>
+      <stop offset=".80" stop-color="#20B8FF"/>
+      <stop offset="1" stop-color="#35ECFF"/>
     </linearGradient>
     <linearGradient id="textGrad" gradientUnits="userSpaceOnUse" x1="145" y1="230" x2="455" y2="230">
       <stop offset="0" stop-color="#FF39D8"/>
@@ -15,66 +15,63 @@
       <stop offset=".68" stop-color="#4D79FF"/>
       <stop offset="1" stop-color="#2BE5FF"/>
     </linearGradient>
-    <filter id="glow" x="-35%" y="-45%" width="170%" height="190%">
+    <filter id="glow" x="-30%" y="-45%" width="160%" height="190%">
       <feGaussianBlur stdDeviation="7" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
     <filter id="softGlow" x="-100%" y="-100%" width="300%" height="300%">
-      <feGaussianBlur stdDeviation="2.8" result="b"/>
+      <feGaussianBlur stdDeviation="2.6" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
 
-  <!-- Premium W: one deliberate, symmetric ribbon trajectory. -->
-  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <!-- atmospheric glow -->
-    <path d="M125 67
-             C151 52 175 55 190 76
-             C207 100 215 144 229 180
-             C241 210 262 215 280 192
-             C292 177 296 143 300 108
-             C304 143 308 177 320 192
-             C338 215 359 210 371 180
-             C385 144 393 100 410 76
-             C425 55 449 52 475 67"
-          stroke="url(#wv)" stroke-width="48" opacity=".42" filter="url(#glow)"/>
-
-    <!-- main capsule ribbon -->
-    <path d="M125 67
-             C151 52 175 55 190 76
-             C207 100 215 144 229 180
-             C241 210 262 215 280 192
-             C292 177 296 143 300 108
-             C304 143 308 177 320 192
-             C338 215 359 210 371 180
-             C385 144 393 100 410 76
-             C425 55 449 52 475 67"
-          stroke="url(#wv)" stroke-width="29"/>
-
-    <!-- glossy inner highlight -->
-    <path d="M125 67
-             C151 52 175 55 190 76
-             C207 100 215 144 229 180
-             C241 210 262 215 280 192"
-          stroke="#FFFFFF" stroke-width="4" opacity=".55"/>
-    <path d="M300 108 C304 143 308 177 320 192 C338 215 359 210 371 180"
-          stroke="#FFFFFF" stroke-width="3.5" opacity=".38"/>
-    <path d="M410 76 C425 55 449 52 475 67"
-          stroke="#FFFFFF" stroke-width="4" opacity=".45"/>
+  <!-- Ambient bloom -->
+  <g fill="none" stroke="url(#wv)" stroke-linecap="round" stroke-linejoin="round" opacity=".48" filter="url(#glow)">
+    <path d="M117 67 C145 47 171 51 187 77 C202 101 211 143 226 181 C237 208 256 219 275 196 C288 181 295 149 300 112" stroke-width="44"/>
+    <path d="M179 76 C207 59 229 76 247 103 C267 133 281 162 300 190 C312 208 329 212 345 193 C367 166 376 125 392 91 C406 62 430 48 480 69" stroke-width="44"/>
+    <path d="M126 91 C151 76 171 84 186 108 C204 138 218 176 236 198 C250 215 268 214 286 193 C296 181 301 157 304 132 C307 157 312 181 322 193 C340 214 358 215 372 198 C390 176 404 138 422 108 C437 84 457 76 474 89" stroke-width="44"/>
   </g>
 
-  <!-- Small luminous terminal accents emphasize the capsule ends. -->
+  <!-- Deep edge/shadow gives the ribbons a physical, layered feel. -->
+  <g fill="none" stroke="#070914" stroke-linecap="round" stroke-linejoin="round" opacity=".92">
+    <path d="M117 67 C145 47 171 51 187 77 C202 101 211 143 226 181 C237 208 256 219 275 196 C288 181 295 149 300 112" stroke-width="34"/>
+    <path d="M179 76 C207 59 229 76 247 103 C267 133 281 162 300 190 C312 208 329 212 345 193 C367 166 376 125 392 91 C406 62 430 48 480 69" stroke-width="34"/>
+    <path d="M126 91 C151 76 171 84 186 108 C204 138 218 176 236 198 C250 215 268 214 286 193 C296 181 301 157 304 132 C307 157 312 181 322 193 C340 214 358 215 372 198 C390 176 404 138 422 108 C437 84 457 76 474 89" stroke-width="34"/>
+  </g>
+
+  <!-- Three continuous capsule/ribbon trajectories. -->
+  <g fill="none" stroke="url(#wv)" stroke-width="29" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M117 67 C145 47 171 51 187 77 C202 101 211 143 226 181 C237 208 256 219 275 196 C288 181 295 149 300 112"/>
+    <path d="M179 76 C207 59 229 76 247 103 C267 133 281 162 300 190 C312 208 329 212 345 193 C367 166 376 125 392 91 C406 62 430 48 480 69"/>
+    <path d="M126 91 C151 76 171 84 186 108 C204 138 218 176 236 198 C250 215 268 214 286 193 C296 181 301 157 304 132 C307 157 312 181 322 193 C340 214 358 215 372 198 C390 176 404 138 422 108 C437 84 457 76 474 89"/>
+  </g>
+
+  <!-- Controlled over/under separators at the two center crossings. -->
+  <g fill="none" stroke="#070914" stroke-linecap="round">
+    <path d="M292 177 C297 164 300 148 303 130" stroke-width="38"/>
+    <path d="M307 132 C310 150 313 166 320 181" stroke-width="38"/>
+  </g>
+  <g fill="none" stroke="url(#wv)" stroke-width="29" stroke-linecap="round">
+    <path d="M292 177 C297 164 300 148 303 130"/>
+    <path d="M307 132 C310 150 313 166 320 181"/>
+  </g>
+
+  <!-- Fine glossy accents, following the same trajectories. -->
+  <g fill="none" stroke="#fff" stroke-linecap="round" opacity=".40">
+    <path d="M126 66 C147 54 169 57 181 78" stroke-width="3.7"/>
+    <path d="M187 100 C198 122 206 151 218 178" stroke-width="3.5"/>
+    <path d="M187 76 C207 66 225 79 239 100" stroke-width="3.2"/>
+    <path d="M329 199 C341 203 350 196 359 184" stroke-width="3.3"/>
+    <path d="M400 78 C419 56 443 54 474 67" stroke-width="3.8"/>
+  </g>
+
   <g fill="url(#wv)" filter="url(#softGlow)">
-    <circle cx="125" cy="67" r="3.5"/>
-    <circle cx="475" cy="67" r="3.5"/>
+    <circle cx="118" cy="67" r="3.4"/>
+    <circle cx="480" cy="69" r="3.4"/>
   </g>
 
-  <!-- WALLVERSE: restrained futuristic wordmark. -->
-  <text x="292" y="253" text-anchor="middle" fill="url(#textGrad)"
-        font-family="Montserrat,Manrope,Poppins,Arial,sans-serif"
-        font-size="41" font-weight="800" letter-spacing="2.8">WALLVERSE</text>
+  <text x="292" y="253" text-anchor="middle" fill="url(#textGrad)" font-family="Montserrat,Manrope,Poppins,Arial,sans-serif" font-size="41" font-weight="800" letter-spacing="2.8">WALLVERSE</text>
 
-  <!-- Compact four-point sparkle, kept close to the final E. -->
   <g transform="translate(531 238)" fill="url(#wv)" filter="url(#softGlow)">
     <path d="M0-17 C2-7 7-2 17 0 C7 2 2 7 0 17 C-2 7 -7 2 -17 0 C-7-2 -2-7 0-17Z"/>
     <circle cx="0" cy="0" r="2.2" fill="#FFFFFF"/>
