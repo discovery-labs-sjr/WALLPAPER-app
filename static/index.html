@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>WALLVERSE — Ton écran. Ton univers.</title>
-  <link rel="icon" href="/static/brand/wallverse-logo.svg?v=20260913-logo11" type="image/svg+xml">
+  <link rel="icon" href="/static/brand/wallverse-app-icon.svg?v=20260913-icon1" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="/static/explore-v1.css?v=20260912-explore1">
   <link rel="stylesheet" href="/static/interface-v1.css?v=20260912-interface5">
   <link rel="stylesheet" href="/static/interface-v4.css?v=20260912-interface5">
-  <link rel="stylesheet" href="/static/cinematic-v2.css?v=20260913-cinematic6">
+  <link rel="stylesheet" href="/static/cinematic-v2.css?v=20260913-cinematic7">
   <link rel="stylesheet" href="/static/final-layout-v1.css?v=20260912-layout1">
   <link rel="stylesheet" href="/static/desktop-layout-v1.css?v=20260912-desktop1">
 </head>
@@ -32,14 +32,14 @@
     <div class="splashAura"></div>
     <div class="splashScene">
       <div class="splashNativeLogo" aria-label="WALLVERSE">
-        <img class="splashExactLogo" src="/static/brand/wallverse-splash-logo.svg?v=20260913-logo11" alt="WALLVERSE">
+        <img class="splashExactLogo" src="/static/brand/wallverse-logo.svg?v=20260913-logo12" alt="WALLVERSE">
       </div>
     </div>
   </div>
 
   <header class="topbar" id="topbar">
     <a class="brand brandNative" href="#top" aria-label="WALLVERSE">
-      <img class="brandExactLogo" src="/static/brand/wallverse-logo.svg?v=20260913-logo11" alt="WALLVERSE">
+      <img class="brandExactLogo" src="/static/brand/wallverse-logo.svg?v=20260913-logo12" alt="WALLVERSE">
     </a>
     <div class="search" role="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Rechercher un wallpaper…" autocomplete="off" enterkeyhint="search"><kbd>⌘ K</kbd></div>
     <div class="headerActions"><button id="randomBtn" class="iconBtn" title="Wallpaper aléatoire" aria-label="Wallpaper aléatoire">✦</button><button id="authBtn" class="profileBtn"><span class="avatar" id="avatar">W</span><span id="authLabel">Connexion</span></button></div>
@@ -58,6 +58,6 @@
   <nav class="bottomNav" aria-label="Navigation principale"><button class="navBtn active" data-tab="home" aria-label="Accueil"><span class="navIcon navIconHome" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5z"/><path d="M9 20v-6h6v6"/></svg></span><span>Accueil</span></button><button class="navBtn" data-tab="explore" aria-label="Explorer"><span class="navIcon navIconSearch" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5 5"/></svg></span><span>Explorer</span></button><button class="navBtn" data-tab="live" aria-label="Live"><span class="navIcon navIconLive" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/><path d="M12 3.5v3M12 17.5v3M3.5 12h3M17.5 12h3"/></svg></span><span>Live</span></button><button class="navBtn" data-tab="inspiration" aria-label="Inspiration"><span class="navIcon navIconGrid" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span><span>Inspiration</span></button><button class="navBtn" data-tab="favorites" aria-label="Favoris"><span class="navIcon navIconHeart" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20.2 4.9 13.3A4.8 4.8 0 0 1 12 6.6a4.8 4.8 0 0 1 7.1 6.7z"/></svg></span><span>Favoris</span></button></nav>
   <div id="viewer" class="modal hidden" aria-hidden="true"><div id="viewerBackdrop" class="viewerBackdrop" aria-hidden="true"></div><div class="viewerShell" role="dialog" aria-modal="true" aria-labelledby="viewerTitle"><button id="closeViewer" class="closeBtn" aria-label="Fermer">×</button><div id="liveBadge" class="viewerLive hidden">● LIVE</div><div class="viewerMedia"><img id="viewerImg" alt="" draggable="false"></div><div class="viewerInfo"><div class="viewerCopy"><p id="viewerCategory"></p><h2 id="viewerTitle"></h2><small id="viewerTags"></small></div><div class="viewerActions"><button id="likeBtn" class="roundBtn" aria-label="Ajouter aux favoris">♡</button><button id="shareBtn" class="roundBtn" aria-label="Partager">↗</button><button id="downloadBtn" class="downloadBtn">Télécharger <span>↓</span></button></div></div></div></div>
   <div id="authModal" class="modal hidden" aria-hidden="true"><div class="authPanel" role="dialog" aria-modal="true" aria-labelledby="authTitle"><button id="closeAuth" class="closeBtn" aria-label="Fermer">×</button><p class="eyebrow">WALLVERSE ACCOUNT</p><h2 id="authTitle">Bienvenue.</h2><p class="authSub">Synchronise tes favoris sur tous tes appareils.</p><div class="authTabs"><button id="loginTab" class="active">Connexion</button><button id="registerTab">Créer un compte</button></div><form id="authForm"><label id="nameField" class="hidden">Nom<input id="nameInput" minlength="2" maxlength="80" autocomplete="name"></label><label>E-mail<input id="emailInput" type="email" required autocomplete="email" inputmode="email"></label><label>Mot de passe<input id="passwordInput" type="password" minlength="8" required autocomplete="current-password"></label><button class="primaryBtn" type="submit" id="authSubmit">Se connecter</button><p id="authError" class="formError" role="alert"></p></form></div></div>
-  <script src="/static/hero-mobile-v2.js?v=20260912-hero2" defer></script><script src="/static/app.js?v=20260912-app1" defer></script><script src="/static/hero-interaction-v3.js?v=20260912-hero3" defer></script><script src="/static/viewer-v1.js?v=20260912-viewer1" defer></script><script src="/static/explore-v1.js?v=20260912-explore1" defer></script><script src="/static/interface-v1.js?v=20260912-interface5" defer></script><script src="/static/interface-v4.js?v=20260912-interface5" defer></script><script src="/static/cinematic-v2.js?v=20260913-cinematic6" defer></script>
+  <script src="/static/hero-mobile-v2.js?v=20260912-hero2" defer></script><script src="/static/app.js?v=20260912-app1" defer></script><script src="/static/hero-interaction-v3.js?v=20260912-hero3" defer></script><script src="/static/viewer-v1.js?v=20260912-viewer1" defer></script><script src="/static/explore-v1.js?v=20260912-explore1" defer></script><script src="/static/interface-v1.js?v=20260912-interface5" defer></script><script src="/static/interface-v4.js?v=20260912-interface5" defer></script><script src="/static/cinematic-v2.js?v=20260913-cinematic7" defer></script>
 </body>
 </html>
