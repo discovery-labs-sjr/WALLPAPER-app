@@ -1,0 +1,72 @@
+/* WALLVERSE desktop-only shell correction. Mobile <=700px is intentionally untouched. */
+@media (min-width:701px){
+  :root{--wv-desktop-max:1240px}
+
+  body{overflow-x:hidden!important}
+
+  /* Header: one clean horizontal rhythm across the full viewport. */
+  .topbar{
+    position:sticky!important;top:0!important;z-index:50!important;
+    width:100%!important;max-width:none!important;height:76px!important;
+    display:grid!important;grid-template-columns:minmax(190px,1fr) minmax(360px,520px) minmax(190px,1fr)!important;
+    align-items:center!important;gap:28px!important;
+    padding:0 max(28px,calc((100vw - var(--wv-desktop-max))/2 + 28px))!important;
+  }
+  .brand.brandNative{justify-self:start!important}
+  .brandNative .brandExactLogo{width:150px!important}
+  .search{justify-self:center!important;width:100%!important;max-width:520px!important}
+  .headerActions{justify-self:end!important}
+
+  /* Main desktop canvas. */
+  main{
+    width:min(100%,var(--wv-desktop-max))!important;max-width:var(--wv-desktop-max)!important;
+    margin:0 auto!important;padding:0 28px 150px!important;
+  }
+
+  /* Hero: text left, wallpaper right; no overlap with floating navigation. */
+  .hero{
+    position:relative!important;display:grid!important;
+    grid-template-columns:minmax(0,1.12fr) minmax(390px,.88fr)!important;
+    align-items:center!important;gap:72px!important;
+    min-height:590px!important;padding:62px 0 86px!important;
+    overflow:visible!important;
+  }
+  .heroCopy{max-width:680px!important;align-self:center!important;z-index:3!important}
+  .hero h1{max-width:700px!important;margin:0!important}
+  .heroText{max-width:600px!important}
+  .heroActions{gap:12px!important}
+
+  .heroStage{min-height:530px!important;display:grid!important;place-items:center!important;position:relative!important}
+  .heroCard{width:min(100%,380px)!important;aspect-ratio:3/4!important}
+
+  /* Categories live below the Hero, not inside it. */
+  .categories{position:sticky!important;top:76px!important;z-index:30!important}
+
+  /* Intro/content start with a deliberate breathing zone. */
+  .sectionIntro{margin:52px 0 22px!important}
+  .sectionIntro h2{font-size:clamp(1.8rem,2.5vw,2.35rem)!important}
+  .gallery{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:14px!important}
+
+  /* Bottom navigation becomes a floating desktop dock, never overlaying the Hero copy. */
+  .bottomNav{
+    position:fixed!important;left:50%!important;right:auto!important;
+    bottom:20px!important;transform:translateX(-50%) translateZ(0)!important;
+    width:min(760px,calc(100vw - 56px))!important;max-width:760px!important;
+    min-height:64px!important;padding:6px!important;z-index:80!important;
+    border-radius:22px!important;
+  }
+  .navBtn{flex:1 1 0!important;min-width:0!important;padding:8px 12px!important}
+}
+
+@media (min-width:701px) and (max-width:1100px){
+  .topbar{grid-template-columns:minmax(170px,1fr) minmax(280px,1.25fr) minmax(150px,1fr)!important;gap:18px!important}
+  main{padding-left:22px!important;padding-right:22px!important}
+  .hero{grid-template-columns:minmax(0,1fr) minmax(320px,.86fr)!important;gap:38px!important;min-height:560px!important}
+  .heroCard{width:min(100%,350px)!important}
+  .gallery{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
+
+/* Wide screens: keep the visual center, do not stretch the wallpaper card. */
+@media (min-width:1400px){
+  .hero{gap:92px!important}
+}
