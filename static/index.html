@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>WALLVERSE — Ton écran. Ton univers.</title>
-  <link rel="icon" href="/static/brand/wallverse-video-logo.svg?v=20260912-logo4" type="image/svg+xml">
+  <link rel="icon" href="/static/brand/wallverse-exact-reference.png?v=20260912-logo5" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -21,29 +21,23 @@
   <link rel="stylesheet" href="/static/hero-interaction-v3.css?v=20260912-hero3">
   <link rel="stylesheet" href="/static/viewer-v1.css?v=20260912-viewer1">
   <link rel="stylesheet" href="/static/explore-v1.css?v=20260912-explore1">
-  <link rel="stylesheet" href="/static/interface-v1.css?v=20260912-interface4">
-  <link rel="stylesheet" href="/static/interface-v4.css?v=20260912-interface4">
-  <link rel="stylesheet" href="/static/cinematic-v2.css?v=20260912-cinematic2">
+  <link rel="stylesheet" href="/static/interface-v1.css?v=20260912-interface5">
+  <link rel="stylesheet" href="/static/interface-v4.css?v=20260912-interface5">
+  <link rel="stylesheet" href="/static/cinematic-v2.css?v=20260912-cinematic3">
 </head>
 <body>
   <div id="splash" class="splash" aria-hidden="true">
     <div class="splashAura"></div>
     <div class="splashScene">
       <div class="splashNativeLogo" aria-label="WALLVERSE">
-        <img class="splashNativeMark" src="/static/brand/wallverse-video-w.svg?v=20260912-brand2" alt="">
-        <img class="splashNativeWord" src="/static/brand/wallverse-video-wordmark.svg?v=20260912-brand2" alt="WALLVERSE">
-        <img class="splashNativeStar" src="/static/brand/wallverse-video-star.svg?v=20260912-brand2" alt="">
+        <img class="splashExactLogo" src="/static/brand/wallverse-exact-reference.png?v=20260912-logo5" alt="WALLVERSE">
       </div>
-      <div class="splashTagline">DES FONDS D’ÉCRAN QUI TE RESSEMBLENT</div>
-      <div class="splashProgress"><span></span></div>
     </div>
   </div>
 
   <header class="topbar" id="topbar">
     <a class="brand brandNative" href="#top" aria-label="WALLVERSE">
-      <img class="brandMark" src="/static/brand/wallverse-video-w.svg?v=20260912-brand2" alt="">
-      <img class="brandWordmark" src="/static/brand/wallverse-video-wordmark.svg?v=20260912-brand2" alt="WALLVERSE">
-      <img class="brandStar" src="/static/brand/wallverse-video-star.svg?v=20260912-brand2" alt="">
+      <img class="brandExactLogo" src="/static/brand/wallverse-exact-reference.png?v=20260912-logo5" alt="WALLVERSE">
     </a>
 
     <div class="search" role="search">
@@ -65,7 +59,6 @@
     <section class="hero" id="hero">
       <div id="heroAmbient" class="heroAmbient" aria-hidden="true"></div>
       <div class="heroOverlay"></div>
-
       <div class="heroCopy">
         <p class="eyebrow">CURATED DIGITAL UNIVERSE</p>
         <h1>Ton écran.<br><em>Ton univers.</em></h1>
@@ -75,7 +68,6 @@
           <button id="heroRandom" class="ghostHeroBtn">Surprise-moi <span>✦</span></button>
         </div>
       </div>
-
       <div class="heroStage" id="heroStage" aria-label="Carrousel de wallpapers vedettes">
         <div class="heroGlow" aria-hidden="true"></div>
         <div id="heroCard" class="heroCard">
@@ -93,7 +85,6 @@
     </section>
 
     <div class="categories" id="categories" aria-label="Catégories"></div>
-
     <div class="sectionIntro">
       <div>
         <p class="eyebrow">DISCOVER</p>
@@ -118,7 +109,6 @@
   </nav>
 
   <div id="viewer" class="modal hidden" aria-hidden="true"><div id="viewerBackdrop" class="viewerBackdrop" aria-hidden="true"></div><div class="viewerShell" role="dialog" aria-modal="true" aria-labelledby="viewerTitle"><button id="closeViewer" class="closeBtn" aria-label="Fermer">×</button><div id="liveBadge" class="viewerLive hidden">● LIVE</div><div class="viewerMedia"><img id="viewerImg" alt="" draggable="false"></div><div class="viewerInfo"><div class="viewerCopy"><p id="viewerCategory"></p><h2 id="viewerTitle"></h2><small id="viewerTags"></small></div><div class="viewerActions"><button id="likeBtn" class="roundBtn" aria-label="Ajouter aux favoris">♡</button><button id="shareBtn" class="roundBtn" aria-label="Partager">↗</button><button id="downloadBtn" class="downloadBtn">Télécharger <span>↓</span></button></div></div></div></div>
-
   <div id="authModal" class="modal hidden" aria-hidden="true"><div class="authPanel" role="dialog" aria-modal="true" aria-labelledby="authTitle"><button id="closeAuth" class="closeBtn" aria-label="Fermer">×</button><p class="eyebrow">WALLVERSE ACCOUNT</p><h2 id="authTitle">Bienvenue.</h2><p class="authSub">Synchronise tes favoris sur tous tes appareils.</p><div class="authTabs"><button id="loginTab" class="active">Connexion</button><button id="registerTab">Créer un compte</button></div><form id="authForm"><label id="nameField" class="hidden">Nom<input id="nameInput" minlength="2" maxlength="80" autocomplete="name"></label><label>E-mail<input id="emailInput" type="email" required autocomplete="email" inputmode="email"></label><label>Mot de passe<input id="passwordInput" type="password" minlength="8" required autocomplete="current-password"></label><button class="primaryBtn" type="submit" id="authSubmit">Se connecter</button><p id="authError" class="formError" role="alert"></p></form></div></div>
 
   <script src="/static/hero-mobile-v2.js?v=20260912-hero2" defer></script>
@@ -126,8 +116,8 @@
   <script src="/static/hero-interaction-v3.js?v=20260912-hero3" defer></script>
   <script src="/static/viewer-v1.js?v=20260912-viewer1" defer></script>
   <script src="/static/explore-v1.js?v=20260912-explore1" defer></script>
-  <script src="/static/interface-v1.js?v=20260912-interface4" defer></script>
-  <script src="/static/interface-v4.js?v=20260912-interface4" defer></script>
-  <script src="/static/cinematic-v2.js?v=20260912-cinematic2" defer></script>
+  <script src="/static/interface-v1.js?v=20260912-interface5" defer></script>
+  <script src="/static/interface-v4.js?v=20260912-interface5" defer></script>
+  <script src="/static/cinematic-v2.js?v=20260912-cinematic3" defer></script>
 </body>
 </html>
