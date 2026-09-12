@@ -1,7 +1,7 @@
-/* WALLVERSE v6.2 — exact supplied reference + compact header rendering */
+/* WALLVERSE v6.3 — rendered artwork as primary app logo */
 .brandLogoImage{
   display:block!important;
-  content:url("/static/brand/wallverse-exact-reference.png?v=20260912-exact1")!important;
+  content:url("/static/brand/wallverse-video-logo.svg?v=20260912-render1")!important;
   width:150px!important;
   height:auto!important;
   max-width:none!important;
@@ -16,7 +16,7 @@
 }
 .splashLogoImage{
   display:block;
-  content:url("/static/brand/wallverse-exact-reference.png?v=20260912-exact1");
+  content:url("/static/brand/wallverse-video-logo.svg?v=20260912-render1");
   width:min(420px,78vw);
   height:auto;
   max-height:none;
