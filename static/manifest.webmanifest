@@ -1,0 +1,20 @@
+{
+  "name": "WALLVERSE",
+  "short_name": "WALLVERSE",
+  "description": "Wallpapers HD, 4K et Live — ton écran, ton univers.",
+  "lang": "fr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#02030a",
+  "theme_color": "#040610",
+  "icons": [
+    {
+      "src": "/static/brand/wallverse-app-icon.svg?v=20260913-icon2",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
