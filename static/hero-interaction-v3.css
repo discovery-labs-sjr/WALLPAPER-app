@@ -1,0 +1,24 @@
+/* WALLVERSE Hero v3 — visible tactile depth + gyro, while preserving native vertical scroll */
+.heroStage{touch-action:pan-y!important;-webkit-user-select:none!important;user-select:none!important}
+.heroCard{
+  --hero-rx:1deg;
+  --hero-ry:-7deg;
+  --hero-rz:1.2deg;
+  --hero-scale:1;
+  --hero-tx:0px;
+  transform:rotateX(var(--hero-rx)) rotateY(var(--hero-ry)) rotateZ(var(--hero-rz)) scale(var(--hero-scale)) translateX(var(--hero-tx))!important;
+  transform-origin:center center!important;
+  will-change:transform!important;
+  transition:transform .34s cubic-bezier(.18,.82,.18,1),box-shadow .34s ease!important;
+}
+.heroCard.heroTouching{
+  --hero-scale:1.075;
+  box-shadow:0 38px 92px rgba(0,0,0,.78),0 0 0 1px rgba(141,178,255,.24),0 0 64px rgba(74,134,255,.18)!important;
+}
+.heroCard.heroDragging{transition:transform .08s linear!important}
+@media(max-width:700px){
+  .heroCard{--hero-ry:-2deg;--hero-rz:.6deg}
+  .heroCard.heroTouching{--hero-scale:1.085}
+}
+@media(max-width:430px){.heroCard.heroTouching{--hero-scale:1.075}}
+@media(prefers-reduced-motion:reduce){.heroCard{transition:none!important}}
