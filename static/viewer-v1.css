@@ -1,0 +1,34 @@
+/* WALLVERSE viewer v1 — immersive wallpaper preview */
+#viewer.viewerEnhanced{background:rgba(1,3,9,.58)!important;backdrop-filter:blur(22px) saturate(135%);-webkit-backdrop-filter:blur(22px) saturate(135%)}
+#viewer.viewerEnhanced .viewerBackdrop{background-image:linear-gradient(180deg,rgba(2,4,11,.38),rgba(2,4,11,.84)),var(--viewer-bg-image);background-position:center;background-size:cover;filter:blur(26px) saturate(1.18);transform:scale(1.08);opacity:.48}
+#viewer.viewerEnhanced .viewerShell{width:min(1180px,calc(100vw - 26px));height:min(92vh,900px);display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,340px);gap:0;overflow:hidden;border:1px solid rgba(160,180,255,.16);border-radius:30px;background:linear-gradient(145deg,rgba(12,17,30,.84),rgba(5,8,16,.76));box-shadow:0 45px 120px rgba(0,0,0,.66),0 0 0 1px rgba(255,255,255,.02) inset}
+#viewer.viewerEnhanced .viewerMedia{position:relative;min-width:0;min-height:0;display:grid;place-items:center;padding:22px;background:radial-gradient(circle at 50% 48%,rgba(84,126,255,.1),transparent 48%)}
+#viewer.viewerEnhanced .viewerMedia:after{content:"";position:absolute;inset:16px;border-radius:24px;border:1px solid rgba(255,255,255,.045);pointer-events:none}
+#viewer.viewerEnhanced #viewerImg{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:22px;box-shadow:0 30px 80px rgba(0,0,0,.42);touch-action:none;user-select:none;-webkit-user-drag:none;will-change:transform}
+#viewer.viewerEnhanced .viewerInfo{display:flex;flex-direction:column;justify-content:flex-end;gap:28px;padding:30px 28px 28px;border-left:1px solid rgba(155,177,255,.11);background:linear-gradient(180deg,rgba(9,13,24,.46),rgba(5,8,16,.82))}
+#viewer.viewerEnhanced .viewerCopy p{margin:0 0 8px;color:rgba(177,199,255,.8);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+#viewer.viewerEnhanced .viewerCopy h2{margin:0;color:#fff;font-size:clamp(1.8rem,3vw,2.7rem);line-height:.98;letter-spacing:-.04em}
+#viewer.viewerEnhanced .viewerCopy small{display:block;margin-top:14px;color:rgba(205,216,236,.62);font-size:12px;line-height:1.65}
+#viewer.viewerEnhanced .viewerActions{display:grid;grid-template-columns:repeat(2,48px) minmax(0,1fr);gap:10px;align-items:center}
+#viewer.viewerEnhanced .roundBtn,#viewer.viewerEnhanced .downloadBtn{height:48px;border-radius:15px;border:1px solid rgba(153,176,255,.16);background:rgba(14,20,33,.72);color:#fff;box-shadow:0 10px 25px rgba(0,0,0,.18);transition:transform .16s ease,background .16s ease,border-color .16s ease}
+#viewer.viewerEnhanced .roundBtn:hover,#viewer.viewerEnhanced .downloadBtn:hover{transform:translateY(-2px);background:rgba(25,34,56,.82);border-color:rgba(142,170,255,.3)}
+#viewer.viewerEnhanced .roundBtn.liked{background:linear-gradient(145deg,rgba(255,75,216,.2),rgba(100,70,255,.18));border-color:rgba(255,108,221,.35)}
+#viewer.viewerEnhanced .downloadBtn{display:flex;align-items:center;justify-content:center;gap:10px;font-weight:700}
+#viewer.viewerEnhanced .closeBtn{top:16px;right:16px;z-index:8;width:42px;height:42px;border-radius:14px;background:rgba(5,8,16,.56);border:1px solid rgba(180,195,255,.16);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+#viewer.viewerEnhanced .viewerGestureHint{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:5;padding:8px 11px;border:1px solid rgba(181,199,255,.12);border-radius:999px;background:rgba(5,8,16,.44);color:rgba(227,235,255,.62);font-size:10px;letter-spacing:.05em;white-space:nowrap;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);pointer-events:none;opacity:1;transition:opacity .25s ease}
+#viewer.viewerEnhanced.isInteracting .viewerGestureHint{opacity:0}
+@media(max-width:760px){
+  #viewer.viewerEnhanced{padding:0!important}
+  #viewer.viewerEnhanced .viewerShell{width:100vw;height:100dvh;max-height:none;border-radius:0;border:0;grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto;background:rgba(4,7,13,.9)}
+  #viewer.viewerEnhanced .viewerMedia{padding:24px 16px 12px;min-height:0}
+  #viewer.viewerEnhanced .viewerMedia:after{inset:14px 10px 6px;border-radius:20px}
+  #viewer.viewerEnhanced #viewerImg{max-width:calc(100vw - 32px);max-height:calc(100dvh - 220px);border-radius:20px}
+  #viewer.viewerEnhanced .viewerInfo{gap:16px;padding:14px 14px calc(14px + env(safe-area-inset-bottom,0px));border-left:0;border-top:1px solid rgba(155,177,255,.11);background:linear-gradient(180deg,rgba(7,11,20,.64),rgba(4,7,14,.94))}
+  #viewer.viewerEnhanced .viewerCopy h2{font-size:1.5rem}
+  #viewer.viewerEnhanced .viewerCopy small{margin-top:6px;font-size:11px;line-height:1.45;max-height:34px;overflow:hidden}
+  #viewer.viewerEnhanced .viewerActions{grid-template-columns:46px 46px minmax(0,1fr);gap:8px}
+  #viewer.viewerEnhanced .roundBtn,#viewer.viewerEnhanced .downloadBtn{height:46px;border-radius:14px}
+  #viewer.viewerEnhanced .closeBtn{top:max(12px,env(safe-area-inset-top,12px));right:12px}
+  #viewer.viewerEnhanced .viewerGestureHint{bottom:calc(132px + env(safe-area-inset-bottom,0px));font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){#viewer.viewerEnhanced #viewerImg,#viewer.viewerEnhanced .roundBtn,#viewer.viewerEnhanced .downloadBtn{transition:none!important}}
