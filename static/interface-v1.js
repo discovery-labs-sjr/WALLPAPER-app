@@ -1,114 +1,101 @@
-/* WALLVERSE interface v2 — tactile navigation + ambient shell */
+/* WALLVERSE interface v3 — ambient wallpaper sync + tactile navigation */
 (() => {
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
   let installed = false;
 
-  function ensureAmbient() {
-    if ($('#uiAmbient')) return $('#uiAmbient');
-    const ambient = document.createElement('div');
-    ambient.id = 'uiAmbient';
-    ambient.setAttribute('aria-hidden', 'true');
-    document.body.insertBefore(ambient, document.body.firstChild);
+  function ensureAmbient(){
+    if($('#uiAmbient')) return $('#uiAmbient');
+    const ambient=document.createElement('div');
+    ambient.id='uiAmbient';
+    ambient.setAttribute('aria-hidden','true');
+    document.body.insertBefore(ambient,document.body.firstChild);
     return ambient;
   }
 
-  function setAmbient(url) {
-    if (!url) return;
-    const ambient = ensureAmbient();
-    ambient.style.setProperty('--wv-ui-bg-image', `url("${String(url).replace(/"/g, '\\"')}")`);
+  function setAmbient(url){
+    if(!url) return;
+    const ambient=ensureAmbient();
+    ambient.style.setProperty('--wv-ui-bg-image',`url("${String(url).replace(/"/g,'\\"')}")`);
     document.body.classList.add('uiAmbientReady');
   }
 
-  function bindAmbientSources() {
-    ensureAmbient();
+  function syncFromHero(){
+    const image=$('#heroImage');
+    if(image?.currentSrc||image?.src) setAmbient(image.currentSrc||image.src);
+  }
 
-    const hero = $('#heroImage');
-    if (hero) {
-      if (hero.currentSrc || hero.src) setAmbient(hero.currentSrc || hero.src);
-      hero.addEventListener('load', () => setAmbient(hero.currentSrc || hero.src), { passive: true });
+  function bindAmbient(){
+    ensureAmbient();
+    const hero=$('#heroImage');
+    if(hero){
+      hero.addEventListener('load',syncFromHero,{passive:true});
+      syncFromHero();
     }
-
-    document.addEventListener('pointerover', event => {
-      const card = event.target.closest('.card');
-      const image = card?.querySelector('img');
-      if (image?.currentSrc) setAmbient(image.currentSrc);
-    }, { passive: true });
-
-    document.addEventListener('pointerdown', event => {
-      const card = event.target.closest('.card');
-      const image = card?.querySelector('img');
-      if (image?.currentSrc) setAmbient(image.currentSrc);
-    }, { passive: true });
+    document.addEventListener('pointerover',event=>{
+      const card=event.target.closest('.card');
+      const image=card?.querySelector('img');
+      if(image?.currentSrc) setAmbient(image.currentSrc);
+    },{passive:true});
+    document.addEventListener('pointerdown',event=>{
+      const card=event.target.closest('.card');
+      const image=card?.querySelector('img');
+      if(image?.currentSrc) setAmbient(image.currentSrc);
+    },{passive:true});
+    const heroObserver=new MutationObserver(syncFromHero);
+    if(hero) heroObserver.observe(hero,{attributes:true,attributeFilter:['src']});
   }
 
-  function playNav(button) {
-    $$('.navBtn').forEach(btn => btn.classList.remove('navPlay', 'navPressing'));
-    const tab = button.dataset.tab || '';
-    button.classList.add('navPlay');
-    button.classList.toggle('navHome', tab === 'home');
-    button.classList.toggle('navExplore', tab === 'explore');
-    button.classList.toggle('navLive', tab === 'live');
-    button.classList.toggle('navInspiration', tab === 'inspiration');
-    button.classList.toggle('navFavorites', tab === 'favorites');
-    window.setTimeout(() => button.classList.remove('navPlay', 'navHome', 'navExplore', 'navLive', 'navInspiration', 'navFavorites'), 760);
+  function playNav(button){
+    $$('.navBtn').forEach(btn=>btn.classList.remove('navPlay','navHome','navExplore','navLive','navInspiration','navFavorites','navPressing'));
+    const tab=button.dataset.tab||'';
+    button.classList.add('navPlay',`nav${tab.charAt(0).toUpperCase()+tab.slice(1)}`);
+    window.setTimeout(()=>button.classList.remove('navPlay','navHome','navExplore','navLive','navInspiration','navFavorites'),820);
   }
 
-  function bindNav() {
-    $$('.navBtn').forEach(button => {
-      const press = () => button.classList.add('navPressing');
-      const release = () => button.classList.remove('navPressing');
-      button.addEventListener('pointerdown', press, { passive: true });
-      button.addEventListener('pointerup', release, { passive: true });
-      button.addEventListener('pointercancel', release, { passive: true });
-      button.addEventListener('pointerleave', release, { passive: true });
-      button.addEventListener('click', () => playNav(button));
+  function bindNav(){
+    $$('.navBtn').forEach(button=>{
+      const press=()=>button.classList.add('navPressing');
+      const release=()=>button.classList.remove('navPressing');
+      button.addEventListener('pointerdown',press,{passive:true});
+      button.addEventListener('pointerup',release,{passive:true});
+      button.addEventListener('pointercancel',release,{passive:true});
+      button.addEventListener('pointerleave',release,{passive:true});
+      button.addEventListener('click',()=>playNav(button));
     });
   }
 
-  function bindCategoryRail() {
-    const rail = $('#categories');
-    if (!rail || rail.dataset.interfaceBound === '1') return;
-    rail.dataset.interfaceBound = '1';
-
-    const updateState = () => {
-      const top = window.matchMedia('(max-width:700px)').matches ? 68 : 76;
-      const rect = rail.getBoundingClientRect();
-      rail.classList.toggle('isPinned', rect.top <= top + 1);
-      document.body.classList.toggle('wvScrolled', window.scrollY > Math.max(30, rect.top + window.scrollY - top));
+  function bindCategories(){
+    const rail=$('#categories');
+    if(!rail||rail.dataset.interfaceBound==='1') return;
+    rail.dataset.interfaceBound='1';
+    const update=()=>{
+      const top=window.matchMedia('(max-width:700px)').matches?68:76;
+      const rect=rail.getBoundingClientRect();
+      rail.classList.toggle('isPinned',rect.top<=top+1);
+      document.body.classList.toggle('wvScrolled',window.scrollY>32);
     };
-
-    window.addEventListener('scroll', updateState, { passive: true });
-    window.addEventListener('resize', updateState, { passive: true });
-    updateState();
-
-    const centerActive = () => {
-      const active = $('.tab.active', rail);
-      if (!active) return;
-      active.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-    };
-
-    const observer = new MutationObserver(() => {
-      requestAnimationFrame(centerActive);
-    });
-    observer.observe(rail, { childList: true, subtree: true, attributes: true, attributeFilter: ['class'] });
-
-    rail.addEventListener('wheel', event => {
-      if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) rail.scrollLeft += event.deltaY;
-    }, { passive: true });
+    window.addEventListener('scroll',update,{passive:true});
+    window.addEventListener('resize',update,{passive:true});
+    update();
+    const centerActive=()=>$('.tab.active',rail)?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+    const observer=new MutationObserver(()=>requestAnimationFrame(centerActive));
+    observer.observe(rail,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
+    rail.addEventListener('wheel',event=>{
+      if(Math.abs(event.deltaY)>Math.abs(event.deltaX)) rail.scrollLeft+=event.deltaY;
+    },{passive:true});
   }
 
-  function install() {
-    if (installed) return;
-    installed = true;
-    ensureAmbient();
-    bindAmbientSources();
+  function install(){
+    if(installed) return;
+    installed=true;
+    bindAmbient();
     bindNav();
-    bindCategoryRail();
+    bindCategories();
+    syncFromHero();
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', install, { once: true });
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',install,{once:true});
   else install();
-  setTimeout(install, 900);
-  setTimeout(bindCategoryRail, 1400);
+  setTimeout(install,900);
 })();
