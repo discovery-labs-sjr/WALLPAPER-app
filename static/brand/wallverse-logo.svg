@@ -1,1 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 260" role="img" aria-labelledby="title desc"><title id="title">WALLVERSE</title><desc id="desc">Logo WALLVERSE avec grand W et petit losange plein, discret, placé derrière la dernière lettre.</desc><defs><linearGradient id="wv" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#5530ff"/><stop offset=".48" stop-color="#c144ff"/><stop offset="1" stop-color="#27d7ff"/></linearGradient><linearGradient id="diamond" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#684cff"/><stop offset=".5" stop-color="#55bfff"/><stop offset="1" stop-color="#c9f7ff"/></linearGradient><filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><path d="M45 65 C62 65 76 78 82 98 L125 210 C131 226 152 227 158 211 L210 80 C215 66 234 66 240 80 L292 211 C298 227 319 226 325 210 L368 98 C374 78 388 65 401 65" fill="none" stroke="url(#wv)" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/><text x="432" y="166" fill="url(#wv)" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="116" letter-spacing="1">WALLVERSE</text><g transform="translate(852 72)" filter="url(#glow)"><path d="M0 -20 L20 0 L0 20 L-20 0 Z" fill="url(#diamond)"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 300" role="img" aria-labelledby="title desc">
+  <title id="title">WALLVERSE</title>
+  <desc id="desc">WALLVERSE gradient logo with rounded ribbon W and sparkle.</desc>
+  <defs>
+    <linearGradient id="wv" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ef39f4"/>
+      <stop offset=".28" stop-color="#6d4dff"/>
+      <stop offset=".62" stop-color="#496fff"/>
+      <stop offset="1" stop-color="#35e3ff"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-40%" width="160%" height="180%">
+      <feGaussianBlur stdDeviation="8" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- The W is deliberately a soft, continuous ribbon: three rounded rises rather than a geometric mark. -->
+  <path d="M196 55 L238 157 Q250 187 269 157 L289 105 L310 157 Q329 187 341 157 L386 55"
+        fill="none" stroke="url(#wv)" stroke-width="48" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+
+  <text x="38" y="251" fill="url(#wv)" font-family="Arial, Helvetica, sans-serif" font-size="76" font-weight="900" letter-spacing="-2">WALLVERSE</text>
+  <g transform="translate(866 218)" filter="url(#glow)">
+    <path d="M0 -25 L8 -8 L25 0 L8 8 L0 25 L-8 8 L-25 0 L-8 -8 Z" fill="url(#wv)"/>
+  </g>
+</svg>
