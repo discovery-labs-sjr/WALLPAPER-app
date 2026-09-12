@@ -1,40 +1,44 @@
-/* WALLVERSE interface v2 — premium mobile shell, persistent categories, tactile navigation */
+/* WALLVERSE interface v3 — cinematic ambient shell + tactile native navigation */
 :root{
   --wv-ui-header:76px;
   --wv-ui-top:76px;
-  --wv-ui-glass:rgba(7,11,21,.74);
-  --wv-ui-line:rgba(147,170,245,.12);
+  --wv-ui-line:rgba(147,170,245,.10);
 }
 
-body{position:relative;isolation:isolate;background:var(--wv-bg,#030611);overflow-x:hidden}
+body{position:relative;isolation:isolate;background:#010207!important;overflow-x:hidden}
 body > *{position:relative}
 
-/* ===== AMBIENT UI LAYER ===== */
+/* ===== CINEMATIC AMBIENT BACKGROUND ===== */
 #uiAmbient{
   position:fixed!important;
-  inset:-14%!important;
+  inset:-18%!important;
   z-index:-2!important;
   pointer-events:none!important;
   opacity:0!important;
-  background-image:linear-gradient(180deg,rgba(2,4,10,.9),rgba(2,4,10,.96)),var(--wv-ui-bg-image);
+  background-image:
+    linear-gradient(180deg,rgba(0,0,4,.94),rgba(0,0,7,.985)),
+    var(--wv-ui-bg-image);
   background-position:center;
   background-size:cover;
-  filter:blur(72px) saturate(125%);
-  transform:scale(1.16);
-  transition:opacity .8s ease,filter .8s ease,transform 1.1s ease,background-image .45s ease;
+  filter:blur(88px) saturate(132%) brightness(.48);
+  transform:scale(1.18);
+  transition:opacity .9s ease,filter 1s ease,transform 1.2s ease,background-image .55s ease;
 }
-body.uiAmbientReady #uiAmbient{opacity:.20}
-body.wvScrolled #uiAmbient{opacity:.26;filter:blur(78px) saturate(140%);transform:scale(1.22)}
+body.uiAmbientReady #uiAmbient{opacity:.28}
+body.wvScrolled #uiAmbient{opacity:.34;filter:blur(96px) saturate(145%) brightness(.42);transform:scale(1.26)}
+body{background-image:
+  radial-gradient(70vw 42vw at 72% -10%,rgba(39,70,180,.07),transparent 70%),
+  radial-gradient(55vw 38vw at 8% 42%,rgba(73,44,155,.055),transparent 70%)!important}
 
-/* ===== TOP BAR / SCROLL STATE ===== */
-.topbar{transition:background .28s ease,border-color .28s ease,box-shadow .28s ease,transform .28s ease!important}
+/* ===== TOP BAR ===== */
+.topbar{transition:background .30s ease,border-color .30s ease,box-shadow .30s ease,height .28s ease!important}
 body.wvScrolled .topbar{
-  background:rgba(3,6,14,.78)!important;
-  border-bottom-color:rgba(143,169,255,.13)!important;
-  box-shadow:0 10px 34px rgba(0,0,0,.18)!important;
+  background:rgba(1,3,8,.86)!important;
+  border-bottom-color:rgba(143,169,255,.10)!important;
+  box-shadow:0 10px 34px rgba(0,0,0,.22)!important;
 }
 
-/* ===== CATEGORY RAIL ===== */
+/* ===== CATEGORY RAIL: FLOATING, NO BUBBLE ===== */
 .categories{
   position:sticky!important;
   top:var(--wv-ui-top)!important;
@@ -42,142 +46,109 @@ body.wvScrolled .topbar{
   display:flex!important;
   align-items:center!important;
   gap:8px!important;
-  min-height:56px!important;
-  padding:8px 7px!important;
-  margin:0 -2px!important;
-  border:1px solid rgba(143,169,255,.11)!important;
-  border-radius:17px!important;
-  background:linear-gradient(180deg,rgba(8,12,23,.82),rgba(5,8,16,.70))!important;
-  box-shadow:0 12px 34px rgba(0,0,0,.18)!important;
-  backdrop-filter:blur(24px) saturate(155%)!important;
-  -webkit-backdrop-filter:blur(24px) saturate(155%)!important;
+  min-height:52px!important;
+  padding:7px 4px!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:linear-gradient(180deg,rgba(1,3,8,.58),rgba(1,3,8,.18),transparent)!important;
+  box-shadow:none!important;
+  backdrop-filter:blur(18px) saturate(125%)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(125%)!important;
   scrollbar-width:none!important;
   overscroll-behavior-x:contain!important;
   scroll-snap-type:x proximity!important;
-  transition:box-shadow .28s ease,border-color .28s ease,background .28s ease,transform .28s ease!important;
+  transition:background .28s ease,padding .28s ease,filter .28s ease!important;
   touch-action:pan-x pan-y!important;
 }
 .categories::-webkit-scrollbar{display:none!important}
 .categories:before,.categories:after{
-  content:"";
-  position:sticky;
-  flex:0 0 16px;
-  height:32px;
-  z-index:3;
-  pointer-events:none;
+  content:"";position:sticky;flex:0 0 24px;height:36px;z-index:3;pointer-events:none;filter:blur(1px)
 }
-.categories:before{left:-1px;background:linear-gradient(90deg,rgba(5,8,15,.99),transparent);margin-right:-16px}
-.categories:after{right:-1px;background:linear-gradient(270deg,rgba(5,8,15,.99),transparent);margin-left:-16px}
+.categories:before{left:0;background:linear-gradient(90deg,rgba(1,3,8,.98),transparent);margin-right:-24px}
+.categories:after{right:0;background:linear-gradient(270deg,rgba(1,3,8,.98),transparent);margin-left:-24px}
 .categories.isPinned{
-  border-color:rgba(123,155,255,.19)!important;
-  background:linear-gradient(180deg,rgba(6,10,20,.91),rgba(4,7,14,.80))!important;
-  box-shadow:0 18px 48px rgba(0,0,0,.34),0 1px 0 rgba(255,255,255,.035) inset!important;
+  background:linear-gradient(180deg,rgba(1,3,8,.90),rgba(1,3,8,.56),transparent)!important;
+  padding-top:6px!important;padding-bottom:6px!important;
+  box-shadow:0 12px 32px rgba(0,0,0,.18)!important;
 }
 .tab{
   position:relative!important;
   flex:0 0 auto!important;
-  min-height:38px!important;
-  padding:0 14px!important;
-  border:1px solid rgba(147,170,245,.10)!important;
+  min-height:34px!important;
+  padding:0 12px!important;
+  border:1px solid rgba(156,181,255,.075)!important;
   border-radius:999px!important;
-  background:rgba(255,255,255,.025)!important;
-  color:rgba(182,194,218,.72)!important;
-  font:650 12px/1 "DM Sans",sans-serif!important;
+  background:rgba(4,7,14,.26)!important;
+  color:rgba(187,199,221,.70)!important;
+  font:650 11px/1 "DM Sans",sans-serif!important;
   letter-spacing:-.012em!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.025)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.018)!important;
   transition:transform .18s cubic-bezier(.2,.85,.2,1),border-color .22s ease,background .22s ease,color .22s ease,box-shadow .22s ease!important;
   scroll-snap-align:center!important;
 }
 .tab:after{display:none!important}
-.tab:hover{transform:translateY(-1px)!important;color:#eef3ff!important;border-color:rgba(133,163,255,.24)!important;background:rgba(255,255,255,.055)!important}
+.tab:hover{transform:translateY(-1px)!important;color:#eef3ff!important;border-color:rgba(133,163,255,.18)!important;background:rgba(255,255,255,.045)!important}
 .tab:active{transform:scale(.965)!important}
 .tab.active{
   color:#fff!important;
-  border-color:rgba(126,154,255,.40)!important;
-  background:linear-gradient(135deg,rgba(109,74,255,.28),rgba(40,193,255,.20))!important;
-  box-shadow:0 7px 24px rgba(45,87,194,.20),inset 0 1px 0 rgba(255,255,255,.10)!important;
+  border-color:rgba(122,154,255,.28)!important;
+  background:linear-gradient(135deg,rgba(103,75,255,.20),rgba(38,173,255,.13))!important;
+  box-shadow:0 6px 18px rgba(38,72,155,.14),inset 0 1px 0 rgba(255,255,255,.08)!important;
 }
-.tab.active:before{
-  content:"";
-  position:absolute;
-  inset:2px;
-  border-radius:inherit;
-  border:1px solid rgba(255,255,255,.05);
-  pointer-events:none;
-}
+.tab.active:before{content:"";position:absolute;left:12px;right:12px;bottom:-7px;height:2px;border-radius:999px;background:linear-gradient(90deg,rgba(255,75,216,.88),rgba(112,76,255,.9),rgba(67,226,255,.9));box-shadow:0 0 14px rgba(82,142,255,.42);pointer-events:none}
 
-/* ===== BOTTOM NAV — custom micro-interactions ===== */
+/* ===== BOTTOM NAV ===== */
 .bottomNav{
-  gap:4px!important;
-  padding:6px!important;
-  border-radius:22px!important;
-  transform:translateZ(0)!important;
+  gap:4px!important;padding:6px!important;border-radius:22px!important;transform:translateZ(0)!important;
 }
 .navBtn{
-  position:relative!important;
-  min-height:54px!important;
-  padding:7px 12px!important;
-  border-radius:16px!important;
-  background:transparent!important;
-  color:rgba(163,175,201,.66)!important;
-  transform:none!important;
+  position:relative!important;min-height:54px!important;padding:7px 12px!important;border-radius:16px!important;
+  background:transparent!important;color:rgba(163,175,201,.66)!important;transform:none!important;overflow:hidden!important;
   transition:background .22s ease,color .22s ease,box-shadow .22s ease,transform .22s cubic-bezier(.2,.85,.2,1)!important;
-  overflow:hidden!important;
 }
-.navBtn:before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at 50% 12%,rgba(112,142,255,.17),transparent 66%);opacity:0;transition:opacity .22s ease;pointer-events:none}
-.navBtn span:first-child{
-  position:relative!important;
-  transform:translateY(0)!important;
-  transition:transform .24s cubic-bezier(.2,.9,.2,1),filter .24s ease!important;
-}
-.navBtn .navIcon svg{
-  width:22px!important;height:22px!important;stroke:currentColor!important;
-  transform:none!important;transform-origin:center!important;
-  transition:filter .22s ease!important;
-}
-.navBtn .navIcon svg *{transform-box:fill-box}
-.navBtn.active{
-  color:#f5f8ff!important;
-  background:linear-gradient(180deg,rgba(34,51,92,.78),rgba(14,23,40,.62))!important;
-  box-shadow:0 9px 26px rgba(24,42,84,.24),0 0 0 1px rgba(115,149,255,.12) inset!important;
-}
+.navBtn:before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at 50% 12%,rgba(112,142,255,.16),transparent 68%);opacity:0;transition:opacity .22s ease;pointer-events:none}
+.navBtn span:first-child{position:relative!important;transform:translateY(0)!important;transition:transform .24s cubic-bezier(.2,.9,.2,1),filter .24s ease!important}
+.navBtn .navIcon svg{width:22px!important;height:22px!important;stroke:currentColor!important;transform:none!important;transform-origin:center!important;transition:filter .22s ease!important;overflow:visible!important}
+.navBtn .navIcon svg *{transform-box:fill-box;transform-origin:center}
+.navBtn.active{color:#f5f8ff!important;background:linear-gradient(180deg,rgba(34,51,92,.72),rgba(14,23,40,.54))!important;box-shadow:0 9px 26px rgba(24,42,84,.20),0 0 0 1px rgba(115,149,255,.10) inset!important}
 .navBtn.active:before{opacity:1}
-.navBtn.active span:first-child{transform:translateY(-2px)!important;filter:drop-shadow(0 5px 13px rgba(72,132,255,.28))!important}
-.navBtn.active .navIcon svg{filter:drop-shadow(0 0 8px rgba(102,177,255,.28))!important}
+.navBtn.active span:first-child{transform:translateY(-2px)!important;filter:drop-shadow(0 5px 13px rgba(72,132,255,.26))!important}
+.navBtn.active .navIcon svg{filter:drop-shadow(0 0 8px rgba(102,177,255,.25))!important}
 .navBtn span:last-child{position:relative!important;display:block!important;margin-top:2px!important;font-size:10px!important;font-weight:700!important;letter-spacing:-.01em!important;transform:none!important}
-.navBtn.navPressing{transform:scale(.96)!important}
-.navBtn.navPressing span:first-child{transform:translateY(-1px) scale(.96)!important}
+.navBtn.navPressing{transform:scale(.965)!important}
+.navBtn.navPressing span:first-child{transform:translateY(-1px) scale(.975)!important}
 
-/* HOME — full clean turn */
-.navBtn.navPlay.navHome .navIcon svg{animation:wvHomeSpin .62s cubic-bezier(.24,.84,.25,1)}
-@keyframes wvHomeSpin{0%{transform:rotate(0deg) scale(1)}46%{transform:rotate(205deg) scale(1.035)}78%{transform:rotate(330deg) scale(1.015)}100%{transform:rotate(360deg) scale(1)}}
+/* HOME — quick 360° turn */
+.navBtn.navPlay.navHome .navIcon svg{animation:wvHomeSpin .58s cubic-bezier(.2,.88,.2,1)}
+@keyframes wvHomeSpin{0%{transform:rotate(0deg) scale(1)}42%{transform:rotate(178deg) scale(1.025)}78%{transform:rotate(322deg) scale(1.01)}100%{transform:rotate(360deg) scale(1)}}
 
-/* EXPLORE — handle shifts, lens makes a searching sweep */
-.navBtn.navPlay.navExplore .navIcon svg path{animation:wvSearchHandle .52s cubic-bezier(.22,.86,.24,1)}
-.navBtn.navPlay.navExplore .navIcon svg circle{animation:wvSearchLens .62s cubic-bezier(.24,.84,.24,1)}
-@keyframes wvSearchHandle{0%{transform:translate(0,0) rotate(0)}45%{transform:translate(2.5px,-1.5px) rotate(12deg)}100%{transform:translate(0,0) rotate(0)}}
-@keyframes wvSearchLens{0%{transform:scale(1) rotate(0deg)}45%{transform:scale(1.075) rotate(175deg)}75%{transform:scale(1.035) rotate(300deg)}100%{transform:scale(1) rotate(360deg)}}
+/* EXPLORE — handle dips; lens alone flips like a coin */
+.navBtn.navPlay.navExplore .navIcon svg path{animation:wvSearchHandle .54s cubic-bezier(.22,.86,.24,1)}
+.navBtn.navPlay.navExplore .navIcon svg circle{animation:wvSearchCoin .68s cubic-bezier(.20,.86,.20,1)}
+@keyframes wvSearchHandle{0%,100%{transform:translateY(0)}38%{transform:translateY(2.8px)}66%{transform:translateY(.6px)}}
+@keyframes wvSearchCoin{0%{transform:perspective(80px) rotateY(0deg) scale(1)}44%{transform:perspective(80px) rotateY(178deg) scaleX(.20) scaleY(1.01)}52%{transform:perspective(80px) rotateY(205deg) scaleX(.22)}78%{transform:perspective(80px) rotateY(335deg) scaleX(.92)}100%{transform:perspective(80px) rotateY(360deg) scale(1)}}
 
-/* LIVE — breathing/pulse */
-.navBtn.navPlay.navLive .navIcon svg{animation:wvLivePulse .60s cubic-bezier(.2,.88,.2,1)}
-@keyframes wvLivePulse{0%{transform:scale(1);filter:drop-shadow(0 0 3px rgba(99,194,255,.12))}42%{transform:scale(1.14);filter:drop-shadow(0 0 13px rgba(99,194,255,.36))}72%{transform:scale(1.04);filter:drop-shadow(0 0 8px rgba(99,194,255,.22))}100%{transform:scale(1);filter:drop-shadow(0 0 3px rgba(99,194,255,.12))}}
+/* LIVE — breathing signal */
+.navBtn.navPlay.navLive .navIcon svg{animation:wvLivePulse .62s cubic-bezier(.2,.88,.2,1)}
+@keyframes wvLivePulse{0%{transform:scale(1)}24%{transform:scale(.96)}48%{transform:scale(1.14);filter:drop-shadow(0 0 14px rgba(99,194,255,.38))}72%{transform:scale(1.045)}100%{transform:scale(1);filter:none}}
 
-/* INSPIRATION — four squares exchange positions */
+/* INSPIRATION — four tiles trade places */
 .navBtn.navPlay.navInspiration .navIconGrid svg rect{animation-duration:.68s;animation-timing-function:cubic-bezier(.25,.82,.22,1);animation-fill-mode:both}
 .navBtn.navPlay.navInspiration .navIconGrid svg rect:nth-child(1){animation-name:wvGridA}
 .navBtn.navPlay.navInspiration .navIconGrid svg rect:nth-child(2){animation-name:wvGridB}
 .navBtn.navPlay.navInspiration .navIconGrid svg rect:nth-child(3){animation-name:wvGridC}
 .navBtn.navPlay.navInspiration .navIconGrid svg rect:nth-child(4){animation-name:wvGridD}
-@keyframes wvGridA{0%,100%{transform:translate(0,0)}40%{transform:translate(10px,0)}72%{transform:translate(10px,10px)}}
-@keyframes wvGridB{0%,100%{transform:translate(0,0)}40%{transform:translate(0,10px)}72%{transform:translate(-10px,10px)}}
-@keyframes wvGridC{0%,100%{transform:translate(0,0)}40%{transform:translate(0,-10px)}72%{transform:translate(10px,-10px)}}
-@keyframes wvGridD{0%,100%{transform:translate(0,0)}40%{transform:translate(-10px,0)}72%{transform:translate(-10px,-10px)}}
+@keyframes wvGridA{0%,100%{transform:translate(0,0)}38%{transform:translate(10px,0)}72%{transform:translate(10px,10px)}}
+@keyframes wvGridB{0%,100%{transform:translate(0,0)}38%{transform:translate(0,10px)}72%{transform:translate(-10px,10px)}}
+@keyframes wvGridC{0%,100%{transform:translate(0,0)}38%{transform:translate(0,-10px)}72%{transform:translate(10px,-10px)}}
+@keyframes wvGridD{0%,100%{transform:translate(0,0)}38%{transform:translate(-10px,0)}72%{transform:translate(-10px,-10px)}}
 
-/* FAVORITE — heartbeat, not gimmick */
-.navBtn.navPlay.navFavorites .navIconHeart svg{animation:wvHeartBeat .56s cubic-bezier(.2,.86,.24,1)}
-@keyframes wvHeartBeat{0%,100%{transform:scale(1)}28%{transform:scale(1.16)}46%{transform:scale(.97)}68%{transform:scale(1.07)}}
+/* FAVORITE — double heartbeat */
+.navBtn.navPlay.navFavorites .navIconHeart svg{animation:wvHeartBeat .62s cubic-bezier(.2,.86,.24,1)}
+@keyframes wvHeartBeat{0%,100%{transform:scale(1)}26%{transform:scale(1.15)}43%{transform:scale(.98)}60%{transform:scale(1.08)}76%{transform:scale(1.02)}}
 
-/* ===== GLOBAL TOUCH POLISH ===== */
+/* ===== GLOBAL TOUCH ===== */
 .iconBtn,.profileBtn,.outlineBtn,.primaryHeroBtn,.ghostHeroBtn,.downloadBtn,.roundBtn,.heart{transition:transform .18s cubic-bezier(.2,.85,.2,1),background .2s ease,border-color .2s ease,box-shadow .2s ease,filter .2s ease!important}
 .iconBtn:active,.profileBtn:active,.outlineBtn:active,.primaryHeroBtn:active,.ghostHeroBtn:active,.downloadBtn:active,.roundBtn:active,.heart:active{transform:scale(.96)!important}
 
@@ -187,13 +158,8 @@ body.wvScrolled .topbar{
   .topbar{backdrop-filter:blur(24px) saturate(155%)!important;-webkit-backdrop-filter:blur(24px) saturate(155%)!important}
   .search{transition:opacity .22s ease,transform .22s ease!important}
   body.wvScrolled .search{opacity:0!important;transform:translateY(-7px) scale(.98)!important;pointer-events:none!important}
-  .categories{
-    margin:0 -8px!important;
-    padding:8px 10px!important;
-    min-height:52px!important;
-    border-radius:16px!important;
-  }
-  .tab{min-height:36px!important;padding:0 13px!important;font-size:11px!important}
+  .categories{margin:0 -8px!important;padding:7px 10px!important;min-height:50px!important;background:linear-gradient(180deg,rgba(1,3,8,.54),rgba(1,3,8,.12),transparent)!important}
+  .tab{min-height:34px!important;padding:0 12px!important;font-size:10.5px!important}
   .bottomNav{padding:5px!important;border-radius:21px!important}
   .navBtn{min-height:52px!important;padding:6px 5px!important;border-radius:15px!important}
   .navBtn .navIcon svg{width:21px!important;height:21px!important}
