@@ -496,4 +496,14 @@ async function init() {
   }
 }
 
+// Small public bridge for progressive UI modules (viewer, gestures, etc.).
+// Getters keep the bridge synchronized with the live application state.
+try {
+  Object.defineProperties(window, {
+    wallpapers: { configurable: true, get: () => wallpapers },
+    current: { configurable: true, get: () => current }
+  });
+  Object.assign(window, { openViewer, closeViewer, toggleFavorite });
+} catch {}
+
 init();
