@@ -1,29 +1,61 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1260 720" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 280" role="img" aria-labelledby="title desc">
   <title id="title">WALLVERSE</title>
-  <desc id="desc">Construction animée du W WALLVERSE à partir de points lumineux, traits violets et ruban néon.</desc>
+  <desc id="desc">Animated WALLVERSE neon ribbon, orbital loop and star.</desc>
   <defs>
-    <linearGradient id="ribbon" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f86bff"/><stop offset=".23" stop-color="#bc55ff"/><stop offset=".50" stop-color="#657dff"/><stop offset=".77" stop-color="#19cfff"/><stop offset="1" stop-color="#51efff"/></linearGradient>
-    <linearGradient id="violet" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff72ff"/><stop offset=".55" stop-color="#9c5cff"/><stop offset="1" stop-color="#47dcff"/></linearGradient>
-    <linearGradient id="word" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8ceeff"/><stop offset=".55" stop-color="#d9f9ff"/><stop offset="1" stop-color="#80eaff"/></linearGradient>
-    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="11" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-    <filter id="smallGlow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <linearGradient id="wv" x1="120" y1="55" x2="510" y2="210" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF45E4"/>
+      <stop offset=".30" stop-color="#A94CFF"/>
+      <stop offset=".58" stop-color="#6073FF"/>
+      <stop offset=".83" stop-color="#25C5FF"/>
+      <stop offset="1" stop-color="#48F1FF"/>
+    </linearGradient>
+    <linearGradient id="word" x1="145" y1="0" x2="455" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset=".48" stop-color="#D6D9FF"/>
+      <stop offset="1" stop-color="#67E8FF"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-60%" width="200%" height="220%">
+      <feGaussianBlur stdDeviation="6.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="2.2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
     <style>
-      .dust{fill:#eefaff;opacity:0}.p{animation:pop .28s ease forwards}.p1{animation-delay:.15s}.p2{animation-delay:.20s}.p3{animation-delay:.24s}.p4{animation-delay:.28s}.p5{animation-delay:.32s}.p6{animation-delay:.36s}.p7{animation-delay:.40s}.p8{animation-delay:.44s}.p9{animation-delay:.48s}.p10{animation-delay:.52s}.p11{animation-delay:.56s}.p12{animation-delay:.60s}.p13{animation-delay:.64s}.p14{animation-delay:.68s}.p15{animation-delay:.72s}.p16{animation-delay:.76s}.p17{animation-delay:.80s}.p18{animation-delay:.84s}.p19{animation-delay:.88s}.p20{animation-delay:.92s}.p21{animation-delay:.96s}.p22{animation-delay:1s}.p23{animation-delay:1.04s}.p24{animation-delay:1.08s}.p25{animation-delay:1.12s}
-      .guide{fill:none;stroke:#8a5dff;stroke-width:1.15;opacity:0;stroke-dasharray:10 14;animation:guideIn .7s ease forwards}.g1{animation-delay:1.05s}.g2{animation-delay:1.18s}.g3{animation-delay:1.31s}.g4{animation-delay:1.44s}.g5{animation-delay:1.57s}
-      .violetTrace{fill:none;stroke:url(#violet);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1100;stroke-dashoffset:1100;animation:trace 2.65s cubic-bezier(.18,.74,.18,1) 1.35s forwards}.traceGlow{fill:none;stroke:url(#violet);stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1100;stroke-dashoffset:1100;opacity:.42;filter:url(#glow);animation:trace 2.65s cubic-bezier(.18,.74,.18,1) 1.35s forwards}
-      .ribbon{fill:none;stroke:url(#ribbon);stroke-width:31;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1100;stroke-dashoffset:1100;animation:trace 2.35s cubic-bezier(.14,.82,.16,1) 2.18s forwards}.ribbonGlow{fill:none;stroke:url(#ribbon);stroke-width:54;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1100;stroke-dashoffset:1100;opacity:.33;filter:url(#glow);animation:trace 2.35s cubic-bezier(.14,.82,.16,1) 2.18s forwards}
-      .sheen{fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-dasharray:320;stroke-dashoffset:320;opacity:.6;animation:sheen 1s ease 4.35s forwards}.word{opacity:0;transform:translateY(16px);animation:wordIn .7s cubic-bezier(.16,.84,.2,1) 5.0s forwards}.star{opacity:0;transform-origin:1003px 479px;animation:starIn .5s cubic-bezier(.2,.9,.2,1) 5.12s forwards}.fadeGuide{animation:guideOut .7s ease 4.55s forwards}
-      @keyframes pop{0%{opacity:0;transform:scale(.25)}65%{opacity:1;transform:scale(1.25)}100%{opacity:.85;transform:scale(1)}}@keyframes guideIn{to{opacity:.22}}@keyframes guideOut{to{opacity:0}}@keyframes trace{to{stroke-dashoffset:0}}@keyframes sheen{to{stroke-dashoffset:0;opacity:.48}}@keyframes wordIn{to{opacity:1;transform:translateY(0)}}@keyframes starIn{0%{opacity:0;transform:scale(.2) rotate(-22deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
-      @media(prefers-reduced-motion:reduce){.p,.guide,.violetTrace,.traceGlow,.ribbon,.ribbonGlow,.sheen,.word,.star,.fadeGuide{animation:none!important}.dust{opacity:.8}.guide{opacity:.16}.violetTrace,.traceGlow,.ribbon,.ribbonGlow,.sheen{stroke-dashoffset:0}.word,.star{opacity:1;transform:none}}
+      .trail{fill:none;stroke:#C96BFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:680;stroke-dashoffset:680;animation:draw .72s cubic-bezier(.2,.8,.15,1) .08s forwards}
+      .ribbonGlow,.ribbon{fill:none;stroke:url(#wv);stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:680;stroke-dashoffset:680}
+      .ribbonGlow{stroke-width:45;opacity:.34;filter:url(#glow);animation:draw 1.04s cubic-bezier(.16,.84,.18,1) .52s forwards}
+      .ribbon{stroke-width:29;filter:url(#glow);animation:draw 1.04s cubic-bezier(.16,.84,.18,1) .52s forwards}
+      .sheen{fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-dasharray:170;stroke-dashoffset:170;opacity:.54;animation:draw .58s ease 1.28s forwards}
+      .orbit{fill:none;stroke:url(#wv);stroke-width:4.5;stroke-linecap:round;stroke-dasharray:430;stroke-dashoffset:430;opacity:.0;filter:url(#soft);animation:orbitIn .8s ease 1.02s forwards}
+      .word{opacity:0;transform-origin:300px 247px;animation:wordIn .5s cubic-bezier(.16,.84,.2,1) 1.38s forwards}
+      .star{opacity:0;transform-origin:520px 89px;animation:starIn .42s cubic-bezier(.2,.9,.2,1) 1.55s forwards}
+      @keyframes draw{to{stroke-dashoffset:0}}
+      @keyframes orbitIn{0%{opacity:0;transform:scale(.82) rotate(-10deg)}100%{opacity:.78;transform:scale(1) rotate(0)}}
+      @keyframes wordIn{0%{opacity:0;transform:translateY(7px) scale(.95)}100%{opacity:1;transform:translateY(0) scale(1)}}
+      @keyframes starIn{0%{opacity:0;transform:scale(.2) rotate(-25deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+      @media(prefers-reduced-motion:reduce){.trail,.ribbonGlow,.ribbon,.sheen,.orbit,.word,.star{animation:none!important;stroke-dashoffset:0}.orbit{opacity:.78}.word,.star{opacity:1;transform:none}}
     </style>
   </defs>
-  <g filter="url(#smallGlow)"><circle class="dust p p1" cx="392" cy="224" r="3"/><circle class="dust p p2" cx="444" cy="223" r="3"/><circle class="dust p p3" cx="487" cy="228" r="3.4"/><circle class="dust p p4" cx="516" cy="211" r="3"/><circle class="dust p p5" cx="547" cy="226" r="3.3"/><circle class="dust p p6" cx="606" cy="229" r="3"/><circle class="dust p p7" cx="639" cy="210" r="3.2"/><circle class="dust p p8" cx="671" cy="224" r="3"/><circle class="dust p p9" cx="704" cy="214" r="3"/><circle class="dust p p10" cx="744" cy="195" r="3.1"/><circle class="dust p p11" cx="782" cy="180" r="3.4"/><circle class="dust p p12" cx="814" cy="192" r="3"/><circle class="dust p p13" cx="515" cy="311" r="3"/><circle class="dust p p14" cx="575" cy="312" r="3"/><circle class="dust p p15" cx="640" cy="311" r="3"/><circle class="dust p p16" cx="703" cy="310" r="3"/><circle class="dust p p17" cx="771" cy="300" r="3"/><circle class="dust p p18" cx="543" cy="392" r="3.2"/><circle class="dust p p19" cx="575" cy="405" r="3"/><circle class="dust p p20" cx="596" cy="387" r="3"/><circle class="dust p p21" cx="607" cy="394" r="3"/><circle class="dust p p22" cx="669" cy="390" r="3.2"/><circle class="dust p p23" cx="702" cy="407" r="3"/><circle class="dust p p24" cx="736" cy="392" r="3"/><circle class="dust p p25" cx="968" cy="482" r="3"/></g>
-  <g class="fadeGuide"><path class="guide g1" d="M392 224 L487 228 L575 312 L543 392 L639 210 L669 390 L782 180"/><path class="guide g2" d="M444 223 L515 311 L607 394 L703 310 L814 192"/><path class="guide g3" d="M487 228 L575 312 L640 311 L703 310 L771 300"/><path class="guide g4" d="M516 211 L547 226 L606 229 L671 224 L744 195 L782 180"/><path class="guide g5" d="M543 392 L596 387 L669 390 L736 392"/></g>
-  <path class="traceGlow" d="M487 228 C505 267 526 350 543 392 C554 416 574 415 589 386 C605 355 600 275 606 229 C615 270 646 354 669 390 C684 414 706 414 720 380 C741 331 757 225 782 180"/>
-  <path class="violetTrace" d="M487 228 C505 267 526 350 543 392 C554 416 574 415 589 386 C605 355 600 275 606 229 C615 270 646 354 669 390 C684 414 706 414 720 380 C741 331 757 225 782 180"/>
-  <path class="ribbonGlow" d="M487 228 C505 267 526 350 543 392 C554 416 574 415 589 386 C605 355 600 275 606 229 C615 270 646 354 669 390 C684 414 706 414 720 380 C741 331 757 225 782 180"/>
-  <path class="ribbon" d="M487 228 C505 267 526 350 543 392 C554 416 574 415 589 386 C605 355 600 275 606 229 C615 270 646 354 669 390 C684 414 706 414 720 380 C741 331 757 225 782 180"/>
-  <path class="sheen" d="M491 229 C507 270 529 347 544 388 C556 413 573 411 588 383 M610 232 C620 271 646 349 669 386 C684 408 703 408 717 377 M746 307 C757 260 770 206 782 185"/>
-  <g class="word"><text x="630" y="535" text-anchor="middle" fill="url(#word)" font-family="Georgia,Times New Roman,serif" font-size="74" font-weight="700" letter-spacing="2">WALLVERSE</text></g>
-  <g class="star" fill="url(#word)" filter="url(#smallGlow)"><path d="M1003 448 C1006 463 1011 474 1026 479 C1011 483 1006 494 1003 509 C1000 494 995 483 980 479 C995 474 1000 463 1003 448Z"/><circle cx="1003" cy="479" r="2.4" fill="#fff"/></g>
+
+  <!-- Violet construction trait is drawn first. -->
+  <path class="trail" d="M126 72 C152 53 180 57 196 87 L241 176 C251 199 271 205 285 183 L319 112 C325 100 335 100 341 112 L375 183 C389 205 409 199 419 176 L464 87 C480 57 508 53 534 72"/>
+
+  <!-- One continuous, deliberately simple ribbon. -->
+  <path class="ribbonGlow" d="M126 72 C152 53 180 57 196 87 L241 176 C251 199 271 205 285 183 L319 112 C325 100 335 100 341 112 L375 183 C389 205 409 199 419 176 L464 87 C480 57 508 53 534 72"/>
+  <path class="ribbon" d="M126 72 C152 53 180 57 196 87 L241 176 C251 199 271 205 285 183 L319 112 C325 100 335 100 341 112 L375 183 C389 205 409 199 419 176 L464 87 C480 57 508 53 534 72"/>
+  <path class="sheen" d="M132 70 C153 56 177 59 192 86 L236 173 M383 177 L421 88 C437 60 489 55 527 71"/>
+
+  <!-- Orbit: easy to animate independently and recognizable at every size. -->
+  <path class="orbit" d="M85 142 C157 76 430 72 514 128 C548 151 545 175 511 190 C429 225 167 222 91 176 C67 162 67 150 85 142Z"/>
+
+  <g class="star" fill="url(#wv)" filter="url(#soft)">
+    <path d="M520 72 C522 81 527 87 536 89 C527 91 522 97 520 106 C518 97 513 91 504 89 C513 87 518 81 520 72Z"/>
+    <circle cx="520" cy="89" r="2.1" fill="#fff"/>
+  </g>
+
+  <g class="word">
+    <text x="300" y="252" text-anchor="middle" fill="url(#word)" font-family="Manrope,DM Sans,Arial,sans-serif" font-size="40" font-weight="800" letter-spacing="3">WALLVERSE</text>
+  </g>
 </svg>
