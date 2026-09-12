@@ -1,79 +1,45 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 280" role="img" aria-labelledby="title desc">
   <title id="title">WALLVERSE</title>
-  <desc id="desc">WALLVERSE logo with three thick intertwined neon ribbon strokes, futuristic wordmark and compact sparkle.</desc>
+  <desc id="desc">A minimal neon ribbon W wrapped by an orbital line and a small star.</desc>
   <defs>
-    <linearGradient id="wv" gradientUnits="userSpaceOnUse" x1="118" y1="52" x2="482" y2="206">
-      <stop offset="0" stop-color="#FF32D8"/>
-      <stop offset=".28" stop-color="#A43CFF"/>
-      <stop offset=".55" stop-color="#596FFF"/>
-      <stop offset=".80" stop-color="#20B8FF"/>
-      <stop offset="1" stop-color="#35ECFF"/>
+    <linearGradient id="wv" x1="130" y1="70" x2="465" y2="195" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF42DF"/>
+      <stop offset=".30" stop-color="#A84BFF"/>
+      <stop offset=".58" stop-color="#596FFF"/>
+      <stop offset=".82" stop-color="#21B9FF"/>
+      <stop offset="1" stop-color="#39ECFF"/>
     </linearGradient>
-    <linearGradient id="textGrad" gradientUnits="userSpaceOnUse" x1="145" y1="230" x2="455" y2="230">
-      <stop offset="0" stop-color="#FF39D8"/>
-      <stop offset=".32" stop-color="#A043FF"/>
-      <stop offset=".68" stop-color="#4D79FF"/>
-      <stop offset="1" stop-color="#2BE5FF"/>
+    <linearGradient id="text" x1="140" y1="0" x2="465" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F7F7FF"/>
+      <stop offset=".48" stop-color="#C7CAFF"/>
+      <stop offset="1" stop-color="#5DE9FF"/>
     </linearGradient>
-    <filter id="glow" x="-30%" y="-45%" width="160%" height="190%">
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
       <feGaussianBlur stdDeviation="7" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-    <filter id="softGlow" x="-100%" y="-100%" width="300%" height="300%">
-      <feGaussianBlur stdDeviation="2.6" result="b"/>
+    <filter id="soft" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="2.3" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
 
-  <!-- Ambient bloom -->
-  <g fill="none" stroke="url(#wv)" stroke-linecap="round" stroke-linejoin="round" opacity=".48" filter="url(#glow)">
-    <path d="M117 67 C145 47 171 51 187 77 C202 101 211 143 226 181 C237 208 256 219 275 196 C288 181 295 149 300 112" stroke-width="44"/>
-    <path d="M179 76 C207 59 229 76 247 103 C267 133 281 162 300 190 C312 208 329 212 345 193 C367 166 376 125 392 91 C406 62 430 48 480 69" stroke-width="44"/>
-    <path d="M126 91 C151 76 171 84 186 108 C204 138 218 176 236 198 C250 215 268 214 286 193 C296 181 301 157 304 132 C307 157 312 181 322 193 C340 214 358 215 372 198 C390 176 404 138 422 108 C437 84 457 76 474 89" stroke-width="44"/>
+  <!-- One continuous ribbon: easy to render, animate and keep crisp at any size. -->
+  <path d="M132 86 C159 53 188 55 204 88 L246 178 C256 199 273 201 284 183 L318 112 C324 100 334 100 340 112 L374 183 C385 201 402 199 412 178 L454 88 C470 55 499 53 526 86"
+        fill="none" stroke="#090B18" stroke-width="43" stroke-linecap="round" stroke-linejoin="round" opacity=".96"/>
+  <path d="M132 86 C159 53 188 55 204 88 L246 178 C256 199 273 201 284 183 L318 112 C324 100 334 100 340 112 L374 183 C385 201 402 199 412 178 L454 88 C470 55 499 53 526 86"
+        fill="none" stroke="url(#wv)" stroke-width="31" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+  <path d="M136 82 C160 55 184 58 198 87 L241 179" fill="none" stroke="#FFF" stroke-width="3.2" stroke-linecap="round" opacity=".48"/>
+  <path d="M414 178 L457 87 C471 58 495 55 520 82" fill="none" stroke="#FFF" stroke-width="3.2" stroke-linecap="round" opacity=".38"/>
+
+  <!-- Orbital identity line. -->
+  <path d="M92 147 C178 73 398 72 503 137 C537 159 539 184 505 198 C427 229 188 229 103 185 C74 170 69 155 92 147Z"
+        fill="none" stroke="url(#wv)" stroke-width="5.5" stroke-linecap="round" opacity=".72" filter="url(#soft)"/>
+
+  <g transform="translate(514 105)" fill="url(#wv)" filter="url(#soft)">
+    <path d="M0-16 C2-7 7-2 16 0 C7 2 2 7 0 16 C-2 7 -7 2 -16 0 C-7-2 -2-7 0-16Z"/>
+    <circle r="2.1" fill="#fff"/>
   </g>
 
-  <!-- Deep edge/shadow gives the ribbons a physical, layered feel. -->
-  <g fill="none" stroke="#070914" stroke-linecap="round" stroke-linejoin="round" opacity=".92">
-    <path d="M117 67 C145 47 171 51 187 77 C202 101 211 143 226 181 C237 208 256 219 275 196 C288 181 295 149 300 112" stroke-width="34"/>
-    <path d="M179 76 C207 59 229 76 247 103 C267 133 281 162 300 190 C312 208 329 212 345 193 C367 166 376 125 392 91 C406 62 430 48 480 69" stroke-width="34"/>
-    <path d="M126 91 C151 76 171 84 186 108 C204 138 218 176 236 198 C250 215 268 214 286 193 C296 181 301 157 304 132 C307 157 312 181 322 193 C340 214 358 215 372 198 C390 176 404 138 422 108 C437 84 457 76 474 89" stroke-width="34"/>
-  </g>
-
-  <!-- Three continuous capsule/ribbon trajectories. -->
-  <g fill="none" stroke="url(#wv)" stroke-width="29" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M117 67 C145 47 171 51 187 77 C202 101 211 143 226 181 C237 208 256 219 275 196 C288 181 295 149 300 112"/>
-    <path d="M179 76 C207 59 229 76 247 103 C267 133 281 162 300 190 C312 208 329 212 345 193 C367 166 376 125 392 91 C406 62 430 48 480 69"/>
-    <path d="M126 91 C151 76 171 84 186 108 C204 138 218 176 236 198 C250 215 268 214 286 193 C296 181 301 157 304 132 C307 157 312 181 322 193 C340 214 358 215 372 198 C390 176 404 138 422 108 C437 84 457 76 474 89"/>
-  </g>
-
-  <!-- Controlled over/under separators at the two center crossings. -->
-  <g fill="none" stroke="#070914" stroke-linecap="round">
-    <path d="M292 177 C297 164 300 148 303 130" stroke-width="38"/>
-    <path d="M307 132 C310 150 313 166 320 181" stroke-width="38"/>
-  </g>
-  <g fill="none" stroke="url(#wv)" stroke-width="29" stroke-linecap="round">
-    <path d="M292 177 C297 164 300 148 303 130"/>
-    <path d="M307 132 C310 150 313 166 320 181"/>
-  </g>
-
-  <!-- Fine glossy accents, following the same trajectories. -->
-  <g fill="none" stroke="#fff" stroke-linecap="round" opacity=".40">
-    <path d="M126 66 C147 54 169 57 181 78" stroke-width="3.7"/>
-    <path d="M187 100 C198 122 206 151 218 178" stroke-width="3.5"/>
-    <path d="M187 76 C207 66 225 79 239 100" stroke-width="3.2"/>
-    <path d="M329 199 C341 203 350 196 359 184" stroke-width="3.3"/>
-    <path d="M400 78 C419 56 443 54 474 67" stroke-width="3.8"/>
-  </g>
-
-  <g fill="url(#wv)" filter="url(#softGlow)">
-    <circle cx="118" cy="67" r="3.4"/>
-    <circle cx="480" cy="69" r="3.4"/>
-  </g>
-
-  <text x="292" y="253" text-anchor="middle" fill="url(#textGrad)" font-family="Montserrat,Manrope,Poppins,Arial,sans-serif" font-size="41" font-weight="800" letter-spacing="2.8">WALLVERSE</text>
-
-  <g transform="translate(531 238)" fill="url(#wv)" filter="url(#softGlow)">
-    <path d="M0-17 C2-7 7-2 17 0 C7 2 2 7 0 17 C-2 7 -7 2 -17 0 C-7-2 -2-7 0-17Z"/>
-    <circle cx="0" cy="0" r="2.2" fill="#FFFFFF"/>
-  </g>
+  <text x="300" y="255" text-anchor="middle" fill="url(#text)" font-family="Manrope,DM Sans,Arial,sans-serif" font-size="42" font-weight="800" letter-spacing="3.1">WALLVERSE</text>
 </svg>
