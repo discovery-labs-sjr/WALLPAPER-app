@@ -1,25 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 300" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 280" role="img" aria-labelledby="title desc">
   <title id="title">WALLVERSE</title>
-  <desc id="desc">WALLVERSE gradient logo with rounded ribbon W and sparkle.</desc>
+  <desc id="desc">WALLVERSE gradient logo with rounded ribbon W, wordmark and sparkle.</desc>
   <defs>
     <linearGradient id="wv" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="#ef39f4"/>
-      <stop offset=".28" stop-color="#6d4dff"/>
-      <stop offset=".62" stop-color="#496fff"/>
+      <stop offset=".28" stop-color="#744bff"/>
+      <stop offset=".62" stop-color="#4c72ff"/>
       <stop offset="1" stop-color="#35e3ff"/>
     </linearGradient>
-    <filter id="glow" x="-30%" y="-40%" width="160%" height="180%">
-      <feGaussianBlur stdDeviation="8" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    <filter id="glow" x="-30%" y="-35%" width="160%" height="170%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
-
-  <!-- The W is deliberately a soft, continuous ribbon: three rounded rises rather than a geometric mark. -->
-  <path d="M196 55 L238 157 Q250 187 269 157 L289 105 L310 157 Q329 187 341 157 L386 55"
-        fill="none" stroke="url(#wv)" stroke-width="48" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
-
-  <text x="38" y="251" fill="url(#wv)" font-family="Arial, Helvetica, sans-serif" font-size="76" font-weight="900" letter-spacing="-2">WALLVERSE</text>
-  <g transform="translate(866 218)" filter="url(#glow)">
-    <path d="M0 -25 L8 -8 L25 0 L8 8 L0 25 L-8 8 L-25 0 L-8 -8 Z" fill="url(#wv)"/>
+  <path d="M198 54 L238 151 Q248 176 264 151 L288 91 L313 151 Q329 176 339 151 L389 54" fill="none" stroke="url(#wv)" stroke-width="47" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+  <text x="27" y="245" fill="url(#wv)" font-family="Arial, Helvetica, sans-serif" font-size="57" font-weight="900" letter-spacing="-2.5">WALLVERSE</text>
+  <g transform="translate(548 222)" filter="url(#glow)">
+    <path d="M0 -27 C4 -8 8 -4 27 0 C8 4 4 8 0 27 C-4 8 -8 4 -27 0 C-8 -4 -4 -8 0 -27 Z" fill="url(#wv)"/>
   </g>
 </svg>
