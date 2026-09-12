@@ -394,33 +394,7 @@ function initHeroInteraction() {
 }
 
 function initSplash() {
-  const splash = $("#splash");
-  const path = $("#splashWPath");
-  const letters = document.querySelectorAll(".logoLetter");
-  const diamond = $("#splashDiamond");
-  const trail = $("#diamondTrail");
-  if (!splash || !path) return;
-  try {
-    const length = path.getTotalLength();
-    path.style.strokeDasharray = `${length}`;
-    path.style.strokeDashoffset = `${length}`;
-  } catch {}
-  const start = performance.now();
-  const timeline = () => {
-    const elapsed = performance.now() - start;
-    if (elapsed >= 120) splash.classList.add("phase-w");
-    if (elapsed >= 900) splash.classList.add("phase-draw-word");
-    if (elapsed >= 1120) {
-      splash.classList.add("phase-travel");
-      diamond.classList.add("traveling");
-      trail.classList.add("traveling");
-      letters.forEach((letter, index) => setTimeout(() => letter.classList.add("revealed"), index * 95));
-    }
-    if (elapsed >= 1880) splash.classList.add("phase-settle");
-    if (elapsed >= 2300) splash.classList.add("phase-out");
-    if (elapsed < 2550) requestAnimationFrame(timeline);
-  };
-  requestAnimationFrame(timeline);
+  // Legacy splash hooks intentionally disabled; the SVG owns its own timeline.
 }
 
 function bindGlobalEvents() {
@@ -491,8 +465,7 @@ async function init() {
     console.error(error);
     $("#sections").innerHTML = '<div class="empty"><div class="emptyIcon">!</div><h2>Catalogue indisponible</h2><p>Impossible de charger les wallpapers pour le moment.</p></div>';
   } finally {
-    setTimeout(() => $("#splash")?.classList.add("phase-out"), 2300);
-    setTimeout(() => $("#splash")?.classList.add("hidden"), 2900);
+    // cinematic-v2 owns splash exit; keep the data loader from racing the logo animation.
   }
 }
 
