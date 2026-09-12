@@ -1,38 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 430" role="img" aria-labelledby="title desc">
 <title id="title">WALLVERSE</title>
-<desc id="desc">Minimal futuristic WALLVERSE mark: one continuous neon ribbon W, orbital ring, star and wordmark.</desc>
+<desc id="desc">Premium WALLVERSE identity: neon ribbon W, orbital ring, star and geometric wordmark.</desc>
 <defs>
-  <linearGradient id="wv" x1="260" y1="130" x2="930" y2="410" gradientUnits="userSpaceOnUse">
-    <stop offset="0" stop-color="#FF4BE6"/><stop offset=".28" stop-color="#A946FF"/><stop offset=".55" stop-color="#566FFF"/><stop offset=".80" stop-color="#20C5FF"/><stop offset="1" stop-color="#4EF3FF"/>
-  </linearGradient>
-  <linearGradient id="word" x1="350" y1="0" x2="890" y2="0" gradientUnits="userSpaceOnUse">
-    <stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#DFE6FF"/><stop offset="1" stop-color="#8CEAFF"/>
-  </linearGradient>
-  <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
-    <feGaussianBlur stdDeviation="13" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-  </filter>
-  <filter id="soft" x="-80%" y="-80%" width="260%" height="260%">
-    <feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-  </filter>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#090315"/><stop offset=".52" stop-color="#070A21"/><stop offset="1" stop-color="#020814"/></linearGradient>
+  <linearGradient id="edge" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FF35DB"/><stop offset=".4" stop-color="#9348FF"/><stop offset=".72" stop-color="#447CFF"/><stop offset="1" stop-color="#35ECFF"/></linearGradient>
+  <linearGradient id="ribbon" x1="100" y1="90" x2="500" y2="300"><stop offset="0" stop-color="#FF53E9"/><stop offset=".28" stop-color="#A649FF"/><stop offset=".58" stop-color="#4D77FF"/><stop offset=".82" stop-color="#20C8FF"/><stop offset="1" stop-color="#55F2FF"/></linearGradient>
+  <linearGradient id="word" x1="610" y1="250" x2="1010" y2="250"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#DEE6FF"/><stop offset="1" stop-color="#78EBFF"/></linearGradient>
+  <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="soft" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
 </defs>
 
-<!-- single continuous W ribbon -->
-<path d="M290 155 C328 95 387 95 420 164 L498 340 C510 370 538 374 556 343 L586 286 C596 267 616 267 626 286 L656 343 C674 374 702 370 714 340 L792 164 C825 95 884 95 922 155"
-      fill="none" stroke="#060A16" stroke-width="62" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M290 155 C328 95 387 95 420 164 L498 340 C510 370 538 374 556 343 L586 286 C596 267 616 267 626 286 L656 343 C674 374 702 370 714 340 L792 164 C825 95 884 95 922 155"
-      fill="none" stroke="url(#wv)" stroke-width="46" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
-<path d="M302 147 C335 103 378 104 406 160 L483 337" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" opacity=".55"/>
-<path d="M728 337 L805 160 C833 104 876 103 910 147" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity=".38"/>
+<rect x="18" y="18" width="394" height="394" rx="96" fill="url(#bg)" stroke="#14192E" stroke-width="3"/>
+<rect x="24" y="24" width="382" height="382" rx="90" fill="none" stroke="url(#edge)" stroke-width="2.4" opacity=".85" filter="url(#soft)"/>
 
-<!-- orbit -->
-<path d="M195 308 C290 198 875 184 1005 301 C1040 332 1026 362 973 379 C825 426 340 414 210 348 C174 329 170 315 195 308Z"
-      fill="none" stroke="url(#wv)" stroke-width="7" stroke-linecap="round" opacity=".80" filter="url(#soft)"/>
+<path d="M92 175 C124 122 171 118 198 170 L240 286 C248 307 267 311 279 288 L298 247 C304 233 319 233 325 247 L344 288 C356 311 375 307 383 286 L425 170 C452 118 499 122 531 175" transform="translate(-36 -3) scale(.82)" fill="none" stroke="#050817" stroke-width="64" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M92 175 C124 122 171 118 198 170 L240 286 C248 307 267 311 279 288 L298 247 C304 233 319 233 325 247 L344 288 C356 311 375 307 383 286 L425 170 C452 118 499 122 531 175" transform="translate(-36 -3) scale(.82)" fill="none" stroke="url(#ribbon)" stroke-width="48" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+<path d="M108 161 C137 126 173 129 192 166 L236 284" fill="none" stroke="#fff" stroke-width="4.2" opacity=".44" stroke-linecap="round"/>
+<path d="M323 284 L367 166 C386 129 422 126 451 161" fill="none" stroke="#fff" stroke-width="3.8" opacity=".30" stroke-linecap="round"/>
 
-<!-- star -->
-<g transform="translate(949 165)" fill="url(#wv)" filter="url(#soft)">
-  <path d="M0-22 C3-10 10-3 22 0 C10 3 3 10 0 22 C-3 10 -10 3 -22 0 C-10-3 -3-10 0-22Z"/>
-  <circle r="3" fill="#FFFFFF"/>
+<path d="M64 260 C119 186 315 167 389 218 C418 238 414 264 376 284 C303 323 132 321 72 287 C51 275 49 265 64 260Z" fill="none" stroke="url(#ribbon)" stroke-width="7" stroke-linecap="round" opacity=".87" filter="url(#soft)"/>
+<g transform="translate(335 94)" fill="url(#ribbon)" filter="url(#soft)"><path d="M0-23 C3-10 10-3 23 0 C10 3 3 10 0 23 C-3 10 -10 3 -23 0 C-10-3 -3-10 0-23Z"/><circle r="2.8" fill="#fff"/></g>
+
+<g transform="translate(465 0)">
+  <text x="60" y="234" fill="url(#word)" font-family="Manrope,DM Sans,Arial,sans-serif" font-size="84" font-weight="800" letter-spacing="6">WALLVERSE</text>
+  <rect x="62" y="264" width="430" height="2" rx="1" fill="url(#edge)" opacity=".34"/>
+  <text x="62" y="303" fill="#AEB8D8" font-family="Manrope,DM Sans,Arial,sans-serif" font-size="18" font-weight="600" letter-spacing="5">WALLPAPERS • BEYOND</text>
 </g>
-
-<text x="600" y="505" text-anchor="middle" fill="url(#word)" font-family="Manrope,DM Sans,Arial,sans-serif" font-size="78" font-weight="800" letter-spacing="7">WALLVERSE</text>
 </svg>
