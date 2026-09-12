@@ -1,35 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 280" role="img" aria-labelledby="title desc">
   <title id="title">WALLVERSE</title>
-  <desc id="desc">WALLVERSE logo with a continuous ribbon-shaped W, gradient wordmark and compact four-point sparkle.</desc>
+  <desc id="desc">WALLVERSE logo prototype based on the observed neon ribbon construction: two intertwined smooth trajectories, gradient wordmark and compact sparkle.</desc>
   <defs>
-    <linearGradient id="wv" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#ff38df"/>
-      <stop offset="0.30" stop-color="#7547ff"/>
-      <stop offset="0.62" stop-color="#477cff"/>
-      <stop offset="1" stop-color="#35e6ff"/>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff35df"/>
+      <stop offset="0.34" stop-color="#8248ff"/>
+      <stop offset="0.68" stop-color="#3986ff"/>
+      <stop offset="1" stop-color="#35e8ff"/>
     </linearGradient>
-    <filter id="wglow" x="-30%" y="-40%" width="160%" height="190%">
-      <feGaussianBlur stdDeviation="6"/>
-    </filter>
-    <filter id="smallglow" x="-80%" y="-80%" width="260%" height="260%">
-      <feGaussianBlur stdDeviation="3.5" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
+    <filter id="glow" x="-50%" y="-60%" width="200%" height="220%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="sg" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
   </defs>
 
-  <!-- One continuous ribbon path: three raised tips and two deep rounded valleys. -->
-  <path d="M150 58 C166 82 175 143 196 151 C218 159 224 86 246 64 C262 48 278 143 301 151 C324 159 335 84 366 58"
-        fill="none" stroke="url(#wv)" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" filter="url(#wglow)" opacity="0.75"/>
-  <path d="M150 58 C166 82 175 143 196 151 C218 159 224 86 246 64 C262 48 278 143 301 151 C324 159 335 84 366 58"
-        fill="none" stroke="url(#wv)" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Wide geometric wordmark, kept as one centered block. -->
-  <text x="73" y="238" fill="url(#wv)"
-        font-family="Montserrat, Poppins, Arial, Helvetica, sans-serif"
-        font-size="63" font-weight="800" letter-spacing="-1.5">WALLVERSE</text>
-
-  <!-- Small sparkle immediately after the E. -->
-  <g transform="translate(457 221) scale(.28)" filter="url(#smallglow)">
-    <path d="M0 -30 C3 -10 10 -3 30 0 C10 3 3 10 0 30 C-3 10 -10 3 -30 0 C-10 -3 -3 -10 0 -30Z" fill="url(#wv)"/>
+  <!-- Prototype W: two intertwined ribbon trajectories, following the construction visible in the reference frames. -->
+  <g fill="none" stroke="url(#g)" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)">
+    <path d="M166 62 C181 51 202 53 211 67 C220 82 225 112 238 151 C244 169 257 171 268 151 C282 126 285 83 303 65 C315 53 337 52 349 64 C363 78 369 111 382 151 C388 169 401 171 413 151 C426 130 432 89 449 63"/>
+    <path d="M214 67 C228 82 239 111 251 145 C258 163 271 166 282 148 C296 125 301 91 303 65 C305 82 313 111 326 145 C333 163 346 166 357 148 C371 125 377 92 382 151"/>
   </g>
+  <g fill="none" stroke="url(#g)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M166 62 C181 51 202 53 211 67 C220 82 225 112 238 151 C244 169 257 171 268 151 C282 126 285 83 303 65 C315 53 337 52 349 64 C363 78 369 111 382 151 C388 169 401 171 413 151 C426 130 432 89 449 63"/>
+    <path d="M214 67 C228 82 239 111 251 145 C258 163 271 166 282 148 C296 125 301 91 303 65 C305 82 313 111 326 145 C333 163 346 166 357 148 C371 125 377 92 382 151"/>
+  </g>
+
+  <text x="54" y="226" fill="url(#g)" font-family="Arial Black,Montserrat,Poppins,sans-serif" font-size="52" font-weight="900" letter-spacing="-2.2">WALLVERSE</text>
+  <g transform="translate(424 211) scale(.22)" filter="url(#sg)"><path d="M0-34C3-12 12-3 34 0 12 3 3 12 0 34-3 12-12 3-34 0-12-3-3-12 0-34Z" fill="url(#g)"/></g>
 </svg>
