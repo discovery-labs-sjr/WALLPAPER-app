@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 280" role="img" aria-labelledby="title desc">
+  <title id="title">WALLVERSE</title>
+  <desc id="desc">Animated WALLVERSE ribbon W construction inspired by the reference drawing sequence.</desc>
+  <defs>
+    <linearGradient id="wv" gradientUnits="userSpaceOnUse" x1="118" y1="52" x2="482" y2="206">
+      <stop offset="0" stop-color="#FF32D8"/><stop offset=".28" stop-color="#A43CFF"/><stop offset=".55" stop-color="#596FFF"/><stop offset=".80" stop-color="#20B8FF"/><stop offset="1" stop-color="#35ECFF"/>
+    </linearGradient>
+    <linearGradient id="textGrad" gradientUnits="userSpaceOnUse" x1="145" y1="230" x2="455" y2="230">
+      <stop offset="0" stop-color="#FF39D8"/><stop offset=".32" stop-color="#A043FF"/><stop offset=".68" stop-color="#4D79FF"/><stop offset="1" stop-color="#2BE5FF"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-45%" width="160%" height="190%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="softGlow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="2.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <style>
+      .draw{stroke-dasharray:760;stroke-dashoffset:760;animation:draw 1.05s cubic-bezier(.15,.78,.18,1) forwards}
+      .d1{animation-delay:.08s}.d2{animation-delay:.32s}.d3{animation-delay:.50s}
+      .glow{opacity:0;animation:glowIn .34s ease forwards;animation-delay:.98s}
+      .word{opacity:0;transform-origin:50% 236px;animation:wordIn .5s cubic-bezier(.2,.85,.2,1) forwards;animation-delay:1.20s}
+      .star{opacity:0;transform-origin:531px 238px;animation:starIn .42s cubic-bezier(.2,.85,.2,1) forwards;animation-delay:1.34s}
+      @keyframes draw{0%{stroke-dashoffset:760}100%{stroke-dashoffset:0}}
+      @keyframes glowIn{0%{opacity:0}100%{opacity:.42}}
+      @keyframes wordIn{0%{opacity:0;transform:translateY(8px) scale(.94)}100%{opacity:1;transform:translateY(0) scale(1)}}
+      @keyframes starIn{0%{opacity:0;transform:scale(.35) rotate(-20deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+      @media (prefers-reduced-motion:reduce){.draw{animation:none;stroke-dashoffset:0}.glow{opacity:.42;animation:none}.word{opacity:1;animation:none}.star{opacity:1;animation:none}}
+    </style>
+  </defs>
+
+  <!-- soft construction bloom -->
+  <g class="glow" fill="none" stroke="url(#wv)" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)">
+    <path d="M117 67 C145 47 171 51 187 77 C202 101 211 143 226 181 C237 208 256 219 275 196 C288 181 295 149 300 112" stroke-width="44"/>
+    <path d="M179 76 C207 59 229 76 247 103 C267 133 281 162 300 190 C312 208 329 212 345 193 C367 166 376 125 392 91 C406 62 430 48 480 69" stroke-width="44"/>
+    <path d="M126 91 C151 76 171 84 186 108 C204 138 218 176 236 198 C250 215 268 214 286 193 C296 181 301 157 304 132 C307 157 312 181 322 193 C340 214 358 215 372 198 C390 176 404 138 422 108 C437 84 457 76 474 89" stroke-width="44"/>
+  </g>
+
+  <!-- three distinct ribbon trajectories: each enters and grows on its own timing -->
+  <g fill="none" stroke="url(#wv)" stroke-width="29" stroke-linecap="round" stroke-linejoin="round">
+    <path class="draw d1" pathLength="760" d="M117 67 C145 47 171 51 187 77 C202 101 211 143 226 181 C237 208 256 219 275 196 C288 181 295 149 300 112"/>
+    <path class="draw d2" pathLength="760" d="M179 76 C207 59 229 76 247 103 C267 133 281 162 300 190 C312 208 329 212 345 193 C367 166 376 125 392 91 C406 62 430 48 480 69"/>
+    <path class="draw d3" pathLength="760" d="M126 91 C151 76 171 84 186 108 C204 138 218 176 236 198 C250 215 268 214 286 193 C296 181 301 157 304 132 C307 157 312 181 322 193 C340 214 358 215 372 198 C390 176 404 138 422 108 C437 84 457 76 474 89"/>
+  </g>
+
+  <!-- tiny gloss appears after the weave settles -->
+  <g class="glow" fill="none" stroke="#fff" stroke-linecap="round" opacity=".42">
+    <path d="M126 66 C147 54 169 57 181 78" stroke-width="3.7"/>
+    <path d="M187 100 C198 122 206 151 218 178" stroke-width="3.5"/>
+    <path d="M400 78 C419 56 443 54 474 67" stroke-width="3.8"/>
+  </g>
+
+  <g class="word"><text x="292" y="253" text-anchor="middle" fill="url(#textGrad)" font-family="Montserrat,Manrope,Poppins,Arial,sans-serif" font-size="41" font-weight="800" letter-spacing="2.8">WALLVERSE</text></g>
+
+  <g class="star" fill="url(#wv)" filter="url(#softGlow)">
+    <path d="M531 221 C533 231 538 236 548 238 C538 240 533 245 531 255 C529 245 524 240 514 238 C524 236 529 231 531 221Z"/>
+    <circle cx="531" cy="238" r="2.2" fill="#FFFFFF"/>
+  </g>
+</svg>
