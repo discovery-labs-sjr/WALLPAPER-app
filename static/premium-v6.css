@@ -1,10 +1,11 @@
-/* WALLVERSE v6.1 — logo fidelity + small-header rendering */
+/* WALLVERSE v6.2 — exact supplied reference + compact header rendering */
 .brandLogoImage{
   display:block!important;
-  width:160px!important;
+  content:url("/static/brand/wallverse-exact-reference.png?v=20260912-exact1")!important;
+  width:150px!important;
   height:auto!important;
   max-width:none!important;
-  max-height:48px!important;
+  max-height:none!important;
   flex:0 0 auto!important;
   object-fit:contain!important;
   object-position:center!important;
@@ -15,9 +16,10 @@
 }
 .splashLogoImage{
   display:block;
+  content:url("/static/brand/wallverse-exact-reference.png?v=20260912-exact1");
   width:min(420px,78vw);
   height:auto;
-  max-height:260px;
+  max-height:none;
   object-fit:contain;
   opacity:1;
   filter:drop-shadow(0 0 28px rgba(70,100,255,.42));
@@ -30,12 +32,12 @@
 }
 .splashTagline{margin-top:2px!important}
 @media(max-width:900px){
-  .brandLogoImage{width:148px!important;max-height:46px!important}
+  .brandLogoImage{width:138px!important}
 }
 @media(max-width:700px){
-  .brandLogoImage{width:132px!important;max-height:42px!important}
-  .splashLogoImage{width:min(330px,82vw);max-height:190px}
+  .brandLogoImage{width:122px!important}
+  .splashLogoImage{width:min(330px,82vw);max-height:none}
 }
 @media(max-width:430px){
-  .brandLogoImage{width:124px!important;max-height:40px!important}
+  .brandLogoImage{width:116px!important}
 }
