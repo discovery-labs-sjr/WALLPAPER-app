@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>WALLVERSE — Studio créateur</title>
-<link rel="stylesheet" href="/static/admin.css?v=20260913-creator1">
+<link rel="stylesheet" href="/static/admin.css?v=20260913-creator2">
 </head>
 <body>
 <main class="studio">
 <header class="studioHead"><a href="/" class="wordmark">WALLVERSE</a><span class="pill">STUDIO CRÉATEUR</span></header>
-<section id="gate" class="panel gate"><h1>Studio créateur</h1><p>Ajoute des wallpapers haute résolution, vérifie leur qualité et obtiens une suggestion de catégorie.</p><div id="gateMessage" class="status"></div></section>
+<section id="gate" class="panel gate"><h1>Studio créateur</h1><p>Ajoute des wallpapers haute résolution, vérifie leur qualité et améliore automatiquement leur rendu avant publication.</p><div id="gateMessage" class="status"></div></section>
 <section id="studio" class="hidden">
 <div class="grid">
 <section class="panel uploadPanel">
@@ -20,8 +20,10 @@
 <label>Titre<input id="title" maxlength="180" placeholder="Ex. Midnight Supercar" required></label>
 <div class="row"><label>Catégorie<select id="category"></select></label><label>Type<select id="type"><option value="static">Standard</option><option value="live">Live</option></select></label></div>
 <label>Tags<input id="tags" maxlength="240" placeholder="nuit, chrome, premium"></label>
+<label class="enhanceToggle"><input id="enhance" type="checkbox" checked><span><strong>Amélioration WallVerse</strong><small>Corrige l’orientation, optimise contraste et netteté, puis compresse en WEBP haute qualité.</small></span><b>ON</b></label>
+<div id="enhancement" class="enhancement hidden"></div>
 <div id="analysis" class="analysis hidden"></div>
-<button id="analyzeBtn" class="secondary" type="button">Analyser la qualité & la catégorie</button>
+<div class="actionRow"><button id="analyzeBtn" class="secondary" type="button">Analyser</button><button id="enhanceBtn" class="secondary" type="button">Prévisualiser l’amélioration</button></div>
 <button id="publishBtn" class="primary" type="submit">Publier le wallpaper</button>
 <div id="formStatus" class="status"></div>
 </form>
@@ -30,6 +32,6 @@
 </div>
 </section>
 </main>
-<script src="/static/admin.js?v=20260913-creator1" defer></script>
+<script src="/static/admin.js?v=20260913-creator2" defer></script>
 </body>
 </html>
