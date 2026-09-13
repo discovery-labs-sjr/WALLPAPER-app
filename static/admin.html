@@ -9,22 +9,22 @@
 <body>
 <main class="studio">
 <header class="studioHead"><a href="/" class="wordmark">WALLVERSE</a><span class="pill">STUDIO CRÉATEUR</span></header>
-<section id="gate" class="panel gate"><h1>Studio créateur</h1><p>Ajoute des wallpapers haute résolution, vérifie leur qualité et améliore automatiquement leur rendu avant publication.</p><div id="gateMessage" class="status"></div></section>
+<section id="gate" class="panel gate"><h1>Studio créateur</h1><p>Ajoute des wallpapers haute résolution, vérifie leur qualité et prépare automatiquement une version pensée pour les écrans de téléphone avant publication.</p><div id="gateMessage" class="status"></div></section>
 <section id="studio" class="hidden">
 <div class="grid">
 <section class="panel uploadPanel">
 <div class="panelTop"><div><p class="eyebrow">NOUVEAU WALLPAPER</p><h2>Publier un fond</h2></div></div>
 <form id="uploadForm">
-<label class="drop"><input id="image" type="file" accept="image/jpeg,image/png,image/webp"><span id="dropText">Choisir une image</span><small>JPG, PNG ou WEBP · minimum source 1080×2000 px · optimisation automatique ensuite</small></label>
+<label class="drop"><input id="image" type="file" accept="image/jpeg,image/png,image/webp"><span id="dropText">Choisir une image</span><small>JPG, PNG ou WEBP · minimum source 1080×2000 px · préparation téléphone automatique</small></label>
 <div id="resolutionInfo" class="analysis hidden"></div>
 <div id="previewWrap" class="previewWrap hidden"><img id="preview" alt="Prévisualisation"></div>
 <label>Titre<input id="title" maxlength="180" placeholder="Ex. Midnight Supercar" required></label>
 <div class="row"><label>Catégorie<select id="category"></select></label><label>Type<select id="type"><option value="static">Standard</option><option value="live">Live</option></select></label></div>
 <label>Tags<input id="tags" maxlength="240" placeholder="nuit, chrome, premium"></label>
-<label class="enhanceToggle"><input id="enhance" type="checkbox" checked><span><strong>Amélioration WallVerse</strong><small>Corrige l’orientation, optimise contraste et netteté, puis compresse en WEBP haute qualité.</small></span><b>ON</b></label>
+<label class="enhanceToggle"><input id="enhance" type="checkbox" checked><span><strong>Préparation WallVerse</strong><small>Corrige l’orientation, recadre intelligemment pour téléphone, équilibre l’image et produit un master 1080×2340 en WEBP haute qualité.</small></span><b>ON</b></label>
 <div id="enhancement" class="enhancement hidden"></div>
 <div id="analysis" class="analysis hidden"></div>
-<div class="actionRow"><button id="analyzeBtn" class="secondary" type="button">Analyser</button><button id="enhanceBtn" class="secondary" type="button">Prévisualiser l’amélioration</button></div>
+<div class="actionRow"><button id="analyzeBtn" class="secondary" type="button">Analyser</button><button id="enhanceBtn" class="secondary" type="button">Prévisualiser la version téléphone</button></div>
 <button id="publishBtn" class="primary" type="submit">Publier le wallpaper</button>
 <div id="formStatus" class="status"></div>
 </form>
@@ -33,7 +33,7 @@
 </div>
 </section>
 </main>
-<script src="/static/admin.js?v=20260913-creator5" defer></script>
+<script src="/static/admin.js?v=20260913-creator6" defer></script>
 <script src="/static/admin-minimum-fix.js?v=20260913-2" defer></script>
 </body>
 </html>
