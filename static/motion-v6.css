@@ -1,0 +1,42 @@
+/* WALLVERSE motion v6 — final interaction layer */
+
+/* Navigation: this layer is intentionally loaded last so the motion cannot be masked by older styles. */
+.navBtn .navIcon{position:relative;display:inline-flex!important;align-items:center;justify-content:center;transform-origin:50% 50%;will-change:transform;}
+.navBtn .navIcon svg{display:block;transform-origin:50% 50%;}
+.navBtn .navIconGrid svg rect{transform-box:fill-box;transform-origin:center;}
+
+.navBtn.navPressing .navIcon{transform:scale(.90)!important;}
+
+/* Inspiration keeps its signature four-square movement. */
+.navBtn[data-tab="inspiration"].navMotionActive .navIconGrid svg rect:nth-child(1){animation:wvGrid1 .52s cubic-bezier(.2,.8,.2,1)}
+.navBtn[data-tab="inspiration"].navMotionActive .navIconGrid svg rect:nth-child(2){animation:wvGrid2 .52s cubic-bezier(.2,.8,.2,1)}
+.navBtn[data-tab="inspiration"].navMotionActive .navIconGrid svg rect:nth-child(3){animation:wvGrid3 .52s cubic-bezier(.2,.8,.2,1)}
+.navBtn[data-tab="inspiration"].navMotionActive .navIconGrid svg rect:nth-child(4){animation:wvGrid4 .52s cubic-bezier(.2,.8,.2,1)}
+@keyframes wvGrid1{0%,100%{transform:translate(0,0)}50%{transform:translate(10px,10px)} }
+@keyframes wvGrid2{0%,100%{transform:translate(0,0)}50%{transform:translate(-10px,10px)} }
+@keyframes wvGrid3{0%,100%{transform:translate(0,0)}50%{transform:translate(10px,-10px)} }
+@keyframes wvGrid4{0%,100%{transform:translate(0,0)}50%{transform:translate(-10px,-10px)} }
+
+/* Splash: WALLVERSE appears letter by letter, from blurred to crisp. */
+.splashNativeLogo .splashLetter{
+  display:inline-block;
+  opacity:0;
+  filter:blur(16px);
+  transform:translateY(10px) scale(.94);
+  will-change:opacity,filter,transform;
+}
+.splashNativeLogo.splashLettersReady .splashLetter{
+  animation:wvSplashLetter .68s cubic-bezier(.16,.84,.2,1) forwards;
+  animation-delay:calc(var(--letter-index) * 70ms);
+}
+@keyframes wvSplashLetter{
+  0%{opacity:0;filter:blur(16px);transform:translateY(10px) scale(.94)}
+  55%{opacity:1;filter:blur(4px);transform:translateY(-1px) scale(1.015)}
+  100%{opacity:1;filter:blur(0);transform:translateY(0) scale(1)}
+}
+.splash.phase-brand .splashNativeLogo.splashLettersReady:after{animation-delay:1.05s}
+
+@media(prefers-reduced-motion:reduce){
+  .navBtn[data-tab="inspiration"].navMotionActive .navIconGrid svg rect{animation:none!important}
+  .splashNativeLogo .splashLetter{opacity:1;filter:none;transform:none;animation:none!important}
+}
