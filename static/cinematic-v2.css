@@ -1,4 +1,4 @@
-/* WALLVERSE cinematic v7 — precise sequential letter reveal. */
+/* WALLVERSE cinematic v8 — isolated sequential reveal, no nested glyph transforms. */
 .brand.brandNative{display:inline-flex!important;align-items:center!important;justify-content:flex-start!important;min-width:0!important;width:auto!important;height:48px!important;position:relative!important;overflow:visible!important}
 .brand.brandNative:before{content:"";position:absolute;inset:5px -16px;background:radial-gradient(ellipse at 46% 50%,rgba(28,50,115,.30),rgba(5,10,25,.14) 48%,transparent 76%);filter:blur(14px);pointer-events:none;z-index:0}
 .brandNative .brandExactLogo{display:block!important;position:relative!important;z-index:1!important;width:128px!important;height:46px!important;max-width:none!important;object-fit:contain!important;mix-blend-mode:normal!important;opacity:1!important;filter:drop-shadow(0 7px 18px rgba(52,99,255,.18))!important}
@@ -9,19 +9,21 @@
 .splashScene{position:relative!important;width:min(620px,92vw)!important;display:grid!important;justify-items:center!important;gap:0!important}
 .splashNativeLogo{position:relative!important;width:min(500px,88vw)!important;display:block!important;opacity:0;transform:translateY(10px);filter:drop-shadow(0 22px 54px rgba(0,0,0,.55));transition:opacity .24s ease,transform .45s cubic-bezier(.16,.84,.2,1)!important}
 .splashWordmark{display:flex!important;align-items:center!important;justify-content:center!important;white-space:nowrap!important;font:800 clamp(30px,7vw,70px)/1 Manrope!important;letter-spacing:.02em!important}
-.splashWordmark .splashLetter{display:inline-block!important;opacity:0!important;filter:blur(13px)!important;transform:translateX(-15px) translateY(5px)!important;will-change:opacity,filter,transform!important}
+/* Only the authored top-level letters participate in the reveal. */
+.splashWordmark > .splashLetter{display:inline-block!important;opacity:0!important;filter:blur(13px)!important;transform:translate3d(-15px,5px,0)!important;will-change:opacity,filter,transform!important;backface-visibility:hidden!important}
+.splashWordmark > .splashLetter > .splashLetter{display:inline!important;opacity:1!important;filter:none!important;transform:none!important;will-change:auto!important}
 .splash.phase-brand .splashNativeLogo{opacity:1;transform:translateY(0)}
-.splash.phase-brand .splashWordmark .splashLetter{animation:wvLetterReveal .56s cubic-bezier(.2,.78,.2,1) forwards!important}
-.splash.phase-brand .splashWordmark .splashLetter:nth-child(1){animation-delay:.05s!important}
-.splash.phase-brand .splashWordmark .splashLetter:nth-child(2){animation-delay:.22s!important}
-.splash.phase-brand .splashWordmark .splashLetter:nth-child(3){animation-delay:.39s!important}
-.splash.phase-brand .splashWordmark .splashLetter:nth-child(4){animation-delay:.56s!important}
-.splash.phase-brand .splashWordmark .splashLetter:nth-child(5){animation-delay:.73s!important}
-.splash.phase-brand .splashWordmark .splashLetter:nth-child(6){animation-delay:.90s!important}
-.splash.phase-brand .splashWordmark .splashLetter:nth-child(7){animation-delay:1.07s!important}
-.splash.phase-brand .splashWordmark .splashLetter:nth-child(8){animation-delay:1.24s!important}
-.splash.phase-brand .splashWordmark .splashLetter:nth-child(9){animation-delay:1.41s!important}
-@keyframes wvLetterReveal{0%{opacity:0;filter:blur(13px);transform:translateX(-15px) translateY(5px)}55%{opacity:1;filter:blur(3px);transform:translateX(2px) translateY(0)}100%{opacity:1;filter:blur(0);transform:translateX(0) translateY(0)}}
+.splash.phase-brand .splashWordmark > .splashLetter{animation:wvLetterReveal .56s cubic-bezier(.2,.78,.2,1) forwards!important}
+.splash.phase-brand .splashWordmark > .splashLetter:nth-child(1){animation-delay:.05s!important}
+.splash.phase-brand .splashWordmark > .splashLetter:nth-child(2){animation-delay:.22s!important}
+.splash.phase-brand .splashWordmark > .splashLetter:nth-child(3){animation-delay:.39s!important}
+.splash.phase-brand .splashWordmark > .splashLetter:nth-child(4){animation-delay:.56s!important}
+.splash.phase-brand .splashWordmark > .splashLetter:nth-child(5){animation-delay:.73s!important}
+.splash.phase-brand .splashWordmark > .splashLetter:nth-child(6){animation-delay:.90s!important}
+.splash.phase-brand .splashWordmark > .splashLetter:nth-child(7){animation-delay:1.07s!important}
+.splash.phase-brand .splashWordmark > .splashLetter:nth-child(8){animation-delay:1.24s!important}
+.splash.phase-brand .splashWordmark > .splashLetter:nth-child(9){animation-delay:1.41s!important}
+@keyframes wvLetterReveal{0%{opacity:0;filter:blur(13px);transform:translate3d(-15px,5px,0)}55%{opacity:1;filter:blur(3px);transform:translate3d(2px,0,0)}100%{opacity:1;filter:blur(0);transform:translate3d(0,0,0)}}
 .splashTagline,.splashProgress{display:none!important}
 .splash.phase-settle .splashNativeLogo{opacity:1!important;transform:none!important}
 .splash.phase-out .splashNativeLogo{opacity:0!important;transform:translateY(-10px)!important;transition:opacity .38s ease,transform .42s cubic-bezier(.2,.8,.2,1)!important}
@@ -33,6 +35,6 @@
   .splashNativeLogo{width:min(430px,92vw)!important}
 }
 @media(prefers-reduced-motion:reduce){
-  .splashNativeLogo,.splashWordmark .splashLetter{transition:none!important;animation:none!important}
-  .splash.phase-brand .splashWordmark .splashLetter{opacity:1!important;filter:none!important;transform:none!important}
+  .splashNativeLogo,.splashWordmark > .splashLetter{transition:none!important;animation:none!important}
+  .splash.phase-brand .splashWordmark > .splashLetter{opacity:1!important;filter:none!important;transform:none!important}
 }
