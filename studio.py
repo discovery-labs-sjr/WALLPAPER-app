@@ -13,7 +13,8 @@ from core import BASE, Base, SessionLocal, User, WALLPAPER_BY_ID, WALLPAPERS, WA
 ADMIN_EMAIL=os.getenv('ADMIN_EMAIL','').strip().lower()
 UPLOAD_DIR=BASE/'static'/'uploads'; UPLOAD_DIR.mkdir(parents=True,exist_ok=True)
 MAX_BYTES=int(os.getenv('WALLPAPER_MAX_UPLOAD_MB','20'))*1048576
-MIN_LONG=int(os.getenv('WALLPAPER_MIN_LONG_SIDE','2400')); MIN_SHORT=int(os.getenv('WALLPAPER_MIN_SHORT_SIDE','1440'))
+# Seuil volontairement plus accessible : assez grand pour un bon wallpaper, sans bloquer trop d'images.
+MIN_LONG=int(os.getenv('WALLPAPER_MIN_LONG_SIDE','2000')); MIN_SHORT=int(os.getenv('WALLPAPER_MIN_SHORT_SIDE','1200'))
 ENHANCE_MAX_LONG=int(os.getenv('WALLPAPER_ENHANCE_MAX_LONG_SIDE','4096'))
 CATEGORIES=['Aesthetic','Nature','Voitures','Animaux','Sport','Musique','Espace','Noir','Ville & Nuit','Technologie','Art','Anime','Jeux vidéo']
 KEYWORDS={'Voitures':['car','vehicle','truck','taxi','jeep','racing'],'Animaux':['dog','cat','horse','tiger','lion','bear','wolf','fox','bird','fish','snake','rabbit','elephant'],'Sport':['basketball','soccer','football','tennis','golf','baseball','volleyball','bicycle','skateboard','surfboard','ski'],'Nature':['mountain','forest','tree','flower','garden','beach','coast','sunset','sunrise','waterfall','desert','lake','valley','volcano'],'Espace':['space','planet','earth','moon','star','astronaut','galaxy','nebula','cosmos'],'Musique':['guitar','microphone','drum','piano','violin','sax'],'Technologie':['computer','laptop','keyboard','monitor','smartphone','camera','robot','server'],'Ville & Nuit':['street','skyscraper','building','city','bridge','subway','traffic light'],'Art':['painting','sculpture','art','drawing','portrait'],'Noir':['black','dark','shadow','silhouette']}
