@@ -1,37 +1,16 @@
-/* WALLVERSE motion v7 — single reliable interaction layer */
-.heroCopy{display:none!important}
-.sectionIntro{display:none!important}
-.heroStage{width:100%!important;max-width:none!important}
-.navBtn .navIcon{position:relative;display:inline-flex!important;align-items:center;justify-content:center;transform-origin:50% 50%;will-change:transform}
-.navBtn .navIcon svg{display:block;transform-origin:50% 50%}
-.navBtn .navIconGrid svg rect{transform-box:fill-box;transform-origin:center}
-.navBtn.navPressing .navIcon{transform:scale(.9)!important}
-.navBtn:active .navIcon{transform:scale(.88)!important}
-.navBtn.navPressing .navIcon,.navBtn:active .navIcon{transition:transform .08s ease}
-.navBtn[data-tab="inspiration"]:active .navIconGrid svg rect:nth-child(1){transform:translate(8px,8px)}
-.navBtn[data-tab="inspiration"]:active .navIconGrid svg rect:nth-child(2){transform:translate(-8px,8px)}
-.navBtn[data-tab="inspiration"]:active .navIconGrid svg rect:nth-child(3){transform:translate(8px,-8px)}
-.navBtn[data-tab="inspiration"]:active .navIconGrid svg rect:nth-child(4){transform:translate(-8px,-8px)}
-.navBtn.motion-home .navIcon{animation:wvHome .62s cubic-bezier(.22,.82,.22,1)}
-.navBtn.motion-explore .navIcon{animation:wvExplore .48s cubic-bezier(.22,.82,.22,1)}
-.navBtn.motion-live .navIcon{animation:wvLive .58s cubic-bezier(.22,.82,.22,1)}
-.navBtn.motion-favorites .navIcon{animation:wvFav .58s cubic-bezier(.22,.82,.22,1)}
-.navBtn.motion-inspiration .navIcon{animation:wvInspire .48s cubic-bezier(.22,.82,.22,1)}
-@keyframes wvHome{0%{transform:rotate(0) scale(1)}45%{transform:rotate(190deg) scale(1.08)}78%{transform:rotate(320deg) scale(1.03)}100%{transform:rotate(360deg) scale(1)}}
-@keyframes wvExplore{0%{transform:scale(1)}35%{transform:scale(1.14) rotate(-5deg)}70%{transform:scale(.96) rotate(3deg)}100%{transform:scale(1) rotate(0)}}
-@keyframes wvLive{0%{transform:scale(1)}28%{transform:scale(1.22)}48%{transform:scale(.92)}68%{transform:scale(1.1)}100%{transform:scale(1)}}
-@keyframes wvFav{0%{transform:scale(1)}24%{transform:scale(1.24)}45%{transform:scale(.9)}67%{transform:scale(1.12)}100%{transform:scale(1)}}
-@keyframes wvInspire{0%{transform:scale(1)}38%{transform:scale(1.14) rotate(4deg)}68%{transform:scale(.94) rotate(-2deg)}100%{transform:scale(1) rotate(0)}}
-.navBtn.motion-inspiration .navIconGrid svg rect:nth-child(1){animation:wvGrid1 .52s cubic-bezier(.2,.8,.2,1)}
-.navBtn.motion-inspiration .navIconGrid svg rect:nth-child(2){animation:wvGrid2 .52s cubic-bezier(.2,.8,.2,1)}
-.navBtn.motion-inspiration .navIconGrid svg rect:nth-child(3){animation:wvGrid3 .52s cubic-bezier(.2,.8,.2,1)}
-.navBtn.motion-inspiration .navIconGrid svg rect:nth-child(4){animation:wvGrid4 .52s cubic-bezier(.2,.8,.2,1)}
-@keyframes wvGrid1{0%,100%{transform:translate(0,0)}50%{transform:translate(10px,10px)}}
-@keyframes wvGrid2{0%,100%{transform:translate(0,0)}50%{transform:translate(-10px,10px)}}
-@keyframes wvGrid3{0%,100%{transform:translate(0,0)}50%{transform:translate(10px,-10px)}}
-@keyframes wvGrid4{0%,100%{transform:translate(0,0)}50%{transform:translate(-10px,-10px)}}
-.splashNativeLogo .splashLetter{display:inline-block;opacity:0;filter:blur(16px);transform:translateY(10px) scale(.94);will-change:opacity,filter,transform}
-.splashNativeLogo.splashLettersReady .splashLetter{animation:wvSplashLetter .62s cubic-bezier(.16,.84,.2,1) forwards;animation-delay:calc(var(--letter-index) * 65ms);animation-play-state:paused}
+/* WALLVERSE motion v8 — one animation system, no layout side effects */
+.navBtn .navIcon{position:relative;display:inline-flex!important;align-items:center;justify-content:center;transform-origin:50% 50%;transform-box:fill-box;will-change:transform}
+.navBtn .navIcon svg{display:block;transform-origin:50% 50%;transform-box:fill-box}
+.navBtn .navIconGrid svg rect{transform-box:fill-box;transform-origin:center;will-change:transform}
+.navBtn.navPressing .navIcon{transform:scale(.9)!important;transition:transform .08s ease}
+.navBtn .navIcon{transition:transform .16s ease}
+@media(prefers-reduced-motion:reduce){.navBtn .navIcon,.navBtn .navIconGrid svg rect{transition:none!important;animation:none!important}.splashNativeLogo .splashLetter{opacity:1!important;filter:none!important;transform:none!important;animation:none!important}}
+
+/* This file owns motion only: never hide the hero or page sections. */
+.heroCopy,.sectionIntro{display:block}
+
+/* Splash letters start exactly when cinematic-v2 enters phase-brand. */
+.splashNativeLogo .splashLetter{display:inline-block;opacity:0;filter:blur(14px);transform:translateY(12px) scale(.94);will-change:opacity,filter,transform}
+.splashNativeLogo.splashLettersReady .splashLetter{animation:wvSplashLetter .62s cubic-bezier(.16,.84,.2,1) forwards;animation-delay:calc(var(--letter-index) * 55ms);animation-play-state:paused}
 .splash.phase-brand .splashNativeLogo.splashLettersReady .splashLetter{animation-play-state:running}
-@keyframes wvSplashLetter{0%{opacity:0;filter:blur(16px);transform:translateY(10px) scale(.94)}55%{opacity:1;filter:blur(4px);transform:translateY(-1px) scale(1.015)}100%{opacity:1;filter:blur(0);transform:translateY(0) scale(1)}}
-@media(prefers-reduced-motion:reduce){.navBtn.motion-home .navIcon,.navBtn.motion-explore .navIcon,.navBtn.motion-live .navIcon,.navBtn.motion-favorites .navIcon,.navBtn.motion-inspiration .navIcon,.navBtn.motion-inspiration .navIconGrid svg rect{animation:none!important}.splashNativeLogo .splashLetter{opacity:1;filter:none;transform:none;animation:none!important}}
+@keyframes wvSplashLetter{0%{opacity:0;filter:blur(14px);transform:translateY(12px) scale(.94)}55%{opacity:1;filter:blur(3px);transform:translateY(-1px) scale(1.015)}100%{opacity:1;filter:blur(0);transform:translateY(0) scale(1)}}
