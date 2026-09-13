@@ -1,0 +1,7 @@
+/* Safe splash fallback: static, clean, no letter-by-letter transforms. */
+.splash{background:#000!important;isolation:isolate!important}
+.splashAura,.splash:before{display:none!important}
+.splashNativeLogo{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
+.splashWordmark{display:flex!important;align-items:center!important;justify-content:center!important;white-space:nowrap!important;transform:none!important}
+.splashWordmark > .splashLetter{opacity:1!important;filter:none!important;transform:none!important;animation:none!important;will-change:auto!important}
+.splashWordmark > .splashLetter > .splashLetter{opacity:1!important;filter:none!important;transform:none!important;animation:none!important}
