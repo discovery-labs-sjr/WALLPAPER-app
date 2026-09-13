@@ -1,4 +1,13 @@
-/* WALLVERSE interface v4 — reliable motion + final hardening */
+/* WALLVERSE interface v5 — reliable, visible navigation motion */
+.navBtn .navIcon{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  transform-origin:50% 50%!important;
+  will-change:transform,filter!important;
+  backface-visibility:hidden!important;
+  -webkit-backface-visibility:hidden!important;
+}
 .navBtn .navIcon svg{
   display:block!important;
   fill:none!important;
@@ -7,89 +16,35 @@
   stroke-linecap:round!important;
   stroke-linejoin:round!important;
   overflow:visible!important;
-  backface-visibility:hidden!important;
-  -webkit-backface-visibility:hidden!important;
-  transform-style:preserve-3d!important;
-  will-change:transform,filter!important;
-}
-.navBtn .navIcon svg circle,
-.navBtn .navIcon svg path,
-.navBtn .navIconGrid svg rect{
-  will-change:transform!important;
-  backface-visibility:hidden!important;
 }
 .navBtn .navIconGrid svg rect{fill:currentColor!important;stroke:none!important}
 .navBtn .navIconHeart svg path{fill:none!important}
 
-/* Immediate tactile press feedback. */
-.navBtn.navPressing .navIcon svg{
+.navBtn.navPressing .navIcon{
   transform:scale(.90)!important;
   transition:transform .10s cubic-bezier(.2,.8,.2,1)!important;
 }
 
-/* Navigation micro-interactions. Each animation is attached to the exact icon. */
-.navBtn.navPlay.navHome .navIconHome svg{
-  animation:wvHomeSpin .54s cubic-bezier(.22,.72,.2,1) both!important;
-  transform-origin:50% 50%!important;
-}
-.navBtn.navPlay.navFavorites .navIconHeart svg{
-  animation:wvHeartBounce .50s cubic-bezier(.22,.82,.22,1) both!important;
-  transform-origin:50% 58%!important;
-}
-.navBtn.navPlay.navExplore .navIconSearch svg{
-  animation:wvSearchPop .46s cubic-bezier(.22,.82,.22,1) both!important;
-  transform-origin:50% 50%!important;
-}
-.navBtn.navPlay.navInspiration .navIconGrid svg{
-  animation:wvGridPop .48s cubic-bezier(.22,.82,.22,1) both!important;
-  transform-origin:50% 50%!important;
-}
-.navBtn.navPlay.navLive .navIconLive svg{
-  animation:wvLivePulse .62s cubic-bezier(.22,.82,.22,1) both!important;
-  transform-origin:50% 50%!important;
-}
+.navBtn.navPlay.navHome .navIcon{animation:wvHomeSpinV5 .62s cubic-bezier(.22,.72,.2,1) both!important}
+.navBtn.navPlay.navExplore .navIcon{animation:wvExplorePopV5 .46s cubic-bezier(.22,.82,.22,1) both!important}
+.navBtn.navPlay.navLive .navIcon{animation:wvLivePulseV5 .62s cubic-bezier(.22,.82,.22,1) both!important}
+.navBtn.navPlay.navInspiration .navIcon{animation:wvInspirationPopV5 .48s cubic-bezier(.22,.82,.22,1) both!important}
+.navBtn.navPlay.navFavorites .navIcon{animation:wvHeartBounceV5 .52s cubic-bezier(.22,.82,.22,1) both!important}
 
-@keyframes wvHomeSpin{
-  0%{transform:rotate(0deg) scale(1)}
-  45%{transform:rotate(190deg) scale(1.04)}
-  78%{transform:rotate(320deg) scale(1.01)}
-  100%{transform:rotate(360deg) scale(1)}
-}
-@keyframes wvHeartBounce{
-  0%{transform:scale(1)}
-  25%{transform:scale(1.18)}
-  48%{transform:scale(.92)}
-  70%{transform:scale(1.07)}
-  100%{transform:scale(1)}
-}
-@keyframes wvSearchPop{
-  0%{transform:scale(1) rotate(0deg)}
-  35%{transform:scale(1.13) rotate(-4deg)}
-  65%{transform:scale(.96) rotate(2deg)}
-  100%{transform:scale(1) rotate(0deg)}
-}
-@keyframes wvGridPop{
-  0%{transform:scale(1) rotate(0deg)}
-  38%{transform:scale(1.10) rotate(3deg)}
-  68%{transform:scale(.96) rotate(-2deg)}
-  100%{transform:scale(1) rotate(0deg)}
-}
-@keyframes wvLivePulse{
-  0%{transform:scale(1)}
-  28%{transform:scale(1.12)}
-  48%{transform:scale(.96)}
-  68%{transform:scale(1.06)}
-  100%{transform:scale(1)}
-}
+@keyframes wvHomeSpinV5{0%{transform:rotate(0) scale(1)}45%{transform:rotate(190deg) scale(1.08)}78%{transform:rotate(320deg) scale(1.03)}100%{transform:rotate(360deg) scale(1)}}
+@keyframes wvExplorePopV5{0%,100%{transform:scale(1) rotate(0)}35%{transform:scale(1.16) rotate(-5deg)}65%{transform:scale(.95) rotate(3deg)}}
+@keyframes wvLivePulseV5{0%,100%{transform:scale(1)}28%{transform:scale(1.16)}48%{transform:scale(.94)}68%{transform:scale(1.08)}}
+@keyframes wvInspirationPopV5{0%,100%{transform:scale(1) rotate(0)}38%{transform:scale(1.13) rotate(4deg)}68%{transform:scale(.95) rotate(-2deg)}}
+@keyframes wvHeartBounceV5{0%,100%{transform:scale(1)}24%{transform:scale(1.20)}45%{transform:scale(.91)}67%{transform:scale(1.09)}}
 
-@media (prefers-reduced-motion:reduce){
-  .navBtn.navPlay .navIcon svg{animation:none!important}
-  .navBtn.navPressing .navIcon svg{transition:none!important;transform:none!important}
+.navBtn.navPlay{user-select:none!important;-webkit-user-select:none!important}
+
+@media(prefers-reduced-motion:reduce){
+  .navBtn.navPlay .navIcon{animation:none!important}
+  .navBtn.navPressing .navIcon{transition:none!important;transform:none!important}
 }
 
 @media(max-width:700px){
   .categories{top:68px!important}
   .categories .tab{backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important}
 }
-
-.navBtn.navPlay{user-select:none!important;-webkit-user-select:none!important}
