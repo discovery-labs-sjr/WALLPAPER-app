@@ -17,18 +17,32 @@
 @keyframes wvWordSweep{to{transform:translateX(120%)}}
 
 /* Remove CTA clutter: the wallpaper itself is the focus. */
-#heroRandom,#randomBtn2{display:none!important}
+#heroRandom,#randomBtn2,#heroExplore{display:none!important}
 .heroActions:has(#heroRandom){gap:0!important}
 
-/* Navigation: Home returns to the calm first-model behavior. Explore/loupe stays untouched. */
-.navBtn.navPlay.navHome .navIcon svg{animation:none!important}
-.navBtn.navPlay.navHome .navIcon{animation:wvHomeNudge .34s cubic-bezier(.2,.86,.2,1)}
-@keyframes wvHomeNudge{0%,100%{transform:translateY(0) scale(1)}48%{transform:translateY(-2px) scale(1.015)}}
+/* Navigation motion: small, intentional, visible, and limited to the requested element. */
+.navBtn.navPlay.navHome .navIcon svg{animation:wvHomeSpin .58s cubic-bezier(.2,.88,.2,1)!important}
+@keyframes wvHomeSpin{0%{transform:rotate(0deg) scale(1)}42%{transform:rotate(178deg) scale(1.025)}78%{transform:rotate(322deg) scale(1.01)}100%{transform:rotate(360deg) scale(1)}}
 
-/* Inspiration gets a simple native pop instead of rearranging tiles. */
-.navBtn.navPlay.navInspiration .navIconGrid svg{animation:wvGridPop .42s cubic-bezier(.2,.86,.2,1)}
-.navBtn.navPlay.navInspiration .navIconGrid svg rect{animation:none!important}
-@keyframes wvGridPop{0%,100%{transform:scale(1)}45%{transform:scale(1.08)}70%{transform:scale(.99)}}
+/* Explore: only the handle moves; the lens stays perfectly still. */
+.navBtn.navPlay.navExplore .navIconSearch svg path{animation:wvSearchHandleOnly .48s cubic-bezier(.22,.86,.24,1)!important}
+.navBtn.navPlay.navExplore .navIconSearch svg circle{animation:none!important;transform:none!important}
+@keyframes wvSearchHandleOnly{0%,100%{transform:translateY(0)}40%{transform:translateY(2.6px)}68%{transform:translateY(.55px)}}
+
+/* Inspiration: four tiles exchange positions. */
+.navBtn.navPlay.navInspiration .navIconGrid svg rect{animation-duration:.68s!important;animation-timing-function:cubic-bezier(.25,.82,.22,1)!important;animation-fill-mode:both!important}
+.navBtn.navPlay.navInspiration .navIconGrid svg rect:nth-child(1){animation-name:wvGridA!important}
+.navBtn.navPlay.navInspiration .navIconGrid svg rect:nth-child(2){animation-name:wvGridB!important}
+.navBtn.navPlay.navInspiration .navIconGrid svg rect:nth-child(3){animation-name:wvGridC!important}
+.navBtn.navPlay.navInspiration .navIconGrid svg rect:nth-child(4){animation-name:wvGridD!important}
+@keyframes wvGridA{0%,100%{transform:translate(0,0)}38%{transform:translate(10px,0)}72%{transform:translate(10px,10px)}}
+@keyframes wvGridB{0%,100%{transform:translate(0,0)}38%{transform:translate(0,10px)}72%{transform:translate(-10px,10px)}}
+@keyframes wvGridC{0%,100%{transform:translate(0,0)}38%{transform:translate(0,-10px)}72%{transform:translate(10px,-10px)}}
+@keyframes wvGridD{0%,100%{transform:translate(0,0)}38%{transform:translate(-10px,0)}72%{transform:translate(-10px,-10px)}}
+
+/* Favorites: a restrained, visible rebound. */
+.navBtn.navPlay.navFavorites .navIconHeart svg{animation:wvHeartRebound .58s cubic-bezier(.2,.86,.24,1)!important}
+@keyframes wvHeartRebound{0%,100%{transform:scale(1)}34%{transform:scale(1.13)}54%{transform:scale(.965)}72%{transform:scale(1.055)}88%{transform:scale(.995)}}
 
 @media(max-width:700px){
   .brandNative{height:44px!important}
@@ -38,5 +52,5 @@
 }
 
 @media(prefers-reduced-motion:reduce){
-  .brandWordmark,.splashWordmark,.splashNativeLogo,.splashNativeLogo:after,.navBtn.navPlay.navHome .navIcon,.navBtn.navPlay.navInspiration .navIconGrid svg{animation:none!important;transition:none!important}
+  .brandWordmark,.splashWordmark,.splashNativeLogo,.splashNativeLogo:after,.navBtn.navPlay.navHome .navIcon svg,.navBtn.navPlay.navExplore .navIconSearch svg path,.navBtn.navPlay.navInspiration .navIconGrid svg rect,.navBtn.navPlay.navFavorites .navIconHeart svg{animation:none!important;transition:none!important}
 }
