@@ -1,29 +1,50 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 430" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
 <title id="title">WALLVERSE</title>
-<desc id="desc">Premium WALLVERSE identity: neon ribbon W, orbital ring, star and geometric wordmark.</desc>
+<desc id="desc">WALLVERSE premium monogram in cool silver and electric violet-blue, with the W formed by three simple overlapping V strokes.</desc>
 <defs>
-  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#090315"/><stop offset=".52" stop-color="#070A21"/><stop offset="1" stop-color="#020814"/></linearGradient>
-  <linearGradient id="edge" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FF35DB"/><stop offset=".4" stop-color="#9348FF"/><stop offset=".72" stop-color="#447CFF"/><stop offset="1" stop-color="#35ECFF"/></linearGradient>
-  <linearGradient id="ribbon" x1="100" y1="90" x2="500" y2="300"><stop offset="0" stop-color="#FF53E9"/><stop offset=".28" stop-color="#A649FF"/><stop offset=".58" stop-color="#4D77FF"/><stop offset=".82" stop-color="#20C8FF"/><stop offset="1" stop-color="#55F2FF"/></linearGradient>
-  <linearGradient id="word" x1="610" y1="250" x2="1010" y2="250"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#DEE6FF"/><stop offset="1" stop-color="#78EBFF"/></linearGradient>
-  <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-  <filter id="soft" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <linearGradient id="silver" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#F7FAFF"/>
+    <stop offset=".28" stop-color="#AAB8D3"/>
+    <stop offset=".55" stop-color="#5E6D88"/>
+    <stop offset=".78" stop-color="#D8E2F4"/>
+    <stop offset="1" stop-color="#7E8CA7"/>
+  </linearGradient>
+  <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#A98BFF"/>
+    <stop offset=".42" stop-color="#6C63FF"/>
+    <stop offset=".72" stop-color="#3D9CFF"/>
+    <stop offset="1" stop-color="#64E7FF"/>
+  </linearGradient>
+  <linearGradient id="word" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#D9E2F2"/>
+    <stop offset=".65" stop-color="#F5F8FF"/>
+    <stop offset="1" stop-color="#AFC5E7"/>
+  </linearGradient>
+  <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
+    <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#00030B" flood-opacity=".55"/>
+  </filter>
 </defs>
 
-<rect x="18" y="18" width="394" height="394" rx="96" fill="url(#bg)" stroke="#14192E" stroke-width="3"/>
-<rect x="24" y="24" width="382" height="382" rx="90" fill="none" stroke="url(#edge)" stroke-width="2.4" opacity=".85" filter="url(#soft)"/>
+<!-- Clean monogram inspired by the supplied reference: no complex ribbon. -->
+<g filter="url(#shadow)" stroke-linecap="round" stroke-linejoin="round" fill="none">
+  <path d="M188 130 L338 386 L488 130" stroke="#070B16" stroke-width="104"/>
+  <path d="M188 130 L338 386 L488 130" stroke="url(#silver)" stroke-width="86"/>
 
-<path d="M92 175 C124 122 171 118 198 170 L240 286 C248 307 267 311 279 288 L298 247 C304 233 319 233 325 247 L344 288 C356 311 375 307 383 286 L425 170 C452 118 499 122 531 175" transform="translate(-36 -3) scale(.82)" fill="none" stroke="#050817" stroke-width="64" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M92 175 C124 122 171 118 198 170 L240 286 C248 307 267 311 279 288 L298 247 C304 233 319 233 325 247 L344 288 C356 311 375 307 383 286 L425 170 C452 118 499 122 531 175" transform="translate(-36 -3) scale(.82)" fill="none" stroke="url(#ribbon)" stroke-width="48" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
-<path d="M108 161 C137 126 173 129 192 166 L236 284" fill="none" stroke="#fff" stroke-width="4.2" opacity=".44" stroke-linecap="round"/>
-<path d="M323 284 L367 166 C386 129 422 126 451 161" fill="none" stroke="#fff" stroke-width="3.8" opacity=".30" stroke-linecap="round"/>
+  <path d="M414 130 L560 386 L718 130" stroke="#070B16" stroke-width="104"/>
+  <path d="M414 130 L560 386 L718 130" stroke="url(#accent)" stroke-width="86"/>
 
-<path d="M64 260 C119 186 315 167 389 218 C418 238 414 264 376 284 C303 323 132 321 72 287 C51 275 49 265 64 260Z" fill="none" stroke="url(#ribbon)" stroke-width="7" stroke-linecap="round" opacity=".87" filter="url(#soft)"/>
-<g transform="translate(335 94)" fill="url(#ribbon)" filter="url(#soft)"><path d="M0-23 C3-10 10-3 23 0 C10 3 3 10 0 23 C-3 10 -10 3 -23 0 C-10-3 -3-10 0-23Z"/><circle r="2.8" fill="#fff"/></g>
+  <path d="M642 130 L792 386 L948 130" stroke="#070B16" stroke-width="104"/>
+  <path d="M642 130 L792 386 L948 130" stroke="url(#silver)" stroke-width="86"/>
 
-<g transform="translate(465 0)">
-  <text x="60" y="234" fill="url(#word)" font-family="Manrope,DM Sans,Arial,sans-serif" font-size="84" font-weight="800" letter-spacing="6">WALLVERSE</text>
-  <rect x="62" y="264" width="430" height="2" rx="1" fill="url(#edge)" opacity=".34"/>
-  <text x="62" y="303" fill="#AEB8D8" font-family="Manrope,DM Sans,Arial,sans-serif" font-size="18" font-weight="600" letter-spacing="5">WALLPAPERS • BEYOND</text>
+  <path d="M188 130 L338 386 L488 130" stroke="#FFFFFF" stroke-width="4" opacity=".28"/>
+  <path d="M414 130 L560 386 L718 130" stroke="#E8E8FF" stroke-width="4" opacity=".28"/>
+  <path d="M642 130 L792 386 L948 130" stroke="#FFFFFF" stroke-width="4" opacity=".24"/>
+</g>
+
+<!-- Wordmark -->
+<g font-family="Manrope,DM Sans,Arial,sans-serif" font-size="78" font-weight="800" letter-spacing="12">
+  <text x="600" y="488" text-anchor="middle" fill="url(#word)">W</text>
+  <text x="679" y="488" text-anchor="middle" fill="url(#accent)">A</text>
+  <text x="760" y="488" text-anchor="middle" fill="url(#word)">LLVERSE</text>
 </g>
 </svg>
