@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WALLVERSE — Studio créateur</title>
+<link rel="stylesheet" href="/static/admin.css?v=20260913-creator1">
+</head>
+<body>
+<main class="studio">
+<header class="studioHead"><a href="/" class="wordmark">WALLVERSE</a><span class="pill">STUDIO CRÉATEUR</span></header>
+<section id="gate" class="panel gate"><h1>Studio créateur</h1><p>Ajoute des wallpapers haute résolution, vérifie leur qualité et obtiens une suggestion de catégorie.</p><div id="gateMessage" class="status"></div></section>
+<section id="studio" class="hidden">
+<div class="grid">
+<section class="panel uploadPanel">
+<div class="panelTop"><div><p class="eyebrow">NOUVEAU WALLPAPER</p><h2>Publier un fond</h2></div></div>
+<form id="uploadForm">
+<label class="drop"><input id="image" type="file" accept="image/jpeg,image/png,image/webp"><span id="dropText">Choisir une image</span><small>JPG, PNG ou WEBP · haute résolution</small></label>
+<div id="previewWrap" class="previewWrap hidden"><img id="preview" alt="Prévisualisation"></div>
+<label>Titre<input id="title" maxlength="180" placeholder="Ex. Midnight Supercar" required></label>
+<div class="row"><label>Catégorie<select id="category"></select></label><label>Type<select id="type"><option value="static">Standard</option><option value="live">Live</option></select></label></div>
+<label>Tags<input id="tags" maxlength="240" placeholder="nuit, chrome, premium"></label>
+<div id="analysis" class="analysis hidden"></div>
+<button id="analyzeBtn" class="secondary" type="button">Analyser la qualité & la catégorie</button>
+<button id="publishBtn" class="primary" type="submit">Publier le wallpaper</button>
+<div id="formStatus" class="status"></div>
+</form>
+</section>
+<section class="panel catalogPanel"><div class="panelTop"><div><p class="eyebrow">CATALOGUE</p><h2>Mes uploads</h2></div><span id="count" class="count">0</span></div><div id="catalog" class="catalog"></div></section>
+</div>
+</section>
+</main>
+<script src="/static/admin.js?v=20260913-creator1" defer></script>
+</body>
+</html>
