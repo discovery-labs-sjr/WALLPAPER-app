@@ -1,0 +1,3 @@
+/* WALLVERSE nav motion v2 */
+.navBtn.navPlay.navLive .navIconLive svg{animation:wvLivePulse .62s cubic-bezier(.22,.82,.22,1)!important;transform-origin:50% 50%!important}
+@keyframes wvLivePulse{0%{transform:scale(1)}28%{transform:scale(1.12)}48%{transform:scale(.96)}68%{transform:scale(1.06)}100%{transform:scale(1)}}
