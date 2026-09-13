@@ -1,4 +1,4 @@
-from __future__
+from __future__ import annotations
 import io, json, mimetypes, os, re, secrets
 from datetime import datetime, timezone
 from typing import Any
