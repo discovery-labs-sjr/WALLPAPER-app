@@ -19,6 +19,63 @@
 .navBtn.navPlay.navExplore .navIconSearch svg circle{transform-style:preserve-3d!important;backface-visibility:hidden!important}
 .navBtn.navPlay.navExplore .navIconSearch svg path{transform-origin:16.5px 17.5px!important}
 
+/* Navigation micro-interactions — quick, tactile and intentionally subtle. */
+.navBtn.navPressing .navIcon svg{
+  transform:scale(.90)!important;
+  transition:transform .10s cubic-bezier(.2,.8,.2,1)!important;
+}
+.navBtn.navPlay.navHome .navIconHome svg{
+  animation:wvHomeSpin .54s cubic-bezier(.22,.72,.2,1)!important;
+  transform-origin:50% 50%!important;
+}
+.navBtn.navPlay.navFavorites .navIconHeart svg{
+  animation:wvHeartBounce .50s cubic-bezier(.22,.82,.22,1)!important;
+  transform-origin:50% 58%!important;
+}
+.navBtn.navPlay.navExplore .navIconSearch svg{
+  animation:wvSearchPop .46s cubic-bezier(.22,.82,.22,1)!important;
+  transform-origin:50% 50%!important;
+}
+.navBtn.navPlay.navInspiration .navIconGrid svg{
+  animation:wvGridPop .48s cubic-bezier(.22,.82,.22,1)!important;
+  transform-origin:50% 50%!important;
+}
+
+@keyframes wvHomeSpin{
+  0%{transform:rotate(0deg) scale(1)}
+  45%{transform:rotate(190deg) scale(1.04)}
+  78%{transform:rotate(320deg) scale(1.01)}
+  100%{transform:rotate(360deg) scale(1)}
+}
+@keyframes wvHeartBounce{
+  0%{transform:scale(1)}
+  25%{transform:scale(1.18)}
+  48%{transform:scale(.92)}
+  70%{transform:scale(1.07)}
+  100%{transform:scale(1)}
+}
+@keyframes wvSearchPop{
+  0%{transform:scale(1) rotate(0deg)}
+  35%{transform:scale(1.13) rotate(-4deg)}
+  65%{transform:scale(.96) rotate(2deg)}
+  100%{transform:scale(1) rotate(0deg)}
+}
+@keyframes wvGridPop{
+  0%{transform:scale(1) rotate(0deg)}
+  38%{transform:scale(1.10) rotate(3deg)}
+  68%{transform:scale(.96) rotate(-2deg)}
+  100%{transform:scale(1) rotate(0deg)}
+}
+
+/* Keep the existing Live pulse exactly as designed. */
+.navBtn.navPlay.navLive .navIconLive svg{animation:wvLivePulse .62s cubic-bezier(.22,.82,.22,1)!important;transform-origin:50% 50%!important}
+@keyframes wvLivePulse{0%{transform:scale(1)}28%{transform:scale(1.12)}48%{transform:scale(.96)}68%{transform:scale(1.06)}100%{transform:scale(1)}}
+
+@media (prefers-reduced-motion:reduce){
+  .navBtn.navPlay .navIcon svg{animation:none!important}
+  .navBtn.navPressing .navIcon svg{transition:none!important;transform:none!important}
+}
+
 /* Keep the category rail visible without feeling like a container */
 @media(max-width:700px){
   .categories{top:68px!important}
