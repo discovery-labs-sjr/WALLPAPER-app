@@ -13,8 +13,8 @@ from core import BASE, Base, SessionLocal, User, WALLPAPER_BY_ID, WALLPAPERS, WA
 ADMIN_EMAIL=os.getenv('ADMIN_EMAIL','').strip().lower()
 UPLOAD_DIR=BASE/'static'/'uploads'; UPLOAD_DIR.mkdir(parents=True,exist_ok=True)
 MAX_BYTES=int(os.getenv('WALLPAPER_MAX_UPLOAD_MB','20'))*1048576
-# Seuil plus accessible pour les wallpapers mobiles : 1200x2000 minimum.
-MIN_LONG=int(os.getenv('WALLPAPER_MIN_LONG_SIDE','2000')); MIN_SHORT=int(os.getenv('WALLPAPER_MIN_SHORT_SIDE','1200'))
+# Seuil mobile assoupli : 1080x2340 minimum. La qualite visuelle est ensuite optimisee automatiquement.
+MIN_LONG=int(os.getenv('WALLPAPER_MIN_LONG_SIDE','2340')); MIN_SHORT=int(os.getenv('WALLPAPER_MIN_SHORT_SIDE','1080'))
 ENHANCE_MAX_LONG=int(os.getenv('WALLPAPER_ENHANCE_MAX_LONG_SIDE','4096'))
 CATEGORIES=['Aesthetic','Nature','Voitures','Animaux','Sport','Musique','Espace','Noir','Ville & Nuit','Technologie','Art','Anime','Jeux vidéo']
 KEYWORDS={'Voitures':['car','vehicle','truck','taxi','jeep','racing','automobile','supercar','sports car'],'Animaux':['dog','cat','horse','tiger','lion','bear','wolf','fox','bird','fish','snake','rabbit','elephant'],'Sport':['basketball','soccer','football','tennis','golf','baseball','volleyball','bicycle','skateboard','surfboard','ski'],'Nature':['mountain','forest','tree','flower','garden','beach','coast','sunset','sunrise','waterfall','desert','lake','valley','volcano','ocean'],'Espace':['space','planet','earth','moon','star','astronaut','galaxy','nebula','cosmos'],'Musique':['guitar','microphone','drum','piano','violin','sax'],'Technologie':['computer','laptop','keyboard','monitor','smartphone','camera','robot','server','phone'],'Ville & Nuit':['street','skyscraper','building','city','bridge','subway','traffic light','gas station','station'],'Art':['painting','sculpture','art','drawing','portrait'],'Noir':['black','dark','shadow','silhouette']}
@@ -38,8 +38,7 @@ def check_image(data:bytes,name:str)->dict[str,Any]:
     if len(data)>MAX_BYTES: raise HTTPException(413,f'Image trop lourde. Maximum : {MAX_BYTES//1048576} Mo')
     im=open_image(data); w,h=im.size; long,short=max(w,h),min(w,h)
     if long<MIN_LONG or short<MIN_SHORT: raise HTTPException(400,f'Résolution insuffisante : minimum {MIN_SHORT}×{MIN_LONG}px')
-    sample=im.copy(); sample.thumbnail((900,900)); edge=ImageStat.Stat(sample.convert('L').filter(ImageFilter.FIND_EDGES)).mean[0]
-    if edge<18: raise HTTPException(400,'Image possiblement trop floue : ajoute un original plus net')
+    # On ne bloque plus les images sur un simple score de netteté : l'amelioration automatique intervient ensuite.
     fmt=Image.open(io.BytesIO(data)).format; mime=Image.MIME.get(fmt)
     if mime not in {'image/jpeg','image/png','image/webp'}: raise HTTPException(400,'Formats acceptés : JPG, PNG ou WEBP')
     return {'width':w,'height':h,'size_bytes':len(data),'mime_type':mime,'quality_score':round(min(100,(long/MIN_LONG)*55+(short/MIN_SHORT)*45),1)}
@@ -62,7 +61,6 @@ def tags_from_text(text:str,limit:int=12)->list[str]:
 def title_from_caption(caption:str)->str:
     words=re.sub(r'[^\w\s-]',' ',caption,flags=re.UNICODE).split()
     if not words:return 'Nouveau wallpaper'
-    # Titre court et éditorial, basé sur les éléments réellement vus dans la légende IA.
     stop={'a','an','the','of','and','with','in','on','at','is','there','this','that'}
     picked=[w for w in words if w.lower() not in stop][:7]
     return ' '.join(picked).strip().capitalize()[:180] or 'Nouveau wallpaper'
@@ -70,8 +68,7 @@ async def ai_metadata(data:bytes)->dict[str,Any]:
     token=os.getenv('HF_TOKEN','').strip()
     if not token:return {'caption':None,'title':None,'tags':[],'category':None,'confidence':0}
     caption_model=os.getenv('HF_CAPTION_MODEL','Salesforce/blip-image-captioning-base').strip(); cls_model=os.getenv('HF_IMAGE_MODEL','google/vit-base-patch16-224').strip()
-    headers={'Authorization':f'Bearer {token}','Content-Type':'application/octet-stream'}
-    caption=None; labels=[]
+    headers={'Authorization':f'Bearer {token}','Content-Type':'application/octet-stream'}; caption=None; labels=[]
     try:
         async with httpx.AsyncClient(timeout=45) as c:
             r=await c.post(f'https://router.huggingface.co/hf-inference/models/{caption_model}',content=data,headers=headers)
@@ -82,8 +79,7 @@ async def ai_metadata(data:bytes)->dict[str,Any]:
                 out=r.json(); labels=[str(x.get('label','')) for x in out if isinstance(x,dict)] if isinstance(out,list) else []
     except (httpx.HTTPError,ValueError):
         return {'caption':None,'title':None,'tags':[],'category':None,'confidence':0}
-    text=' '.join([caption or '',*labels]); tags=tags_from_text(text)
-    cat,conf=smart_category('',text,tags)
+    text=' '.join([caption or '',*labels]); tags=tags_from_text(text); cat,conf=smart_category('',text,tags)
     return {'caption':caption,'title':title_from_caption(caption) if caption else None,'tags':tags,'category':cat if tags else None,'confidence':round(conf*100)}
 def materialize(row:WallpaperAsset)->dict[str,Any]:
     ext=mimetypes.guess_extension(row.mime_type) or '.jpg'; path=UPLOAD_DIR/f'{row.id}{ext}'
