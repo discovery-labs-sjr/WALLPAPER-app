@@ -9,21 +9,22 @@
 <body>
 <main class="studio">
 <header class="studioHead"><a href="/" class="wordmark">WALLVERSE</a><span class="pill">STUDIO CRÉATEUR</span></header>
-<section id="gate" class="panel gate"><h1>Studio créateur</h1><p>Ajoute des wallpapers, analyse leur qualité, laisse l’IA proposer un nom, une catégorie et des tags, puis modifie tout avant publication.</p><div id="gateMessage" class="status"></div></section>
+<section id="gate" class="panel gate"><h1>Studio créateur</h1><p>Ajoute des wallpapers haute résolution, vérifie leur qualité et améliore automatiquement leur rendu avant publication.</p><div id="gateMessage" class="status"></div></section>
 <section id="studio" class="hidden">
 <div class="grid">
 <section class="panel uploadPanel">
 <div class="panelTop"><div><p class="eyebrow">NOUVEAU WALLPAPER</p><h2>Publier un fond</h2></div></div>
 <form id="uploadForm">
 <label class="drop"><input id="image" type="file" accept="image/jpeg,image/png,image/webp"><span id="dropText">Choisir une image</span><small>JPG, PNG ou WEBP · minimum 1200×2000 px</small></label>
+<div id="resolutionInfo" class="analysis hidden"></div>
 <div id="previewWrap" class="previewWrap hidden"><img id="preview" alt="Prévisualisation"></div>
-<label>Titre<input id="title" maxlength="180" placeholder="Ex. Midnight Supercar" required><small>Laisse vide puis clique sur « Analyser » pour demander une suggestion IA.</small></label>
+<label>Titre<input id="title" maxlength="180" placeholder="Ex. Midnight Supercar" required></label>
 <div class="row"><label>Catégorie<select id="category"></select></label><label>Type<select id="type"><option value="static">Standard</option><option value="live">Live</option></select></label></div>
-<label>Tags<input id="tags" maxlength="240" placeholder="nuit, chrome, premium"><small>Les tags proposés par l’analyse peuvent être modifiés librement.</small></label>
+<label>Tags<input id="tags" maxlength="240" placeholder="nuit, chrome, premium"></label>
 <label class="enhanceToggle"><input id="enhance" type="checkbox" checked><span><strong>Amélioration WallVerse</strong><small>Corrige l’orientation, optimise contraste et netteté, puis compresse en WEBP haute qualité.</small></span><b>ON</b></label>
 <div id="enhancement" class="enhancement hidden"></div>
 <div id="analysis" class="analysis hidden"></div>
-<div class="actionRow"><button id="analyzeBtn" class="secondary" type="button">🔎 Analyser l’image</button><button id="enhanceBtn" class="secondary" type="button">✨ Prévisualiser l’amélioration</button></div>
+<div class="actionRow"><button id="analyzeBtn" class="secondary" type="button">Analyser</button><button id="enhanceBtn" class="secondary" type="button">Prévisualiser l’amélioration</button></div>
 <button id="publishBtn" class="primary" type="submit">Publier le wallpaper</button>
 <div id="formStatus" class="status"></div>
 </form>
