@@ -1,4 +1,4 @@
-/* WALLVERSE interface v4 — reliable navigation motion + clean labels */
+/* WALLVERSE interface v5 — navigation interactions */
 (() => {
   const NAV_CLASSES = ['navPlay','navHome','navExplore','navLive','navInspiration','navFavorites'];
   let bound = false;
@@ -16,53 +16,47 @@
 
   function play(button){
     if (!button) return;
-
     document.querySelectorAll('.navBtn').forEach(btn => btn.classList.remove(...NAV_CLASSES));
-
     const tab = String(button.dataset.tab || '');
     const motion = `nav${tab.charAt(0).toUpperCase()}${tab.slice(1)}`;
     if (!NAV_CLASSES.includes(motion)) return;
-
-    // Force a fresh animation even when the same navigation item is tapped repeatedly.
+    // Removing then forcing layout guarantees a fresh animation on repeated taps.
     void button.offsetWidth;
     button.classList.add('navPlay', motion);
-
-    window.setTimeout(() => {
-      button.classList.remove(...NAV_CLASSES);
-    }, 700);
+    window.setTimeout(() => button.classList.remove(...NAV_CLASSES), 760);
   }
 
   function bind(){
     if (bound) return;
     bound = true;
-
     cleanWallpaperLabels();
     const observer = new MutationObserver(cleanWallpaperLabels);
-    observer.observe(document.body, { subtree: true, childList: true, characterData: true });
-
-    document.addEventListener('click', event => {
-      const button = event.target.closest('.navBtn');
-      if (!button) return;
-      play(button);
-    }, { passive: true });
+    observer.observe(document.body, {subtree:true, childList:true, characterData:true});
 
     document.addEventListener('pointerdown', event => {
       const button = event.target.closest('.navBtn');
       if (button) button.classList.add('navPressing');
-    }, { passive: true });
+    }, {passive:true});
 
-    const release = event => {
+    document.addEventListener('pointerup', event => {
+      const button = event.target.closest('.navBtn');
+      if (!button) return;
+      button.classList.remove('navPressing');
+      play(button);
+    }, {passive:true});
+
+    document.addEventListener('pointercancel', event => {
       const button = event.target.closest('.navBtn');
       if (button) button.classList.remove('navPressing');
-    };
-    document.addEventListener('pointerup', release, { passive: true });
-    document.addEventListener('pointercancel', release, { passive: true });
-    document.addEventListener('pointerleave', release, { passive: true });
+    }, {passive:true});
+
+    document.addEventListener('keydown', event => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      const button = event.target.closest?.('.navBtn');
+      if (button) play(button);
+    });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', bind, { once: true });
-  } else {
-    bind();
-  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind, {once:true});
+  else bind();
 })();
