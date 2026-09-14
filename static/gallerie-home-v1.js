@@ -2,21 +2,10 @@
   "use strict";
 
   const CATEGORY_MAP = {
-    Aesthetic: "Aesthetic",
-    Voitures: "Cars",
-    Animaux: "Animals",
-    Sport: "Sport",
-    Musique: "Music",
-    Espace: "Space",
-    Noir: "Noir",
-    "Ville & Nuit": "City & Night",
-    Technologie: "Technology",
-    Art: "Art",
-    Anime: "Anime",
-    "Jeux vidéo": "Video Games",
-    Nature: "Nature"
+    Aesthetic: "Aesthetic", Voitures: "Cars", Animaux: "Animals", Sport: "Sport",
+    Musique: "Music", Espace: "Space", Noir: "Noir", "Ville & Nuit": "City & Night",
+    Technologie: "Technology", Art: "Art", Anime: "Anime", "Jeux vidéo": "Video Games", Nature: "Nature"
   };
-
   const CATEGORY_BY_LABEL = Object.fromEntries(Object.entries(CATEGORY_MAP).map(([fr, en]) => [en, fr]));
   const ORDER = [
     "Hot", "Aesthetic", "Locked In",
@@ -30,17 +19,9 @@
   let observer = null;
 
   const $ = (s, root = document) => root.querySelector(s);
-  const esc = value => String(value ?? "").replace(/[&<>"']/g, c => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
-  }[c]));
-
-  function englishCategory(category) {
-    return CATEGORY_MAP[category] || category || "Aesthetic";
-  }
-
-  function imageOf(w) {
-    return w?.preview || w?.file || "";
-  }
+  const esc = value => String(value ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[c]));
+  const englishCategory = category => CATEGORY_MAP[category] || category || "Aesthetic";
+  const imageOf = w => w?.preview || w?.file || "";
 
   function isHomeVisible() {
     const activeTab = $(".navBtn.active")?.dataset.tab;
@@ -52,7 +33,6 @@
   }
 
   function lockedItems() {
-    // Editorial collection: static, lock-screen-friendly walls first.
     return [...allWallpapers]
       .filter(w => String(w.type || "static").toLowerCase() !== "live")
       .sort((a, b) => (b.likes || 0) - (a.likes || 0))
@@ -67,8 +47,7 @@
   }
 
   function filteredBySearch(items) {
-    const input = $("#search");
-    const query = input?.value.trim().toLowerCase() || "";
+    const query = $("#search")?.value.trim().toLowerCase() || "";
     if (!query) return items;
     return items.filter(w => [w.title, w.category, englishCategory(w.category), ...(w.tags || [])].join(" ").toLowerCase().includes(query));
   }
@@ -76,20 +55,24 @@
   function card(w) {
     const image = imageOf(w);
     const live = String(w.type || "").toLowerCase() === "live";
-    return `<article class="wvCard ${live ? "is-live" : ""}" data-id="${esc(w.id)}" tabindex="0" aria-label="${esc(w.title)}">
-      <div class="wvPoster" style="background-image:url('${esc(image)}')"></div>
-      <img loading="lazy" src="${esc(image)}" alt="${esc(w.title)}" onerror="this.onerror=null;this.style.display='none'">
+    const video = w.video || w.video_url || w.motion_url || "";
+    const media = video
+      ? `<video class="wvMotion" muted loop autoplay playsinline preload="metadata" poster="${esc(image)}"><source src="${esc(video)}"></video>`
+      : `<div class="wvPoster" style="background-image:url('${esc(image)}')"></div><img loading="lazy" src="${esc(image)}" alt="${esc(w.title)}" onerror="this.onerror=null;this.style.display='none'">`;
+    return `<article class="wvCard ${live ? "is-live" : ""} ${video ? "has-video" : ""}" data-id="${esc(w.id)}" tabindex="0" aria-label="${esc(w.title)}">
+      ${media}
       ${live ? '<span class="wvLiveBadge">LIVE</span>' : ''}
       <button class="wvHeart" type="button" data-heart="${esc(w.id)}" aria-label="Favorite">♡</button>
       <div class="wvCardMeta"><strong>${esc(w.title)}</strong><small>${esc(englishCategory(w.category))}</small></div>
     </article>`;
   }
 
-  function section(label, items) {
+  function section(label, items, showSeeAll = true) {
     const visible = filteredBySearch(items).slice(0, 10);
     if (!visible.length) return "";
+    const action = showSeeAll ? `<button class="wvSeeAll" type="button" data-see-all="${esc(label)}">See All</button>` : "";
     return `<section class="wvRailSection" data-section="${esc(label)}">
-      <div class="wvHomeIntro"><h1>${esc(label)}</h1><button class="wvSeeAll" type="button" data-see-all="${esc(label)}">See All</button></div>
+      <div class="wvHomeIntro"><h1>${esc(label)}</h1>${action}</div>
       <div class="wvRail" aria-label="${esc(label)} wallpapers">${visible.map(card).join("")}</div>
     </section>`;
   }
@@ -98,14 +81,12 @@
     const root = $("#categories");
     if (!root) return;
     root.innerHTML = ORDER.map(label => `<button class="tab ${label === active ? "active" : ""}" type="button" data-wv-category="${esc(label)}">${esc(label)}</button>`).join("");
-    root.querySelectorAll("[data-wv-category]").forEach(button => {
-      button.addEventListener("click", () => {
-        active = button.dataset.wvCategory || "Hot";
-        renderCategories();
-        renderHome();
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
-    });
+    root.querySelectorAll("[data-wv-category]").forEach(button => button.addEventListener("click", () => {
+      active = button.dataset.wvCategory || "Hot";
+      renderCategories();
+      renderHome();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }));
   }
 
   function renderHome() {
@@ -113,23 +94,19 @@
     const root = $("#sections");
     if (!root) return;
     rendering = true;
-    try {
-      const query = $("#search")?.value.trim() || "";
-      if (query) {
-        const results = filteredBySearch(allWallpapers).slice(0, 30);
-        root.innerHTML = results.length
-          ? section("Search", results)
-          : '<div class="wvResultsEmpty"><strong>No wallpapers found</strong>Try another search.</div>';
-        return;
-      }
-      if (active !== "Hot") {
-        root.innerHTML = section(active, categoryItems(active)) || '<div class="wvResultsEmpty"><strong>No wallpapers yet</strong>More wallpapers are coming soon.</div>';
-        return;
-      }
+    const query = $("#search")?.value.trim() || "";
+    if (query) {
+      const results = filteredBySearch(allWallpapers).slice(0, 30);
+      root.innerHTML = results.length
+        ? section("Search", results, false)
+        : '<div class="wvResultsEmpty"><strong>No wallpapers found</strong>Try another search.</div>';
+    } else if (active !== "Hot") {
+      root.innerHTML = section(active, categoryItems(active)) || '<div class="wvResultsEmpty"><strong>No wallpapers yet</strong>More wallpapers are coming soon.</div>';
+    } else {
       root.innerHTML = ["Hot", ...ORDER.slice(1)].map(label => section(label, categoryItems(label))).join("");
-    } finally {
-      rendering = false;
     }
+    // MutationObserver fires after this DOM change; keep the guard alive for that delivery.
+    setTimeout(() => { rendering = false; }, 0);
   }
 
   function bindCards() {
@@ -140,33 +117,24 @@
         const id = article.dataset.id;
         if (typeof window.openViewer === "function") window.openViewer(id);
       };
-      article.addEventListener("click", event => {
-        if (event.target.closest("[data-heart]")) return;
-        open();
-      });
-      article.addEventListener("keydown", event => {
-        if (event.key === "Enter" || event.key === " ") { event.preventDefault(); open(); }
-      });
+      article.addEventListener("click", event => { if (!event.target.closest("[data-heart]")) open(); });
+      article.addEventListener("keydown", event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); open(); } });
       article.querySelector("[data-heart]")?.addEventListener("click", event => {
         event.stopPropagation();
         const id = event.currentTarget.dataset.heart;
         if (typeof window.toggleFavorite === "function") window.toggleFavorite(id);
       });
     });
-    root.querySelectorAll("[data-see-all]").forEach(button => {
-      button.addEventListener("click", () => {
-        active = button.dataset.seeAll || "Hot";
-        renderCategories();
-        renderHome();
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
-    });
+    root.querySelectorAll("[data-see-all]").forEach(button => button.addEventListener("click", () => {
+      active = button.dataset.seeAll || "Hot";
+      renderCategories();
+      renderHome();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }));
   }
 
   function applyBodyMode() {
     document.body.classList.add("wvGalleryHome");
-    $("#liveSection")?.classList.add("hidden");
-    $("#inspiration")?.classList.add("hidden");
   }
 
   async function boot() {
@@ -194,22 +162,16 @@
     if (!root || observer) return;
     observer = new MutationObserver(() => {
       if (rendering || !isHomeVisible()) return;
-      applyBodyMode();
-      // Existing app scripts can rerender #sections after login/favorites/search.
-      // Re-apply our presentation without changing the source data.
       requestAnimationFrame(() => {
         if (!rendering && isHomeVisible()) { renderHome(); bindCards(); }
       });
     });
-    observer.observe(root, { childList: true, subtree: false });
+    observer.observe(root, { childList: true });
   }
 
   document.addEventListener("DOMContentLoaded", boot, { once: true });
   window.addEventListener("load", () => { if (!booted) boot(); }, { once: true });
   document.addEventListener("input", event => {
-    if (event.target?.id === "search" && isHomeVisible()) {
-      renderHome();
-      bindCards();
-    }
+    if (event.target?.id === "search" && isHomeVisible()) { renderHome(); bindCards(); }
   });
 })();
