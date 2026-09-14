@@ -1,14 +1,14 @@
 /* WALLVERSE wordmark system — typography only, wallpaper first. */
 .brand.brandNative{width:auto!important;height:48px!important;display:inline-flex!important;align-items:center!important;justify-content:flex-start!important;overflow:visible!important;position:relative!important}
 .brand.brandNative:before{content:""!important;position:absolute!important;inset:8px -18px!important;background:radial-gradient(ellipse at 44% 50%,rgba(68,92,210,.16),rgba(10,16,38,.08) 52%,transparent 76%)!important;filter:blur(15px)!important;pointer-events:none!important;z-index:0!important}
-.brandWordmark{position:relative!important;z-index:1!important;display:block!important;margin:0!important;white-space:nowrap!important;font-family:"Manrope","DM Sans",Arial,sans-serif!important;font-size:31px!important;line-height:1!important;font-weight:800!important;letter-spacing:.10em!important;text-decoration:none!important;color:#f7f9ff!important;background:linear-gradient(100deg,#ffffff 0%,#ffffff 58%,#e7e9ff 75%,#b9eaff 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important;text-shadow:0 7px 24px rgba(42,66,160,.16)!important}
-.brandWordmark .brandAccent{background:linear-gradient(100deg,#dfe7ff,#8d9bff 48%,#6feaff)!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important}
+.brandWordmark{position:relative!important;z-index:1!important;display:block!important;margin:0!important;max-width:100%!important;white-space:nowrap!important;overflow:visible!important;font-family:Georgia,"Times New Roman",serif!important;font-size:43px!important;line-height:.92!important;font-weight:700!important;letter-spacing:.025em!important;text-decoration:none!important;color:#fff!important;background:none!important;-webkit-text-fill-color:#fff!important;text-shadow:0 7px 24px rgba(42,66,160,.16)!important}
+.brandWordmark .brandAccent{background:none!important;-webkit-text-fill-color:#fff!important;color:#fff!important}
 
 /* Splash uses the same typographic identity. */
 .splashScene{width:min(860px,92vw)!important;display:grid!important;place-items:center!important}
 .splashNativeLogo{width:auto!important;display:block!important;opacity:0;transform:translateY(16px) scale(.92);filter:blur(14px)!important;transition:opacity .55s ease,transform 1s cubic-bezier(.16,.84,.2,1),filter .75s ease!important}
-.splashWordmark{display:block!important;margin:0!important;white-space:nowrap!important;font-family:"Manrope","DM Sans",Arial,sans-serif!important;font-size:clamp(44px,8vw,88px)!important;line-height:.95!important;font-weight:800!important;letter-spacing:.13em!important;color:#fff!important;background:linear-gradient(100deg,#ffffff 0%,#ffffff 52%,#dce4ff 76%,#9beaff 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important;text-shadow:0 18px 54px rgba(42,66,160,.24)!important}
-.splashWordmark .brandAccent{background:linear-gradient(100deg,#e7eaff,#8f9dff 52%,#74eaff)!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important}
+.splashWordmark{display:block!important;margin:0!important;max-width:100%!important;white-space:nowrap!important;overflow:visible!important;font-family:Georgia,"Times New Roman",serif!important;font-size:clamp(48px,7vw,82px)!important;line-height:.92!important;font-weight:700!important;letter-spacing:.025em!important;color:#fff!important;background:none!important;-webkit-text-fill-color:#fff!important;text-shadow:0 18px 54px rgba(42,66,160,.24)!important}
+.splashWordmark .brandAccent{background:none!important;-webkit-text-fill-color:#fff!important;color:#fff!important}
 .splash.phase-brand .splashNativeLogo{opacity:1!important;transform:translateY(0) scale(1)!important;filter:blur(0)!important}
 .splash.phase-settle .splashNativeLogo{transform:translateY(-1px) scale(1.012)!important}
 .splash.phase-out .splashNativeLogo{opacity:0!important;transform:translateY(-14px) scale(.98)!important}
@@ -45,10 +45,10 @@
 @keyframes wvHeartRebound{0%,100%{transform:scale(1)}34%{transform:scale(1.13)}54%{transform:scale(.965)}72%{transform:scale(1.055)}88%{transform:scale(.995)}}
 
 @media(max-width:700px){
-  .brandNative{height:44px!important}
-  .brandWordmark{font-size:21px!important;letter-spacing:.085em!important}
+  .brandNative{height:48px!important}
+  .brandWordmark{font-size:34px!important;letter-spacing:.012em!important;line-height:.92!important}
   .brand.brandNative:before{inset:7px -10px!important}
-  .splashWordmark{font-size:clamp(30px,9vw,48px)!important;letter-spacing:.10em!important}
+  .splashWordmark{font-size:clamp(36px,10vw,56px)!important;letter-spacing:.015em!important}
 }
 
 @media(prefers-reduced-motion:reduce){
