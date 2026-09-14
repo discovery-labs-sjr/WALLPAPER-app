@@ -14,6 +14,7 @@
 
   let allWallpapers = [];
   let active = "Hot";
+  let mode = "all";
   let booted = false;
   let rendering = false;
   let observer = null;
@@ -28,24 +29,16 @@
     return !activeTab || activeTab === "home";
   }
 
-  function hotItems() {
-    return [...allWallpapers].sort((a, b) => (b.likes || 0) - (a.likes || 0)).slice(0, 10);
-  }
-
+  function hotItems() { return [...allWallpapers].sort((a, b) => (b.likes || 0) - (a.likes || 0)).slice(0, 10); }
   function lockedItems() {
-    return [...allWallpapers]
-      .filter(w => String(w.type || "static").toLowerCase() !== "live")
-      .sort((a, b) => (b.likes || 0) - (a.likes || 0))
-      .slice(0, 10);
+    return [...allWallpapers].filter(w => String(w.type || "static").toLowerCase() !== "live").sort((a, b) => (b.likes || 0) - (a.likes || 0)).slice(0, 10);
   }
-
   function categoryItems(label) {
     if (label === "Hot") return hotItems();
     if (label === "Locked In") return lockedItems();
     const original = CATEGORY_BY_LABEL[label];
     return allWallpapers.filter(w => w.category === original);
   }
-
   function filteredBySearch(items) {
     const query = $("#search")?.value.trim().toLowerCase() || "";
     if (!query) return items;
@@ -71,10 +64,7 @@
     const visible = filteredBySearch(items).slice(0, 10);
     if (!visible.length) return "";
     const action = showSeeAll ? `<button class="wvSeeAll" type="button" data-see-all="${esc(label)}">See All</button>` : "";
-    return `<section class="wvRailSection" data-section="${esc(label)}">
-      <div class="wvHomeIntro"><h1>${esc(label)}</h1>${action}</div>
-      <div class="wvRail" aria-label="${esc(label)} wallpapers">${visible.map(card).join("")}</div>
-    </section>`;
+    return `<section class="wvRailSection" data-section="${esc(label)}"><div class="wvHomeIntro"><h1>${esc(label)}</h1>${action}</div><div class="wvRail" aria-label="${esc(label)} wallpapers">${visible.map(card).join("")}</div></section>`;
   }
 
   function renderCategories() {
@@ -83,6 +73,7 @@
     root.innerHTML = ORDER.map(label => `<button class="tab ${label === active ? "active" : ""}" type="button" data-wv-category="${esc(label)}">${esc(label)}</button>`).join("");
     root.querySelectorAll("[data-wv-category]").forEach(button => button.addEventListener("click", () => {
       active = button.dataset.wvCategory || "Hot";
+      mode = "single";
       renderCategories();
       renderHome();
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -97,15 +88,12 @@
     const query = $("#search")?.value.trim() || "";
     if (query) {
       const results = filteredBySearch(allWallpapers).slice(0, 30);
-      root.innerHTML = results.length
-        ? section("Search", results, false)
-        : '<div class="wvResultsEmpty"><strong>No wallpapers found</strong>Try another search.</div>';
-    } else if (active !== "Hot") {
+      root.innerHTML = results.length ? section("Search", results, false) : '<div class="wvResultsEmpty"><strong>No wallpapers found</strong>Try another search.</div>';
+    } else if (mode === "single") {
       root.innerHTML = section(active, categoryItems(active)) || '<div class="wvResultsEmpty"><strong>No wallpapers yet</strong>More wallpapers are coming soon.</div>';
     } else {
-      root.innerHTML = ["Hot", ...ORDER.slice(1)].map(label => section(label, categoryItems(label))).join("");
+      root.innerHTML = ORDER.map(label => section(label, categoryItems(label))).join("");
     }
-    // MutationObserver fires after this DOM change; keep the guard alive for that delivery.
     setTimeout(() => { rendering = false; }, 0);
   }
 
@@ -113,10 +101,7 @@
     const root = $("#sections");
     if (!root) return;
     root.querySelectorAll(".wvCard").forEach(article => {
-      const open = () => {
-        const id = article.dataset.id;
-        if (typeof window.openViewer === "function") window.openViewer(id);
-      };
+      const open = () => { const id = article.dataset.id; if (typeof window.openViewer === "function") window.openViewer(id); };
       article.addEventListener("click", event => { if (!event.target.closest("[data-heart]")) open(); });
       article.addEventListener("keydown", event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); open(); } });
       article.querySelector("[data-heart]")?.addEventListener("click", event => {
@@ -127,15 +112,14 @@
     });
     root.querySelectorAll("[data-see-all]").forEach(button => button.addEventListener("click", () => {
       active = button.dataset.seeAll || "Hot";
+      mode = "single";
       renderCategories();
       renderHome();
       window.scrollTo({ top: 0, behavior: "smooth" });
     }));
   }
 
-  function applyBodyMode() {
-    document.body.classList.add("wvGalleryHome");
-  }
+  function applyBodyMode() { document.body.classList.add("wvGalleryHome"); }
 
   async function boot() {
     if (booted) return;
@@ -162,9 +146,7 @@
     if (!root || observer) return;
     observer = new MutationObserver(() => {
       if (rendering || !isHomeVisible()) return;
-      requestAnimationFrame(() => {
-        if (!rendering && isHomeVisible()) { renderHome(); bindCards(); }
-      });
+      requestAnimationFrame(() => { if (!rendering && isHomeVisible()) { renderHome(); bindCards(); } });
     });
     observer.observe(root, { childList: true });
   }
@@ -172,6 +154,6 @@
   document.addEventListener("DOMContentLoaded", boot, { once: true });
   window.addEventListener("load", () => { if (!booted) boot(); }, { once: true });
   document.addEventListener("input", event => {
-    if (event.target?.id === "search" && isHomeVisible()) { renderHome(); bindCards(); }
+    if (event.target?.id === "search" && isHomeVisible()) { mode = "single"; active = "Hot"; renderHome(); bindCards(); }
   });
 })();
