@@ -5,7 +5,7 @@ from typing import Any
 import httpx
 from fastapi import Cookie, Depends, File, Form, HTTPException, UploadFile
 from fastapi.responses import HTMLResponse
-from PIL import Image, ImageFilter, ImageStat, ImageOps
+from PIL import Image, ImageFilter, ImageOps
 from sqlalchemy import DateTime, Integer, LargeBinary, String, Text, select
 from sqlalchemy.orm import Mapped, mapped_column
 from core import BASE, Base, SessionLocal, User, WALLPAPER_BY_ID, WALLPAPERS, WALLPAPER_IDS, app, current_user, engine, require_csrf
@@ -13,8 +13,8 @@ from core import BASE, Base, SessionLocal, User, WALLPAPER_BY_ID, WALLPAPERS, WA
 ADMIN_EMAIL=os.getenv('ADMIN_EMAIL','').strip().lower()
 UPLOAD_DIR=BASE/'static'/'uploads'; UPLOAD_DIR.mkdir(parents=True,exist_ok=True)
 MAX_BYTES=int(os.getenv('WALLPAPER_MAX_UPLOAD_MB','20'))*1048576
-# Seuil mobile assoupli : 1080x2340 minimum. La qualite visuelle est ensuite optimisee automatiquement.
-MIN_LONG=int(os.getenv('WALLPAPER_MIN_LONG_SIDE','2340')); MIN_SHORT=int(os.getenv('WALLPAPER_MIN_SHORT_SIDE','1080'))
+# Source minimum is 1080x2000. The mobile engine prepares a normalized 1080x2340 master after validation.
+MIN_LONG=int(os.getenv('WALLPAPER_MIN_LONG_SIDE','2000')); MIN_SHORT=int(os.getenv('WALLPAPER_MIN_SHORT_SIDE','1080'))
 ENHANCE_MAX_LONG=int(os.getenv('WALLPAPER_ENHANCE_MAX_LONG_SIDE','4096'))
 CATEGORIES=['Aesthetic','Nature','Voitures','Animaux','Sport','Musique','Espace','Noir','Ville & Nuit','Technologie','Art','Anime','Jeux vidéo']
 KEYWORDS={'Voitures':['car','vehicle','truck','taxi','jeep','racing','automobile','supercar','sports car'],'Animaux':['dog','cat','horse','tiger','lion','bear','wolf','fox','bird','fish','snake','rabbit','elephant'],'Sport':['basketball','soccer','football','tennis','golf','baseball','volleyball','bicycle','skateboard','surfboard','ski'],'Nature':['mountain','forest','tree','flower','garden','beach','coast','sunset','sunrise','waterfall','desert','lake','valley','volcano','ocean'],'Espace':['space','planet','earth','moon','star','astronaut','galaxy','nebula','cosmos'],'Musique':['guitar','microphone','drum','piano','violin','sax'],'Technologie':['computer','laptop','keyboard','monitor','smartphone','camera','robot','server','phone'],'Ville & Nuit':['street','skyscraper','building','city','bridge','subway','traffic light','gas station','station'],'Art':['painting','sculpture','art','drawing','portrait'],'Noir':['black','dark','shadow','silhouette']}
@@ -38,7 +38,6 @@ def check_image(data:bytes,name:str)->dict[str,Any]:
     if len(data)>MAX_BYTES: raise HTTPException(413,f'Image trop lourde. Maximum : {MAX_BYTES//1048576} Mo')
     im=open_image(data); w,h=im.size; long,short=max(w,h),min(w,h)
     if long<MIN_LONG or short<MIN_SHORT: raise HTTPException(400,f'Résolution insuffisante : minimum {MIN_SHORT}×{MIN_LONG}px')
-    # On ne bloque plus les images sur un simple score de netteté : l'amelioration automatique intervient ensuite.
     fmt=Image.open(io.BytesIO(data)).format; mime=Image.MIME.get(fmt)
     if mime not in {'image/jpeg','image/png','image/webp'}: raise HTTPException(400,'Formats acceptés : JPG, PNG ou WEBP')
     return {'width':w,'height':h,'size_bytes':len(data),'mime_type':mime,'quality_score':round(min(100,(long/MIN_LONG)*55+(short/MIN_SHORT)*45),1)}
