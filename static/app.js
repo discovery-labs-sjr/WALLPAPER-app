@@ -112,6 +112,7 @@ function bindCards(root = document) {
 }
 
 function renderSections() {
+  if (document.body.classList.contains("wvGalleryHome")) return;
   const list = filtered();
   const query = $("#search").value.trim();
   $("#resultsSummary").textContent = query || activeCategory !== "Tous" ? "Résultats" : "Sélection quotidienne";
@@ -144,6 +145,7 @@ function renderSections() {
 }
 
 function renderCategories() {
+  if (document.body.classList.contains("wvGalleryHome")) return;
   $("#categories").innerHTML = categories.map(category => `<button class="tab ${category === activeCategory ? "active" : ""}" data-category="${esc(category)}">${esc(category)}</button>`).join("");
   $("#categories").querySelectorAll(".tab").forEach(button => button.addEventListener("click", () => {
     activeCategory = button.dataset.category;
