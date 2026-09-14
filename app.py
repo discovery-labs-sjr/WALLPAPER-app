@@ -1,6 +1,7 @@
 import core
 app = core.app
 import studio
+import live_studio
 from wallpaper_engine import prepare_mobile_wallpaper
 
 # Every Studio enhancement now produces a phone-ready master instead of merely
