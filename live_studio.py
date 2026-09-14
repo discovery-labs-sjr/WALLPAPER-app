@@ -7,9 +7,10 @@ import re
 import secrets
 from datetime import datetime, timezone
 
-from fastapi import Cookie, Depends, File, Form, HTTPException, UploadFile
+from fastapi import Depends, File, Form, HTTPException, UploadFile
 
-from core import BASE, SessionLocal, WALLPAPER_BY_ID, WALLPAPERS, WALLPAPER_IDS, User, app, require_csrf
+from core import SessionLocal, WALLPAPER_BY_ID, WALLPAPERS, WALLPAPER_IDS, User, app, require_csrf
+import studio
 from studio import CATEGORIES, WallpaperAsset, UPLOAD_DIR, admin_user
 
 LIVE_MAX_BYTES = int(os.getenv("WALLPAPER_LIVE_MAX_UPLOAD_MB", "30")) * 1048576
@@ -31,6 +32,21 @@ def _valid_video(data: bytes, filename: str, content_type: str | None) -> str:
     if mime == "video/webm" and not data.startswith(b"\x1a\x45\xdf\xa3"):
         raise HTTPException(400, "Le fichier WebM ne semble pas valide")
     return mime
+
+
+_original_materialize = studio.materialize
+
+
+def _materialize_with_live_url(row: WallpaperAsset) -> dict:
+    item = _original_materialize(row)
+    if str(row.mime_type or "").lower().startswith("video/"):
+        item["video"] = item["preview"]
+    return item
+
+
+studio.materialize = _materialize_with_live_url
+# Re-run existing asset materialization so video rows receive their media URL after restart.
+studio.load_assets()
 
 
 @app.post("/api/admin/live/upload")
