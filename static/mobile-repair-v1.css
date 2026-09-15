@@ -38,10 +38,10 @@
   body.wvGalleryHome .wvProfileThumb.is-placeholder{display:grid!important;place-items:center!important;background:linear-gradient(145deg,#151a2a,#0b0f18)!important;border-color:rgba(139,92,246,.22)!important}
   body.wvGalleryHome .wvProfileThumb.is-placeholder::before{content:"✦";font-size:18px;color:rgba(255,255,255,.48)}
 
-  /* Pull categories upward to close the visual gap under the featured rail. */
+  /* Move categories up another 13px to fully close the remaining gap. */
   body.wvGalleryHome .categories{
     position:sticky!important;top:56px!important;z-index:29!important;width:100vw!important;max-width:none!important;
-    margin:-14px 0 0 calc(50% - 50vw)!important;padding:6px 24px 8px!important;
+    margin:-13px 0 0 calc(50% - 50vw)!important;padding:6px 24px 8px!important;
     transform:none!important;box-sizing:border-box!important;overflow-x:auto!important;overflow-y:hidden!important;
   }
   body.wvGalleryHome .categories .tab{padding:11px 18px!important}
@@ -55,8 +55,8 @@
 @media (min-width:700px){
   body.wvGalleryHome .wvProfileRail{height:88px!important;padding-top:6px!important;padding-bottom:4px!important}
   body.wvGalleryHome .wvProfileTrack{gap:12px!important}
+  body.wvGalleryHome .wvProfileRail + .hero + .categories{margin-top:0!important}
 }
 
 /* Defensive cleanup for accidental margins/padding introduced by other theme layers. */
 body.wvGalleryHome #wvProfileRail + .hero{margin:0!important;padding:0!important}
-body.wvGalleryHome .wvProfileRail + .hero + .categories{margin-top:0!important}
