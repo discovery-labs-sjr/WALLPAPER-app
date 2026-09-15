@@ -2,5 +2,5 @@
 .navBtn.navPlay.navLive .navIconLive svg{animation:wvLivePulse .62s cubic-bezier(.22,.82,.22,1)!important;transform-origin:50% 50%!important}
 @keyframes wvLivePulse{0%{transform:scale(1)}28%{transform:scale(1.12)}48%{transform:scale(.96)}68%{transform:scale(1.06)}100%{transform:scale(1)}}
 
-/* 4A.1 — refine the profile rail spacing and proportions on mobile. */
-@media (max-width:699px){body.wvGalleryHome .topbar{height:56px!important}body.wvGalleryHome{--wv-header-height:56px}body.wvGalleryHome .wvProfileRail{height:90px!important;padding-top:6px!important;padding-bottom:4px!important;margin-top:-14px!important}body.wvGalleryHome .wvProfileThumb{flex-basis:74px;width:74px;height:80px}}
+/* 4A.1 — move the profile rail a little higher on mobile. */
+@media (max-width:699px){body.wvGalleryHome .topbar{height:56px!important}body.wvGalleryHome{--wv-header-height:56px}body.wvGalleryHome .wvProfileRail{height:90px!important;padding-top:6px!important;padding-bottom:4px!important;margin-top:-18px!important}body.wvGalleryHome .wvProfileThumb{flex-basis:74px;width:74px;height:80px}}
