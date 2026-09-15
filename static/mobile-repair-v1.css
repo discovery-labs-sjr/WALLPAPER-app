@@ -1,0 +1,76 @@
+/* WALLVERSE mobile shell repair — 2026-09-15
+   Fixes the gallery rail/category overlap introduced by negative mobile offsets.
+*/
+@media (max-width:699px){
+  /* Header: keep the wordmark fully inside the viewport. */
+  body.wvGalleryHome .topbar{
+    width:100%!important;
+    height:56px!important;
+    padding:0 16px!important;
+    grid-template-columns:minmax(0,1fr) auto!important;
+    gap:10px!important;
+    overflow:hidden!important;
+  }
+  body.wvGalleryHome .brand.brandNative{
+    min-width:0!important;
+    max-width:100%!important;
+    width:auto!important;
+    margin:0!important;
+    transform:none!important;
+    overflow:visible!important;
+  }
+  body.wvGalleryHome .brandWordmark{
+    max-width:100%!important;
+    font-size:34px!important;
+    letter-spacing:.012em!important;
+    transform:none!important;
+  }
+
+  /* Main gallery must begin directly below the sticky header. */
+  body.wvGalleryHome main{
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:0 16px calc(160px + var(--safe-bottom))!important;
+    overflow:visible!important;
+  }
+
+  /* Featured thumbnail rail: remove the accidental -140px lift. */
+  body.wvGalleryHome .wvProfileRail{
+    position:relative!important;
+    width:100vw!important;
+    max-width:none!important;
+    height:94px!important;
+    margin:0 0 0 calc(50% - 50vw)!important;
+    padding:8px 24px!important;
+    transform:none!important;
+    overflow:hidden!important;
+  }
+
+  /* Category rail: remove the accidental -180px lift. */
+  body.wvGalleryHome .categories{
+    position:sticky!important;
+    top:56px!important;
+    z-index:29!important;
+    width:100vw!important;
+    max-width:none!important;
+    margin:0 0 0 calc(50% - 50vw)!important;
+    padding:13px 24px 14px!important;
+    transform:none!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+  }
+
+  /* Keep content sections aligned with the phone viewport. */
+  body.wvGalleryHome #sections,
+  body.wvGalleryHome #inspiration,
+  body.wvGalleryHome #liveSection,
+  body.wvGalleryHome #emptyState{
+    width:100%!important;
+    max-width:100%!important;
+  }
+
+  body.wvGalleryHome .wvHomeIntro{
+    margin-top:25px!important;
+  }
+}
