@@ -6,8 +6,9 @@
   let allWallpapers=[],active="Hot",mode="all",booted=false,rendering=false,observer=null,lastRenderedHTML="";
   const $=(s,r=document)=>r.querySelector(s);
   const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
-  const englishCategory=c=>CATEGORY_MAP[c]||c||"Aesthetic";
-  const imageOf=w=>w?.preview||w?.file||"";
+  // Prefer the local WALLVERSE artwork first. Remote preview URLs can fail or be blocked;
+  // the local file is already shipped with the app and is a reliable visual fallback.
+  const imageOf=w=>w?.file||w?.preview||"";
   function isHomeVisible(){const t=$(".navBtn.active")?.dataset.tab;return !t||t==="home";}
   function hotItems(){return [...allWallpapers].sort((a,b)=>(b.likes||0)-(a.likes||0)).slice(0,10)}
   function lockedItems(){return [...allWallpapers].filter(w=>String(w.type||"static").toLowerCase()!=="live").sort((a,b)=>(b.likes||0)-(a.likes||0)).slice(0,10)}
