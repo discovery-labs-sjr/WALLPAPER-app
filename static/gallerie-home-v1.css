@@ -1,4 +1,4 @@
-:root{--wv-rail-gap:16px;--wv-card-ratio:.461538;--wv-header-height:64px}
+:root{--wv-rail-gap:16px;--wv-card-ratio:.461538;--wv-header-height:56px}
 body.wvGalleryHome .hero,body.wvGalleryHome>main>.sectionIntro{display:none!important}
 body.wvGalleryHome main{padding-top:0}
 body.wvGalleryHome .topbar{height:var(--wv-header-height);grid-template-columns:1fr auto;gap:12px;padding:0 18px;max-width:none;background:rgba(4,6,16,.82);border-bottom-color:rgba(255,255,255,.06)}
