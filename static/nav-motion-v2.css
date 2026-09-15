@@ -3,4 +3,4 @@
 @keyframes wvLivePulse{0%{transform:scale(1)}28%{transform:scale(1.12)}48%{transform:scale(.96)}68%{transform:scale(1.06)}100%{transform:scale(1)}}
 
 /* 4A.1 — move the profile rail 2px higher on mobile. */
-@media (max-width:699px){body.wvGalleryHome .topbar{height:56px!important}body.wvGalleryHome{--wv-header-height:56px}body.wvGalleryHome .wvProfileRail{height:90px!important;padding-top:6px!important;padding-bottom:4px!important;margin-top:-34px!important}body.wvGalleryHome .wvProfileThumb{flex-basis:74px;width:74px;height:80px}}
+@media (max-width:699px){body.wvGalleryHome .topbar{height:56px!important}body.wvGalleryHome{--wv-header-height:56px}body.wvGalleryHome .wvProfileRail{height:90px!important;padding-top:6px!important;padding-bottom:4px!important;margin-top:-36px!important}body.wvGalleryHome .wvProfileThumb{flex-basis:74px;width:74px;height:80px}}
