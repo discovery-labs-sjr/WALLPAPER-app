@@ -1,5 +1,5 @@
 /* WALLVERSE mobile shell repair — 2026-09-15
-   Fixes the gallery rail/category overlap introduced by negative mobile offsets.
+   Compact, aligned mobile header + featured rail.
 */
 @media (max-width:699px){
   /* Header: keep the wordmark fully inside the viewport. */
@@ -35,19 +35,68 @@
     overflow:visible!important;
   }
 
-  /* Featured thumbnail rail: remove the accidental -140px lift. */
+  /* Featured thumbnails: compact height, full viewport width, tactile scrolling. */
   body.wvGalleryHome .wvProfileRail{
     position:relative!important;
+    left:auto!important;
     width:100vw!important;
     max-width:none!important;
-    height:94px!important;
+    height:86px!important;
     margin:0 0 0 calc(50% - 50vw)!important;
-    padding:8px 24px!important;
+    padding:6px 24px 5px!important;
     transform:none!important;
+    box-sizing:border-box!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    touch-action:pan-x!important;
+    -webkit-overflow-scrolling:touch!important;
+    scrollbar-width:none!important;
+  }
+  body.wvGalleryHome .wvProfileRail::-webkit-scrollbar{display:none}
+  body.wvGalleryHome .wvProfileTrack{
+    width:max-content!important;
+    height:100%!important;
+    max-width:none!important;
+    display:flex!important;
+    align-items:flex-start!important;
+    justify-content:flex-start!important;
+    gap:12px!important;
+    transform:none!important;
+    animation:none!important;
+  }
+  body.wvGalleryHome .wvProfileItem{
+    flex:0 0 64px!important;
+    width:64px!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    gap:3px!important;
+    min-width:0!important;
+  }
+  body.wvGalleryHome .wvProfileThumb{
+    flex:0 0 64px!important;
+    width:64px!important;
+    height:68px!important;
+    border-radius:31% 39% 30% 37%;
+  }
+  body.wvGalleryHome .wvProfileThumb img{
+    width:100%!important;
+    height:100%!important;
+    object-fit:cover!important;
+  }
+  body.wvGalleryHome .wvProfileLabel{
+    display:block!important;
+    width:64px!important;
     overflow:hidden!important;
+    color:rgba(255,255,255,.78)!important;
+    font:600 10px/1.05 "DM Sans",sans-serif!important;
+    text-align:center!important;
+    white-space:nowrap!important;
+    text-overflow:ellipsis!important;
+    letter-spacing:-.01em!important;
   }
 
-  /* Category rail: remove the accidental -180px lift. */
+  /* Category rail: sit directly beneath the featured rail. */
   body.wvGalleryHome .categories{
     position:sticky!important;
     top:56px!important;
@@ -55,10 +104,12 @@
     width:100vw!important;
     max-width:none!important;
     margin:0 0 0 calc(50% - 50vw)!important;
-    padding:13px 24px 14px!important;
+    padding:7px 24px 9px!important;
     transform:none!important;
+    box-sizing:border-box!important;
     overflow-x:auto!important;
     overflow-y:hidden!important;
+    margin-top:-7px!important;
   }
 
   /* Keep content sections aligned with the phone viewport. */
@@ -71,6 +122,6 @@
   }
 
   body.wvGalleryHome .wvHomeIntro{
-    margin-top:25px!important;
+    margin-top:18px!important;
   }
 }
