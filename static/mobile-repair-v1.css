@@ -38,10 +38,10 @@
   body.wvGalleryHome .wvProfileThumb.is-placeholder{display:grid!important;place-items:center!important;background:linear-gradient(145deg,#151a2a,#0b0f18)!important;border-color:rgba(139,92,246,.22)!important}
   body.wvGalleryHome .wvProfileThumb.is-placeholder::before{content:"✦";font-size:18px;color:rgba(255,255,255,.48)}
 
-  /* No dead zone: categories are the immediate next block after the rail. */
+  /* Pull categories upward to close the visual gap under the featured rail. */
   body.wvGalleryHome .categories{
     position:sticky!important;top:56px!important;z-index:29!important;width:100vw!important;max-width:none!important;
-    margin:-1px 0 0 calc(50% - 50vw)!important;padding:6px 24px 8px!important;
+    margin:-14px 0 0 calc(50% - 50vw)!important;padding:6px 24px 8px!important;
     transform:none!important;box-sizing:border-box!important;overflow-x:auto!important;overflow-y:hidden!important;
   }
   body.wvGalleryHome .categories .tab{padding:11px 18px!important}
