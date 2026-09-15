@@ -52,3 +52,27 @@ body.wvGalleryHome .wvProfileThumb:first-child{border-color:rgba(139,92,246,.48)
     margin-right:calc(50% - 50vw)!important;
   }
 }
+
+/* 4A.7 — mobile gallery-style shell repair. */
+@media (max-width:699px){
+  body.wvGalleryHome .wvProfileRail{
+    width:100vw!important;
+    max-width:none!important;
+    margin-left:calc(50% - 50vw)!important;
+    margin-right:0!important;
+    margin-top:-140px!important;
+    transform:none!important;
+    padding-left:24px!important;
+    padding-right:24px!important;
+  }
+  body.wvGalleryHome .categories{
+    width:100vw!important;
+    max-width:none!important;
+    margin-left:calc(50% - 50vw)!important;
+    margin-right:0!important;
+    margin-top:-180px!important;
+    transform:none!important;
+    padding-left:24px!important;
+    padding-right:24px!important;
+  }
+}
