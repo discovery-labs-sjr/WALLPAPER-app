@@ -37,4 +37,4 @@ body.wvGalleryHome .wvProfileThumb:first-child{border-color:rgba(139,92,246,.42)
 @media (max-width:699px){body.wvGalleryHome .wvProfileRail{margin-left:calc(50% - 50vw)!important;margin-right:0!important}}
 
 /* Mobile spacing: visually connect the profile rail, category chips and first section. */
-@media (max-width:699px){body.wvGalleryHome .categories{margin-top:-10px!important;padding-top:7px;padding-bottom:9px}body.wvGalleryHome .wvHomeIntro{margin-top:12px!important}}
+@media (max-width:699px){body.wvGalleryHome .categories{margin-top:-18px!important;padding-top:7px;padding-bottom:9px}body.wvGalleryHome .wvHomeIntro{margin-top:12px!important}}
