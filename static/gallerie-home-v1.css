@@ -76,3 +76,9 @@ body.wvGalleryHome .wvProfileThumb:first-child{border-color:rgba(139,92,246,.48)
     padding-right:24px!important;
   }
 }
+
+/* FINAL RAIL FIX — override any inline/reduced-motion animation:none rule. */
+body.wvGalleryHome .wvProfileTrack{
+  animation:wvProfileMarquee 19s linear infinite!important;
+  will-change:transform;
+}
