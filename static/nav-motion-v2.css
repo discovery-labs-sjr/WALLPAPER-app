@@ -23,6 +23,6 @@
   }
   body.wvGalleryHome .categories{
     transform:translateX(-50%)!important;
-    margin-top:0!important;
+    margin-top:-8px!important;
   }
 }
