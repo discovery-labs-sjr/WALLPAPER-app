@@ -23,62 +23,19 @@ body.wvGalleryHome #liveSection{padding-top:0}body.wvGalleryHome #liveSection .s
 @media (min-width:700px){body.wvGalleryHome .topbar{padding:0 30px}body.wvGalleryHome main{padding-left:30px;padding-right:30px}body.wvGalleryHome .categories{margin-left:-30px!important;margin-right:-30px!important;padding-left:30px;padding-right:30px}.wvProfileThumb{flex-basis:82px;width:82px;height:84px}}
 @media (max-width:699px){body.wvGalleryHome main{padding-left:24px;padding-right:24px;padding-bottom:calc(260px + var(--safe-bottom))}body.wvGalleryHome .wvRailSection{margin-bottom:30px}body.wvGalleryHome .wvHomeIntro{margin-top:25px}}
 
-/* 4A — featured thumbnail rail. */
+/* Featured thumbnail rail: deliberately self-contained so later motion preferences cannot disable it. */
 body.wvGalleryHome .wvProfileRail{display:block;overflow:hidden;height:94px;margin:0 -24px;padding:8px 24px;background:linear-gradient(180deg,rgba(7,11,22,.72),rgba(4,6,16,.18));border-bottom:1px solid rgba(255,255,255,.035)}
-body.wvGalleryHome .wvProfileTrack{display:flex;align-items:center;gap:12px;width:max-content;height:100%;animation:wvProfileMarquee 19s linear infinite;will-change:transform}
+body.wvGalleryHome .wvProfileTrack{display:flex;align-items:center;gap:12px;width:max-content;height:100%;transform:translate3d(0,0,0);animation-name:wvProfileMarquee!important;animation-duration:19s!important;animation-timing-function:linear!important;animation-iteration-count:infinite!important;animation-play-state:running!important;will-change:transform}
 body.wvGalleryHome .wvProfileThumb{position:relative;flex:0 0 70px;width:70px;height:76px;overflow:hidden;background:#0b0f18;border:1px solid rgba(255,255,255,.14);border-radius:31% 39% 30% 37%;box-shadow:0 8px 20px rgba(0,0,0,.24);isolation:isolate}
 body.wvGalleryHome .wvProfileThumb::before{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(255,255,255,.045),inset 0 10px 18px rgba(255,255,255,.045);z-index:2;pointer-events:none}
 body.wvGalleryHome .wvProfileThumb::after{content:"";position:absolute;inset:0;background:linear-gradient(145deg,rgba(255,255,255,.10),transparent 42%,rgba(0,0,0,.20));z-index:3;pointer-events:none}
 body.wvGalleryHome .wvProfileThumb img{width:100%;height:100%;display:block;object-fit:cover;object-position:center}
 body.wvGalleryHome .wvProfileThumb:first-child{border-color:rgba(139,92,246,.42);box-shadow:0 8px 24px rgba(54,44,130,.22),inset 0 0 0 1px rgba(255,255,255,.05)}
 @keyframes wvProfileMarquee{from{transform:translate3d(0,0,0)}to{transform:translate3d(calc(-50% - 6px),0,0)}}
-@media (prefers-reduced-motion:reduce){body.wvGalleryHome .wvProfileTrack{animation:none}}
 @media (min-width:700px){body.wvGalleryHome .wvProfileRail{margin-left:-30px;margin-right:-30px;padding-left:30px;padding-right:30px}}
 
-/* 4A.3 — premium thumbnail finish. */
-body.wvGalleryHome .wvProfileThumb img{filter:saturate(1.08) contrast(1.04);transform:scale(1.015);transition:filter .25s ease,transform .25s ease}
-body.wvGalleryHome .wvProfileThumb{border-color:rgba(255,255,255,.17);box-shadow:0 9px 24px rgba(0,0,0,.28),inset 0 0 0 1px rgba(255,255,255,.035)}
-body.wvGalleryHome .wvProfileThumb::before{box-shadow:inset 0 0 0 1px rgba(255,255,255,.075),inset 0 12px 22px rgba(255,255,255,.055),inset 0 -10px 20px rgba(0,0,0,.08)}
-body.wvGalleryHome .wvProfileThumb::after{background:linear-gradient(145deg,rgba(255,255,255,.13),transparent 38%,rgba(0,0,0,.24));}
-body.wvGalleryHome .wvProfileThumb:first-child{border-color:rgba(139,92,246,.48);box-shadow:0 10px 26px rgba(54,44,130,.28),inset 0 0 0 1px rgba(255,255,255,.065)}
+/* True full-bleed mobile rails. */
+@media (max-width:699px){body.wvGalleryHome .wvProfileRail,body.wvGalleryHome .categories{width:100vw!important;max-width:none!important;margin-left:calc(50% - 50vw)!important;margin-right:0!important}}
 
-/* 4A.4 — true full-bleed rails. */
-@media (max-width:699px){
-  body.wvGalleryHome .wvProfileRail,
-  body.wvGalleryHome .categories{
-    width:100vw!important;
-    max-width:none!important;
-    margin-left:calc(50% - 50vw)!important;
-    margin-right:calc(50% - 50vw)!important;
-  }
-}
-
-/* 4A.7 — mobile gallery-style shell repair. */
-@media (max-width:699px){
-  body.wvGalleryHome .wvProfileRail{
-    width:100vw!important;
-    max-width:none!important;
-    margin-left:calc(50% - 50vw)!important;
-    margin-right:0!important;
-    margin-top:-140px!important;
-    transform:none!important;
-    padding-left:24px!important;
-    padding-right:24px!important;
-  }
-  body.wvGalleryHome .categories{
-    width:100vw!important;
-    max-width:none!important;
-    margin-left:calc(50% - 50vw)!important;
-    margin-right:0!important;
-    margin-top:-180px!important;
-    transform:none!important;
-    padding-left:24px!important;
-    padding-right:24px!important;
-  }
-}
-
-/* FINAL RAIL FIX — override any inline/reduced-motion animation:none rule. */
-body.wvGalleryHome .wvProfileTrack{
-  animation:wvProfileMarquee 19s linear infinite!important;
-  will-change:transform;
-}
+/* IMPORTANT: do not disable the profile marquee for prefers-reduced-motion. */
+@media (prefers-reduced-motion:reduce){body.wvGalleryHome .wvProfileTrack{animation-name:wvProfileMarquee!important;animation-duration:19s!important;animation-timing-function:linear!important;animation-iteration-count:infinite!important;animation-play-state:running!important}}
