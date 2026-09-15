@@ -64,4 +64,9 @@ body.wvGalleryHome .wvProfileThumb:first-child{border-color:rgba(139,92,246,.42)
   body.wvGalleryHome .categories .tab.active:after{bottom:-9px!important}
   body.wvGalleryHome #sections,body.wvGalleryHome #inspiration,body.wvGalleryHome #liveSection,body.wvGalleryHome #emptyState{width:100%!important;max-width:100%!important}
   body.wvGalleryHome .wvHomeIntro{margin-top:14px!important}
+
+  /* Remove the global category-edge fade on the mobile gallery rail. */
+  body.wvGalleryHome .categories::before,
+  body.wvGalleryHome .categories::after{display:none!important;content:none!important}
+  body.wvGalleryHome .categories{mask-image:none!important;-webkit-mask-image:none!important}
 }
