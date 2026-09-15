@@ -4,3 +4,25 @@
 
 /* 4A.1 — move the profile rail higher on mobile. */
 @media (max-width:699px){body.wvGalleryHome .topbar{height:56px!important}body.wvGalleryHome{--wv-header-height:56px}body.wvGalleryHome .wvProfileRail{height:90px!important;padding-top:6px!important;padding-bottom:4px!important;margin-top:-65px!important}body.wvGalleryHome .wvProfileThumb{flex-basis:74px;width:74px;height:80px}}
+
+/* 4A.6 — force the two horizontal rails to the viewport edges. */
+@media (max-width:699px){
+  body.wvGalleryHome main{overflow:visible!important}
+  body.wvGalleryHome .wvProfileRail,
+  body.wvGalleryHome .categories{
+    position:relative!important;
+    left:50%!important;
+    width:100vw!important;
+    max-width:none!important;
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+  body.wvGalleryHome .wvProfileRail{
+    margin-top:0!important;
+    transform:translateX(-50%)!important;
+  }
+  body.wvGalleryHome .categories{
+    transform:translateX(-50%)!important;
+    margin-top:0!important;
+  }
+}
