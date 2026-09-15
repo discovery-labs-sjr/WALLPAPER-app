@@ -3,4 +3,4 @@
 @keyframes wvLivePulse{0%{transform:scale(1)}28%{transform:scale(1.12)}48%{transform:scale(.96)}68%{transform:scale(1.06)}100%{transform:scale(1)}}
 
 /* 4A.1 — reduce only the header-to-profile-rail vertical gap on mobile. */
-@media (max-width:699px){body.wvGalleryHome .topbar{height:56px!important}body.wvGalleryHome{--wv-header-height:56px}body.wvGalleryHome .wvProfileRail{height:84px!important;padding-top:4px!important;padding-bottom:4px!important}}
+@media (max-width:699px){body.wvGalleryHome .topbar{height:56px!important}body.wvGalleryHome{--wv-header-height:56px}body.wvGalleryHome .wvProfileRail{height:84px!important;padding-top:4px!important;padding-bottom:4px!important;margin-top:-12px!important}}
