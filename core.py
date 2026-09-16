@@ -35,7 +35,7 @@ connect_args = {"check_same_thread": False} if raw_db_url.startswith("sqlite") e
 engine = create_engine(raw_db_url, connect_args=connect_args, pool_pre_ping=True)
 SessionLocal = sessionmaker(bind=engine, autoflush=False, expire_on_commit=False)
 password_hash = PasswordHash.recommended()
-class Base(DeclarativeBase: pass
+class Base(DeclarativeBase): pass
 class User(Base):
     __tablename__="users"; id:Mapped[int]=mapped_column(primary_key=True); email:Mapped[str]=mapped_column(String(320),unique=True,index=True); password_hash:Mapped[str]=mapped_column(String(255)); display_name:Mapped[str]=mapped_column(String(80)); created_at:Mapped[datetime]=mapped_column(DateTime(timezone=True),default=lambda:datetime.now(timezone.utc)); favorites:Mapped[list['Favorite']]=relationship(back_populates='user',cascade='all, delete-orphan'); sessions:Mapped[list['AuthSession']]=relationship(back_populates='user',cascade='all, delete-orphan')
 class Favorite(Base):
