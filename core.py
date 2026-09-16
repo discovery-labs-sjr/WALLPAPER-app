@@ -93,10 +93,25 @@ def wallpaper_like_counts(db:Session,wallpaper_ids:list[str]|None=None)->dict[st
         if not wallpaper_ids:return {}
         query=query.where(Favorite.wallpaper_id.in_(wallpaper_ids))
     return {wallpaper_id:int(count) for wallpaper_id,count in db.execute(query).all()}
+def _catalog_datetime(item:dict)->datetime|None:
+    value=item.get('created_at')
+    if not value:return None
+    try:
+        parsed=datetime.fromisoformat(str(value).replace('Z','+00:00'))
+        return parsed if parsed.tzinfo else parsed.replace(tzinfo=timezone.utc)
+    except (TypeError,ValueError):
+        return None
 def public_wallpapers()->list[dict]:
     with SessionLocal() as db:
         counts=wallpaper_like_counts(db)
-    return [dict(item,likes=int(item.get('likes',0))+counts.get(str(item.get('id')),0)) for item in WALLPAPERS]
+    cutoff=now()-timedelta(days=7)
+    items=[dict(item,likes=int(item.get('likes',0))+counts.get(str(item.get('id')),0)) for item in WALLPAPERS]
+    def sort_key(item:dict):
+        created=_catalog_datetime(item)
+        is_new=created is not None and created>=cutoff
+        timestamp=created.timestamp() if created else 0
+        return (0 if is_new else 1,-timestamp if is_new else -float(item.get('likes',0)),-timestamp)
+    return sorted(items,key=sort_key)
 def public_wallpaper(wallpaper_id:str)->dict|None:
     wallpaper=WALLPAPER_BY_ID.get(wallpaper_id)
     if wallpaper is None:return None
