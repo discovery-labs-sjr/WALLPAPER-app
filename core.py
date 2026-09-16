@@ -17,7 +17,7 @@ from fastapi.responses import FileResponse, HTMLResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, EmailStr, Field
 from pwdlib import PasswordHash
-from sqlalchemy import Boolean, DateTime, ForeignKey, String, UniqueConstraint, create_engine, select
+from sqlalchemy import Boolean, DateTime, ForeignKey, String, UniqueConstraint, create_engine, func, select
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column, relationship, sessionmaker
 
 BASE = Path(__file__).resolve().parent
@@ -35,7 +35,7 @@ connect_args = {"check_same_thread": False} if raw_db_url.startswith("sqlite") e
 engine = create_engine(raw_db_url, connect_args=connect_args, pool_pre_ping=True)
 SessionLocal = sessionmaker(bind=engine, autoflush=False, expire_on_commit=False)
 password_hash = PasswordHash.recommended()
-class Base(DeclarativeBase): pass
+class Base(DeclarativeBase: pass
 class User(Base):
     __tablename__="users"; id:Mapped[int]=mapped_column(primary_key=True); email:Mapped[str]=mapped_column(String(320),unique=True,index=True); password_hash:Mapped[str]=mapped_column(String(255)); display_name:Mapped[str]=mapped_column(String(80)); created_at:Mapped[datetime]=mapped_column(DateTime(timezone=True),default=lambda:datetime.now(timezone.utc)); favorites:Mapped[list['Favorite']]=relationship(back_populates='user',cascade='all, delete-orphan'); sessions:Mapped[list['AuthSession']]=relationship(back_populates='user',cascade='all, delete-orphan')
 class Favorite(Base):
@@ -87,6 +87,22 @@ def remote_preview_url(item:dict):
     parsed=urlparse(str(preview))
     if parsed.scheme!='https' or parsed.hostname not in ALLOWED_IMAGE_HOSTS:return None
     return str(preview)
+def wallpaper_like_counts(db:Session,wallpaper_ids:list[str]|None=None)->dict[str,int]:
+    query=select(Favorite.wallpaper_id,func.count(Favorite.id)).group_by(Favorite.wallpaper_id)
+    if wallpaper_ids is not None:
+        if not wallpaper_ids:return {}
+        query=query.where(Favorite.wallpaper_id.in_(wallpaper_ids))
+    return {wallpaper_id:int(count) for wallpaper_id,count in db.execute(query).all()}
+def public_wallpapers()->list[dict]:
+    with SessionLocal() as db:
+        counts=wallpaper_like_counts(db)
+    return [dict(item,likes=int(item.get('likes',0))+counts.get(str(item.get('id')),0)) for item in WALLPAPERS]
+def public_wallpaper(wallpaper_id:str)->dict|None:
+    wallpaper=WALLPAPER_BY_ID.get(wallpaper_id)
+    if wallpaper is None:return None
+    with SessionLocal() as db:
+        counts=wallpaper_like_counts(db,[wallpaper_id])
+    return dict(wallpaper,likes=int(wallpaper.get('likes',0))+counts.get(wallpaper_id,0))
 @app.on_event('startup')
 async def startup():
     global _http_client; _http_client=httpx.AsyncClient(timeout=httpx.Timeout(20.0,connect=8.0),follow_redirects=True,headers={'User-Agent':'WALLVERSE/7.0','Accept':'image/avif,image/webp,image/jpeg,image/png,image/*;q=0.8'})
@@ -101,15 +117,15 @@ def health():
     with SessionLocal() as db: db.execute(select(1))
     return {'status':'ok','wallpapers':len(WALLPAPERS),'database':'ok'}
 @app.get('/api/wallpapers')
-def get_wallpapers(): return WALLPAPERS
+def get_wallpapers(): return public_wallpapers()
 @app.get('/api/wallpapers/{wallpaper_id}')
 def get_wallpaper(wallpaper_id:str):
-    wallpaper=WALLPAPER_BY_ID.get(wallpaper_id)
+    wallpaper=public_wallpaper(wallpaper_id)
     if not wallpaper:raise HTTPException(404,'Wallpaper introuvable')
     return wallpaper
 @app.get('/api/wallpapers/{wallpaper_id}/download')
 async def download_wallpaper(wallpaper_id:str):
-    wallpaper=WALLPAPER_BY_ID.get(wallpaper_id)
+    wallpaper=public_wallpaper(wallpaper_id)
     if wallpaper is None:raise HTTPException(404,'Wallpaper introuvable')
     preview=remote_preview_url(wallpaper)
     if preview and _http_client:
