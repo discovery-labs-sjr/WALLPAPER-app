@@ -1,9 +1,15 @@
+import logging
+from pathlib import Path
+
 import core
 app = core.app
 import studio
 import live_studio
 from wallpaper_engine import prepare_mobile_wallpaper
 from fastapi import Request
+from fastapi.responses import JSONResponse
+
+logger = logging.getLogger("wallverse.storage")
 
 # Every Studio enhancement now produces a phone-ready master instead of merely
 # sharpening the original dimensions. This keeps uploads consistent with the
@@ -17,14 +23,56 @@ def _wallverse_mobile_enhance(data: bytes):
 
 studio.enhance_image = _wallverse_mobile_enhance
 
-# Creator uploads are stored in the database. Re-sync them before wallpaper
-# API responses so a restarted worker or stale in-memory catalog cannot make a
-# previously published wallpaper disappear from the public gallery.
+
+def _sync_creator_assets() -> None:
+    """Make the database-backed creator catalogue authoritative.
+
+    Render's web-service filesystem is ephemeral, so static/uploads is only a
+    materialized cache. WallpaperAsset.image_bytes in the database is the
+    durable source of truth.
+    """
+    studio.load_assets()
+
+
+@app.on_event('startup')
+async def restore_creator_assets_on_startup():
+    try:
+        _sync_creator_assets()
+        logger.info('Creator asset catalog restored from persistent storage')
+    except Exception:
+        # Do not hide a broken persistence layer behind an apparently healthy
+        # empty catalogue. The API middleware will fail closed as well.
+        logger.exception('Creator asset restore failed during startup')
+
+
 @app.middleware('http')
 async def sync_creator_assets(request: Request, call_next):
-    if request.url.path == '/api/wallpapers' or request.url.path.startswith('/api/wallpapers/'):
+    path = request.url.path
+
+    # Always rebuild/materialize creator assets before the public wallpaper API
+    # reads them. This handles worker restarts and ephemeral Render filesystems.
+    if path == '/api/wallpapers' or path.startswith('/api/wallpapers/'):
         try:
-            studio.load_assets()
-        except Exception as exc:
-            core.app.logger.exception('Creator asset sync failed: %s', exc) if hasattr(core.app, 'logger') else None
+            _sync_creator_assets()
+        except Exception:
+            logger.exception('Creator asset sync failed for %s', path)
+            return JSONResponse(
+                status_code=503,
+                content={'detail': 'Le stockage des wallpapers est temporairement indisponible.'},
+            )
+
+    # If Render has removed an ephemeral upload file between two requests,
+    # recreate it directly from WallpaperAsset before StaticFiles handles the
+    # request. This makes the filesystem a cache, never the source of truth.
+    elif path.startswith('/static/uploads/'):
+        filename = Path(path).name
+        wallpaper_id = filename.rsplit('.', 1)[0]
+        try:
+            with studio.SessionLocal() as db:
+                row = db.get(studio.WallpaperAsset, wallpaper_id)
+            if row is not None:
+                studio.materialize(row)
+        except Exception:
+            logger.exception('Creator upload rematerialization failed for %s', path)
+
     return await call_next(request)
