@@ -13,7 +13,6 @@ from core import BASE, Base, SessionLocal, User, WALLPAPER_BY_ID, WALLPAPERS, WA
 ADMIN_EMAIL=os.getenv('ADMIN_EMAIL','').strip().lower()
 UPLOAD_DIR=BASE/'static'/'uploads'; UPLOAD_DIR.mkdir(parents=True,exist_ok=True)
 MAX_BYTES=int(os.getenv('WALLPAPER_MAX_UPLOAD_MB','20'))*1048576
-# Source minimum is 1080x2000. The mobile engine prepares a normalized 1080x2340 master after validation.
 MIN_LONG=int(os.getenv('WALLPAPER_MIN_LONG_SIDE','2000')); MIN_SHORT=int(os.getenv('WALLPAPER_MIN_SHORT_SIDE','1080'))
 ENHANCE_MAX_LONG=int(os.getenv('WALLPAPER_ENHANCE_MAX_LONG_SIDE','4096'))
 CATEGORIES=['Aesthetic','Nature','Voitures','Animaux','Sport','Musique','Espace','Noir','Ville & Nuit','Technologie','Art','Anime','Jeux vidéo']
@@ -83,7 +82,7 @@ async def ai_metadata(data:bytes)->dict[str,Any]:
 def materialize(row:WallpaperAsset)->dict[str,Any]:
     ext=mimetypes.guess_extension(row.mime_type) or '.jpg'; path=UPLOAD_DIR/f'{row.id}{ext}'
     if not path.exists() or path.stat().st_size!=row.size_bytes:path.write_bytes(row.image_bytes)
-    public=f'/static/uploads/{path.name}'; return {'id':row.id,'slug':row.slug,'title':row.title,'category':row.category,'tags':json.loads(row.tags_json or '[]'),'type':row.wallpaper_type,'preview':public,'file':public,'source':'creator','width':row.width,'height':row.height,'size_bytes':row.size_bytes}
+    public=f'/static/uploads/{path.name}'; return {'id':row.id,'slug':row.slug,'title':row.title,'category':row.category,'tags':json.loads(row.tags_json or '[]'),'type':row.wallpaper_type,'preview':public,'file':public,'source':'creator','width':row.width,'height':row.height,'size_bytes':row.size_bytes,'created_at':row.created_at.isoformat() if row.created_at else None}
 def load_assets():
     with SessionLocal() as db:rows=db.scalars(select(WallpaperAsset).order_by(WallpaperAsset.created_at.desc())).all()
     for row in rows:
