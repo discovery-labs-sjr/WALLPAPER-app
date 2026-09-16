@@ -4,36 +4,55 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>WALLVERSE — Studio créateur</title>
-<link rel="stylesheet" href="/static/admin.css?v=20260913-creator3">
+<link rel="stylesheet" href="/static/admin.css?v=20260917-studio2">
 </head>
 <body>
 <main class="studio">
 <header class="studioHead"><a href="/" class="wordmark">WALLVERSE</a><span class="pill">STUDIO CRÉATEUR</span></header>
-<section id="gate" class="panel gate"><h1>Studio créateur</h1><p>Ajoute des wallpapers haute résolution, vérifie leur qualité et prépare automatiquement une version pensée pour les écrans de téléphone avant publication.</p><div id="gateMessage" class="status"></div></section>
+<section id="gate" class="panel gate"><h1>Studio créateur</h1><p>Importe un wallpaper, recadre-le, prépare sa version téléphone et laisse WALLVERSE proposer le titre, les tags et la catégorie avant publication.</p><div id="gateMessage" class="status"></div></section>
 <section id="studio" class="hidden">
 <div class="grid">
 <section class="panel uploadPanel">
 <div class="panelTop"><div><p class="eyebrow">NOUVEAU WALLPAPER</p><h2>Publier un fond</h2></div></div>
 <form id="uploadForm">
-<label class="drop"><input id="image" type="file" accept="image/jpeg,image/png,image/webp,video/mp4,video/webm,video/quicktime"><span id="dropText">Choisir une image ou un Live</span><small>Image : JPG, PNG ou WEBP · source min. 1080×2000 px · Live : MP4, WebM ou MOV · max. 30 Mo</small></label>
+<label class="drop"><input id="image" type="file" accept="image/jpeg,image/png,image/webp,video/mp4,video/webm,video/quicktime"><span id="dropText">Choisir une image ou un Live</span><small>Image : JPG, PNG ou WEBP · Live : MP4, WebM ou MOV · max. 30 Mo</small></label>
+<div id="editorPanel" class="editorPanel hidden">
+  <div class="editorToolbar">
+    <div><strong>Éditeur</strong><small>Cadre de sortie téléphone</small></div>
+    <div class="editorPresets" role="group" aria-label="Format de recadrage">
+      <button type="button" class="cropPreset active" data-ratio="0.461538">9:19.5</button>
+      <button type="button" class="cropPreset" data-ratio="0.5625">9:16</button>
+      <button type="button" class="cropPreset" data-ratio="1">1:1</button>
+      <button type="button" class="cropPreset" data-ratio="free">Libre</button>
+    </div>
+  </div>
+  <div id="cropStage" class="cropStage">
+    <canvas id="cropCanvas" aria-label="Zone de recadrage"></canvas>
+    <div id="cropBox" class="cropBox"><span></span></div>
+  </div>
+  <div class="editorControls">
+    <label>Zoom<input id="cropZoom" type="range" min="1" max="3" step="0.01" value="1"></label>
+    <div class="cropButtons"><button type="button" id="cropCenter" class="secondary">Recentrer</button><button type="button" id="cropApply" class="secondary">Appliquer le cadrage</button></div>
+  </div>
+</div>
 <div id="resolutionInfo" class="analysis hidden"></div>
 <div id="previewWrap" class="previewWrap hidden"><img id="preview" alt="Prévisualisation"><video id="videoPreview" class="hidden" muted loop autoplay playsinline controls></video></div>
-<label>Titre<input id="title" maxlength="180" placeholder="Ex. Midnight Supercar" required></label>
+<label>Titre<input id="title" maxlength="180" placeholder="Titre proposé automatiquement…" required></label>
+<div class="aiHint"><span aria-hidden="true">✦</span><p id="aiHintText">Le titre, les tags et la catégorie pourront être proposés automatiquement après analyse.</p></div>
 <div class="row"><label>Catégorie<select id="category"></select></label><label>Type<select id="type"><option value="static">Standard</option><option value="live">Live</option></select></label></div>
-<label>Tags<input id="tags" maxlength="240" placeholder="nuit, chrome, premium"></label>
-<label class="enhanceToggle"><input id="enhance" type="checkbox" checked><span><strong>Préparation WallVerse</strong><small>Image : corrige l’orientation, recadre pour téléphone et produit un master 1080×2340 en WEBP. Live : le fichier vidéo original est conservé.</small></span><b>ON</b></label>
+<label>Tags<input id="tags" maxlength="240" placeholder="Tags proposés automatiquement…"></label>
+<label class="enhanceToggle"><input id="enhance" type="checkbox" checked><span><strong>Préparation WallVerse</strong><small>Corrige l’orientation, optimise la netteté et produit un WEBP haute qualité pour le wallpaper standard.</small></span><b>ON</b></label>
 <div id="enhancement" class="enhancement hidden"></div>
 <div id="analysis" class="analysis hidden"></div>
-<div class="actionRow"><button id="analyzeBtn" class="secondary" type="button">Analyser</button><button id="enhanceBtn" class="secondary" type="button">Prévisualiser la version téléphone</button></div>
+<div class="actionRow"><button id="analyzeBtn" class="secondary" type="button">Analyser & proposer</button><button id="enhanceBtn" class="secondary" type="button">Prévisualiser l’optimisation</button></div>
 <button id="publishBtn" class="primary" type="submit">Publier le wallpaper</button>
 <div id="formStatus" class="status"></div>
 </form>
 </section>
-<section class="panel catalogPanel"><div class="panelTop"><div><p class="eyebrow">CATALOGUE</p><h2>Mes uploads</h2></div><span id="count" class="count">0</span></div><div id="catalog" class="catalog"></div></section>
+<section class="panel catalogPanel"><div class="panelTop"><div><p class="eyebrow">CATALOGUE</p><h2>Mes uploads</h2></div><span id="count" class="count">0</span></div><div class="catalogTools"><input id="catalogSearch" type="search" placeholder="Rechercher…" autocomplete="off"><select id="catalogFilter"><option value="all">Tous les types</option><option value="static">Standard</option><option value="live">Live</option></select></div><div id="catalog" class="catalog"></div></section>
 </div>
 </section>
 </main>
-<script src="/static/admin.js?v=20260914-live1" defer></script>
-<script src="/static/admin-minimum-fix.js?v=20260913-2" defer></script>
+<script src="/static/admin.js?v=20260917-studio2" defer></script>
 </body>
 </html>
