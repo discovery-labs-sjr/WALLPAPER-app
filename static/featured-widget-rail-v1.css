@@ -1,0 +1,155 @@
+/* WALLVERSE — Featured Widget Presets rail
+   Dedicated presentation layer: intentionally loaded after the home layout so the
+   glass rail remains isolated from the category/navigation cascade. */
+body.wvGalleryHome .wvProfileRail{
+  position:relative!important;
+  box-sizing:border-box!important;
+  width:calc(100vw - 32px)!important;
+  margin-left:calc(50% - 50vw + 16px)!important;
+  margin-right:0!important;
+  padding:0 12px 7px!important;
+  height:126px!important;
+  overflow-x:hidden!important;
+  overflow-y:hidden!important;
+  border:1px solid rgba(255,255,255,.10)!important;
+  border-radius:21px!important;
+  background:linear-gradient(180deg,rgba(19,25,43,.72),rgba(8,12,23,.58))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.075),inset 0 -1px 0 rgba(0,0,0,.28),0 12px 30px rgba(0,0,0,.20)!important;
+  backdrop-filter:blur(20px) saturate(135%)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(135%)!important;
+  isolation:isolate!important;
+}
+body.wvGalleryHome .wvProfileRail::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  border-radius:inherit!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.075),transparent 30%,transparent 72%,rgba(80,125,255,.045))!important;
+  pointer-events:none!important;
+  z-index:-1!important;
+}
+body.wvGalleryHome .wvProfileHeader{
+  position:relative;
+  z-index:8;
+  height:46px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  box-sizing:border-box;
+  padding:0 3px 0 7px;
+  border-bottom:1px solid rgba(255,255,255,.075);
+}
+body.wvGalleryHome .wvProfileHeading{
+  min-width:0;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+body.wvGalleryHome .wvProfileHeading strong{
+  display:block;
+  min-width:0;
+  color:rgba(255,255,255,.94);
+  font:700 16px/1 "Manrope",sans-serif;
+  letter-spacing:-.025em;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+body.wvGalleryHome .wvProfileNew{
+  flex:0 0 auto;
+  padding:6px 8px;
+  border-radius:7px;
+  color:#2997ff;
+  background:rgba(28,126,215,.17);
+  border:1px solid rgba(54,151,255,.10);
+  font:800 9px/1 "DM Sans",sans-serif;
+  letter-spacing:.07em;
+}
+body.wvGalleryHome .wvProfileNav{
+  flex:0 0 auto;
+  display:flex;
+  align-items:center;
+  gap:4px;
+}
+body.wvGalleryHome .wvProfileArrow{
+  width:34px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  padding:0;
+  border:0;
+  border-radius:50%;
+  background:rgba(255,255,255,.035);
+  color:rgba(255,255,255,.68);
+  font:400 30px/1 Arial,sans-serif;
+  cursor:pointer;
+  transition:background .18s ease,color .18s ease,transform .18s ease,opacity .18s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+body.wvGalleryHome .wvProfileArrow:active{transform:scale(.91);background:rgba(255,255,255,.08);color:#fff}
+body.wvGalleryHome .wvProfileArrow.is-hidden{visibility:hidden;pointer-events:none}
+body.wvGalleryHome .wvProfileViewport{
+  position:relative;
+  width:100%;
+  height:79px;
+  overflow:hidden;
+  padding-top:5px;
+  box-sizing:border-box;
+}
+body.wvGalleryHome .wvProfileTrack{
+  height:74px!important;
+  align-items:flex-start!important;
+  gap:10px!important;
+}
+body.wvGalleryHome .wvProfileItem{
+  flex:0 0 58px;
+  width:58px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:3px;
+  min-width:0;
+}
+body.wvGalleryHome .wvProfileThumb{
+  flex:0 0 59px!important;
+  width:58px!important;
+  height:59px!important;
+  border-radius:17px!important;
+  border:1px solid rgba(255,255,255,.14)!important;
+  box-shadow:0 7px 17px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.055)!important;
+}
+body.wvGalleryHome .wvProfileThumb::after{background:linear-gradient(145deg,rgba(255,255,255,.08),transparent 45%,rgba(0,0,0,.18))!important}
+body.wvGalleryHome .wvProfileLabel{
+  display:block!important;
+  width:58px!important;
+  height:10px!important;
+  overflow:hidden!important;
+  color:rgba(255,255,255,.62)!important;
+  font:600 8px/10px "DM Sans",sans-serif!important;
+  text-align:center!important;
+  white-space:nowrap!important;
+  text-overflow:ellipsis!important;
+}
+@media (min-width:700px){
+  body.wvGalleryHome .wvProfileRail{
+    width:100%!important;
+    margin-left:0!important;
+    height:124px!important;
+    padding-left:18px!important;
+    padding-right:18px!important;
+  }
+  body.wvGalleryHome .wvProfileHeader{height:44px}
+  body.wvGalleryHome .wvProfileHeading strong{font-size:17px}
+  body.wvGalleryHome .wvProfileViewport{height:79px}
+}
+@media (max-width:699px){
+  body.wvGalleryHome .wvProfileRail{
+    width:calc(100vw - 32px)!important;
+    margin-left:calc(50% - 50vw + 16px)!important;
+    height:126px!important;
+    padding-left:12px!important;
+    padding-right:12px!important;
+    overflow:hidden!important;
+  }
+}
