@@ -1,4 +1,4 @@
-/* WALLVERSE viewer v2 — mobile swipe + reliable home-gallery navigation */
+/* WALLVERSE viewer v3 — reliable mobile swipe with API-backed catalog */
 (() => {
   const init = () => {
     const viewer = document.querySelector('#viewer');
@@ -14,29 +14,59 @@
       media.appendChild(hint);
     }
 
-    let startX = 0, startY = 0, active = false, moved = false;
-    let lastTap = 0;
+    let startX = 0, startY = 0, active = false, moved = false, lastTap = 0;
+    let remoteItems = [];
+    let loadingItems = null;
+
+    const loadItems = async () => {
+      if (remoteItems.length) return remoteItems;
+      if (!loadingItems) {
+        loadingItems = fetch('/api/wallpapers', { credentials: 'include', cache: 'no-store' })
+          .then(r => r.ok ? r.json() : [])
+          .then(data => { remoteItems = Array.isArray(data) ? data : []; return remoteItems; })
+          .catch(() => [])
+          .finally(() => { loadingItems = null; });
+      }
+      return loadingItems;
+    };
 
     const list = () => {
       if (Array.isArray(window.wallpapers) && window.wallpapers.length) return window.wallpapers;
       if (Array.isArray(window.__wvHomeWallpapers) && window.__wvHomeWallpapers.length) return window.__wvHomeWallpapers;
-      return [];
+      return remoteItems;
     };
-    const currentId = () => window.__wvCurrentWallpaperId || window.current?.id || null;
+
+    const normalize = value => {
+      try { return new URL(String(value || ''), location.href).href; } catch { return String(value || ''); }
+    };
+
+    const currentId = () => {
+      if (window.__wvCurrentWallpaperId) return window.__wvCurrentWallpaperId;
+      const items = list();
+      const src = normalize(image.currentSrc || image.src);
+      const title = document.querySelector('#viewerTitle')?.textContent?.trim() || '';
+      const found = items.find(w => normalize(w?.preview || w?.file) === src || (title && String(w?.title || '').trim() === title));
+      return found?.id || null;
+    };
+
     const currentIndex = () => {
       const items = list();
       const id = currentId();
       return id == null ? -1 : items.findIndex(w => String(w?.id) === String(id));
     };
 
-    const navigate = direction => {
-      const items = list();
+    const navigate = async direction => {
+      let items = list();
+      if (!items.length) items = await loadItems();
       const index = currentIndex();
       if (!items.length || index < 0 || typeof window.openViewer !== 'function') return;
       const next = (index + direction + items.length) % items.length;
       window.__wvCurrentWallpaperId = items[next].id;
       window.openViewer(items[next].id);
     };
+
+    // Prime the catalog while the viewer is open; this does not block opening the image.
+    loadItems();
 
     const resetImage = () => {
       image.style.transition = 'transform .22s cubic-bezier(.2,.8,.2,1),opacity .22s ease';
@@ -48,18 +78,15 @@
     image.addEventListener('touchstart', event => {
       if (event.touches.length !== 1) return;
       const t = event.touches[0];
-      startX = t.clientX;
-      startY = t.clientY;
-      active = true;
-      moved = false;
+      startX = t.clientX; startY = t.clientY;
+      active = true; moved = false;
       viewer.classList.add('isInteracting');
     }, { passive: true });
 
     image.addEventListener('touchmove', event => {
       if (!active || event.touches.length !== 1) return;
       const t = event.touches[0];
-      const dx = t.clientX - startX;
-      const dy = t.clientY - startY;
+      const dx = t.clientX - startX, dy = t.clientY - startY;
       if (Math.abs(dx) > 8 || Math.abs(dy) > 8) moved = true;
       if (Math.abs(dx) > Math.abs(dy)) {
         const clamped = Math.max(-110, Math.min(110, dx));
@@ -73,17 +100,15 @@
     image.addEventListener('touchend', event => {
       if (!active) return;
       const t = event.changedTouches[0];
-      const dx = t.clientX - startX;
-      const dy = t.clientY - startY;
-      active = false;
-      viewer.classList.remove('isInteracting');
+      const dx = t.clientX - startX, dy = t.clientY - startY;
+      active = false; viewer.classList.remove('isInteracting');
       if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy)) {
         const direction = dx < 0 ? 1 : -1;
         image.style.transition = 'transform .14s ease,opacity .14s ease';
         image.style.transform = `translate3d(${direction * -120}px,0,0) rotate(${direction * -2}deg)`;
         image.style.opacity = '.45';
-        setTimeout(() => {
-          navigate(direction);
+        setTimeout(async () => {
+          await navigate(direction);
           image.style.transition = 'none';
           image.style.transform = `translate3d(${direction * 120}px,0,0) rotate(${direction * 2}deg)`;
           image.style.opacity = '.45';
@@ -103,16 +128,13 @@
     }, { passive: true });
 
     image.addEventListener('touchcancel', () => {
-      active = false;
-      viewer.classList.remove('isInteracting');
-      resetImage();
+      active = false; viewer.classList.remove('isInteracting'); resetImage();
     }, { passive: true });
 
     image.addEventListener('click', () => {
       const now = Date.now();
-      if (now - lastTap < 320 && typeof window.toggleFavorite === 'function' && window.__wvCurrentWallpaperId) {
-        window.toggleFavorite(window.__wvCurrentWallpaperId);
-      }
+      const id = currentId();
+      if (now - lastTap < 320 && id && typeof window.toggleFavorite === 'function') window.toggleFavorite(id);
       lastTap = now;
     });
   };
