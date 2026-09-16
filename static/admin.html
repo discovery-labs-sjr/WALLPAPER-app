@@ -26,14 +26,8 @@
       <button type="button" class="cropPreset" data-ratio="free">Libre</button>
     </div>
   </div>
-  <div id="cropStage" class="cropStage">
-    <canvas id="cropCanvas" aria-label="Zone de recadrage"></canvas>
-    <div id="cropBox" class="cropBox"><span></span></div>
-  </div>
-  <div class="editorControls">
-    <label>Zoom<input id="cropZoom" type="range" min="1" max="3" step="0.01" value="1"></label>
-    <div class="cropButtons"><button type="button" id="cropCenter" class="secondary">Recentrer</button><button type="button" id="cropApply" class="secondary">Appliquer le cadrage</button></div>
-  </div>
+  <div id="cropStage" class="cropStage"><canvas id="cropCanvas" aria-label="Zone de recadrage"></canvas><div id="cropBox" class="cropBox"><span></span></div></div>
+  <div class="editorControls"><label>Zoom<input id="cropZoom" type="range" min="1" max="3" step="0.01" value="1"></label><div class="cropButtons"><button type="button" id="cropCenter" class="secondary">Recentrer</button><button type="button" id="cropApply" class="secondary">Appliquer le cadrage</button></div></div>
 </div>
 <div id="resolutionInfo" class="analysis hidden"></div>
 <div id="previewWrap" class="previewWrap hidden"><img id="preview" alt="Prévisualisation"><video id="videoPreview" class="hidden" muted loop autoplay playsinline controls></video></div>
@@ -42,17 +36,16 @@
 <div class="row"><label>Catégorie<select id="category"></select></label><label>Type<select id="type"><option value="static">Standard</option><option value="live">Live</option></select></label></div>
 <label>Tags<input id="tags" maxlength="240" placeholder="Tags proposés automatiquement…"></label>
 <label class="enhanceToggle"><input id="enhance" type="checkbox" checked><span><strong>Préparation WallVerse</strong><small>Corrige l’orientation, optimise la netteté et produit un WEBP haute qualité pour le wallpaper standard.</small></span><b>ON</b></label>
-<div id="enhancement" class="enhancement hidden"></div>
-<div id="analysis" class="analysis hidden"></div>
+<div id="enhancement" class="enhancement hidden"></div><div id="analysis" class="analysis hidden"></div>
 <div class="actionRow"><button id="analyzeBtn" class="secondary" type="button">Analyser & proposer</button><button id="enhanceBtn" class="secondary" type="button">Prévisualiser l’optimisation</button></div>
-<button id="publishBtn" class="primary" type="submit">Publier le wallpaper</button>
-<div id="formStatus" class="status"></div>
+<button id="publishBtn" class="primary" type="submit">Publier le wallpaper</button><div id="formStatus" class="status"></div>
 </form>
 </section>
 <section class="panel catalogPanel"><div class="panelTop"><div><p class="eyebrow">CATALOGUE</p><h2>Mes uploads</h2></div><span id="count" class="count">0</span></div><div class="catalogTools"><input id="catalogSearch" type="search" placeholder="Rechercher…" autocomplete="off"><select id="catalogFilter"><option value="all">Tous les types</option><option value="static">Standard</option><option value="live">Live</option></select></div><div id="catalog" class="catalog"></div></section>
 </div>
 </section>
 </main>
-<script src="/static/admin.js?v=20260917-studio2" defer></script>
+<script src="/static/admin.js?v=20260917-studio3" defer></script>
+<script src="/static/admin-ai-guard.js?v=20260917-ai1" defer></script>
 </body>
 </html>
