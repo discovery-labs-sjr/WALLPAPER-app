@@ -1,4 +1,4 @@
-/* WALLVERSE interface v5 — reliable, visible navigation motion */
+/* WALLVERSE interface v6 — premium navigation motion */
 .navBtn .navIcon{
   display:inline-flex!important;
   align-items:center!important;
@@ -7,6 +7,7 @@
   will-change:transform,filter!important;
   backface-visibility:hidden!important;
   -webkit-backface-visibility:hidden!important;
+  perspective:500px!important;
 }
 .navBtn .navIcon svg{
   display:block!important;
@@ -19,31 +20,30 @@
 }
 .navBtn .navIconGrid svg rect{fill:currentColor!important;stroke:none!important}
 .navBtn .navIconHeart svg path{fill:none!important}
+.navBtn.navPressing .navIcon{transform:scale(.90)!important;transition:transform .10s cubic-bezier(.2,.8,.2,1)!important}
 
-.navBtn.navPressing .navIcon{
-  transform:scale(.90)!important;
-  transition:transform .10s cubic-bezier(.2,.8,.2,1)!important;
-}
+/* Home — one clean 360° turn. */
+.navBtn.navPlay.navHome .navIcon{animation:wvHomeSpinV6 .68s cubic-bezier(.22,.72,.2,1) both!important}
+/* Explore — Play-Store-like magnifier rotation, with a tiny settle. */
+.navBtn.navPlay.navExplore .navIcon{animation:wvExplore360V6 .66s cubic-bezier(.22,.72,.2,1) both!important}
+/* Live — signal/crosshair pulse. */
+.navBtn.navPlay.navLive .navIcon{animation:wvLivePulseV6 .62s cubic-bezier(.22,.82,.22,1) both!important}
+/* Inspiration — the 4 tiles flip as a compact discovery gesture. */
+.navBtn.navPlay.navInspiration .navIcon{animation:wvInspirationFlipV6 .64s cubic-bezier(.22,.72,.2,1) both!important}
+/* Favorites — soft double heartbeat. */
+.navBtn.navPlay.navFavorites .navIcon{animation:wvHeartBeatV6 .68s cubic-bezier(.22,.82,.22,1) both!important}
 
-.navBtn.navPlay.navHome .navIcon{animation:wvHomeSpinV5 .62s cubic-bezier(.22,.72,.2,1) both!important}
-.navBtn.navPlay.navExplore .navIcon{animation:wvExplorePopV5 .46s cubic-bezier(.22,.82,.22,1) both!important}
-.navBtn.navPlay.navLive .navIcon{animation:wvLivePulseV5 .62s cubic-bezier(.22,.82,.22,1) both!important}
-.navBtn.navPlay.navInspiration .navIcon{animation:wvInspirationPopV5 .48s cubic-bezier(.22,.82,.22,1) both!important}
-.navBtn.navPlay.navFavorites .navIcon{animation:wvHeartBounceV5 .52s cubic-bezier(.22,.82,.22,1) both!important}
-
-@keyframes wvHomeSpinV5{0%{transform:rotate(0) scale(1)}45%{transform:rotate(190deg) scale(1.08)}78%{transform:rotate(320deg) scale(1.03)}100%{transform:rotate(360deg) scale(1)}}
-@keyframes wvExplorePopV5{0%,100%{transform:scale(1) rotate(0)}35%{transform:scale(1.16) rotate(-5deg)}65%{transform:scale(.95) rotate(3deg)}}
-@keyframes wvLivePulseV5{0%,100%{transform:scale(1)}28%{transform:scale(1.16)}48%{transform:scale(.94)}68%{transform:scale(1.08)}}
-@keyframes wvInspirationPopV5{0%,100%{transform:scale(1) rotate(0)}38%{transform:scale(1.13) rotate(4deg)}68%{transform:scale(.95) rotate(-2deg)}}
-@keyframes wvHeartBounceV5{0%,100%{transform:scale(1)}24%{transform:scale(1.20)}45%{transform:scale(.91)}67%{transform:scale(1.09)}}
+@keyframes wvHomeSpinV6{0%{transform:rotate(0) scale(1)}42%{transform:rotate(180deg) scale(1.08)}78%{transform:rotate(320deg) scale(1.03)}100%{transform:rotate(360deg) scale(1)}}
+@keyframes wvExplore360V6{0%{transform:rotate(0) scale(1)}34%{transform:rotate(125deg) scale(1.10)}68%{transform:rotate(285deg) scale(1.05)}100%{transform:rotate(360deg) scale(1)}}
+@keyframes wvLivePulseV6{0%,100%{transform:scale(1)}25%{transform:scale(1.16)}45%{transform:scale(.93)}67%{transform:scale(1.08)}}
+@keyframes wvInspirationFlipV6{0%{transform:rotateY(0) scale(1)}38%{transform:rotateY(170deg) scale(1.08)}72%{transform:rotateY(345deg) scale(1.03)}100%{transform:rotateY(360deg) scale(1)}}
+@keyframes wvHeartBeatV6{0%,100%{transform:scale(1)}18%{transform:scale(1.18)}32%{transform:scale(.96)}46%{transform:scale(1.12)}63%{transform:scale(.99)}}
 
 .navBtn.navPlay{user-select:none!important;-webkit-user-select:none!important}
-
 @media(prefers-reduced-motion:reduce){
   .navBtn.navPlay .navIcon{animation:none!important}
   .navBtn.navPressing .navIcon{transition:none!important;transform:none!important}
 }
-
 @media(max-width:700px){
   .categories{top:68px!important}
   .categories .tab{backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important}
