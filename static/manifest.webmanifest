@@ -9,5 +9,5 @@
   "orientation":"portrait-primary",
   "background_color":"#02030a",
   "theme_color":"#040610",
-  "icons":[{"src":"/static/brand/wallverse-app-icon.svg?v=20260913-icon3","sizes":"512x512","type":"image/svg+xml","purpose":"any maskable"}]
+  "icons":[{"src":"/static/brand/wallverse-app-icon.svg?v=20260917-icon4","sizes":"512x512","type":"image/svg+xml","purpose":"any maskable"}]
 }
