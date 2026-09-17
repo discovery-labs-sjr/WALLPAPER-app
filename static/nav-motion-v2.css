@@ -26,3 +26,32 @@
     margin-top:-8px!important;
   }
 }
+
+/* WALLVERSE card micro-interactions — tactile, fast, no layout shift. */
+body.wvGalleryHome .wvCard{
+  transform-origin:center center;
+  transition:transform .22s cubic-bezier(.22,.8,.2,1),box-shadow .22s ease,border-color .22s ease,filter .22s ease;
+  will-change:transform;
+}
+@media (hover:hover){
+  body.wvGalleryHome .wvCard:hover{
+    transform:translateY(-3px) scale(1.012);
+    border-color:rgba(145,170,255,.24);
+    box-shadow:0 18px 42px rgba(0,0,0,.34),0 0 0 1px rgba(120,150,255,.045) inset;
+  }
+  body.wvGalleryHome .wvCard:hover img,
+  body.wvGalleryHome .wvCard:hover .wvMotion{filter:saturate(1.04) brightness(1.035)}
+}
+body.wvGalleryHome .wvCard:active{transform:scale(.965)!important;transition-duration:.08s!important;box-shadow:0 7px 18px rgba(0,0,0,.28)!important}
+body.wvGalleryHome .wvCard:active .wvCardMeta{transform:translateY(1px)}
+body.wvGalleryHome .wvCard .wvCardMeta{transition:transform .18s ease}
+body.wvGalleryHome .wvHeart{
+  transition:transform .16s cubic-bezier(.2,.8,.2,1),background .18s ease,border-color .18s ease,box-shadow .18s ease;
+  transform-origin:center;
+}
+body.wvGalleryHome .wvHeart:active{transform:scale(.78)!important}
+body.wvGalleryHome .wvHeart.liked{background:linear-gradient(145deg,rgba(255,75,216,.24),rgba(100,70,255,.22))!important;border-color:rgba(255,108,221,.4)!important;box-shadow:0 8px 22px rgba(150,70,190,.18)!important;animation:wvCardHeartPop .34s cubic-bezier(.2,.9,.25,1) both}
+@keyframes wvCardHeartPop{0%{transform:scale(.78)}42%{transform:scale(1.22)}70%{transform:scale(.94)}100%{transform:scale(1.05)}}
+@media(prefers-reduced-motion:reduce){
+  body.wvGalleryHome .wvCard,body.wvGalleryHome .wvCard .wvCardMeta,body.wvGalleryHome .wvHeart{transition:none!important;animation:none!important}
+}
