@@ -1,0 +1,60 @@
+name: Build WALLVERSE APK
+
+on:
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: "Public HTTPS URL of the WALLVERSE website"
+        required: true
+        type: string
+        default: "https://YOUR-WALLVERSE-DOMAIN.example"
+
+permissions:
+  contents: write
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android 36 SDK
+        run: sdkmanager "platforms;android-36" "build-tools;35.0.0"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Build debug APK
+        working-directory: android
+        run: gradle :app:assembleDebug --no-daemon -PWALLVERSE_BASE_URL="${{ inputs.base_url }}"
+
+      - name: Prepare APK
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk WALLVERSE.apk
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: WALLVERSE-APK
+          path: WALLVERSE.apk
+
+      - name: Publish downloadable GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="android-v1.0.0-build-${GITHUB_RUN_NUMBER}"
+          gh release create "$TAG" WALLVERSE.apk \
+            --title "WALLVERSE Android $TAG" \
+            --notes "WALLVERSE Android build. Website: ${{ inputs.base_url }}" \
+            --latest=false
