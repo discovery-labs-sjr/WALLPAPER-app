@@ -7,7 +7,7 @@ on:
         description: "Public HTTPS URL of the WALLVERSE website"
         required: true
         type: string
-        default: "https://YOUR-WALLVERSE-DOMAIN.example"
+        default: "https://wallpaper-app-bw12.onrender.com/"
 
 permissions:
   contents: write
