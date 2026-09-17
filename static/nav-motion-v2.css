@@ -1,57 +1,26 @@
-/* WALLVERSE nav motion v2 */
-.navBtn.navPlay.navLive .navIconLive svg{animation:wvLivePulse .62s cubic-bezier(.22,.82,.22,1)!important;transform-origin:50% 50%!important}
-@keyframes wvLivePulse{0%{transform:scale(1)}28%{transform:scale(1.12)}48%{transform:scale(.96)}68%{transform:scale(1.06)}100%{transform:scale(1)}}
+/* WALLVERSE nav motion — single authoritative layer */
+.navBtn .navIcon{display:inline-flex!important;align-items:center!important;justify-content:center!important;transform-origin:50% 50%!important;will-change:transform!important;backface-visibility:hidden!important;-webkit-backface-visibility:hidden!important;perspective:500px!important}
+.navBtn .navIcon svg{display:block!important;fill:none!important;stroke:currentColor!important;stroke-width:1.9!important;stroke-linecap:round!important;stroke-linejoin:round!important;overflow:visible!important}
+.navBtn .navIconGrid svg rect{fill:currentColor!important;stroke:none!important}.navBtn .navIconHeart svg path{fill:none!important}
+.navBtn.navPressing .navIcon{transform:scale(.9)!important;transition:transform .1s cubic-bezier(.2,.8,.2,1)!important}
+.navBtn.navPlay.navHome .navIcon{animation:wvHomeSpin .68s cubic-bezier(.22,.72,.2,1) both!important}
+.navBtn.navPlay.navExplore .navIcon{animation:wvExplore360 .66s cubic-bezier(.22,.72,.2,1) both!important}
+.navBtn.navPlay.navLive .navIcon{animation:wvLivePulse .62s cubic-bezier(.22,.82,.22,1) both!important}
+.navBtn.navPlay.navInspiration .navIcon{animation:wvInspirationFlip .64s cubic-bezier(.22,.72,.2,1) both!important}
+.navBtn.navPlay.navFavorites .navIcon{animation:wvHeartBeat .68s cubic-bezier(.22,.82,.22,1) both!important}
+@keyframes wvHomeSpin{0%{transform:rotate(0) scale(1)}42%{transform:rotate(180deg) scale(1.08)}78%{transform:rotate(320deg) scale(1.03)}100%{transform:rotate(360deg) scale(1)}}
+@keyframes wvExplore360{0%{transform:rotate(0) scale(1)}34%{transform:rotate(125deg) scale(1.1)}68%{transform:rotate(285deg) scale(1.05)}100%{transform:rotate(360deg) scale(1)}}
+@keyframes wvLivePulse{0%,100%{transform:scale(1)}25%{transform:scale(1.16)}45%{transform:scale(.93)}67%{transform:scale(1.08)}}
+@keyframes wvInspirationFlip{0%{transform:rotateY(0) scale(1)}38%{transform:rotateY(170deg) scale(1.08)}72%{transform:rotateY(345deg) scale(1.03)}100%{transform:rotateY(360deg) scale(1)}}
+@keyframes wvHeartBeat{0%,100%{transform:scale(1)}18%{transform:scale(1.18)}32%{transform:scale(.96)}46%{transform:scale(1.12)}63%{transform:scale(.99)}}
+.navBtn.navPlay{user-select:none!important;-webkit-user-select:none!important}
+@media(prefers-reduced-motion:reduce){.navBtn.navPlay .navIcon{animation:none!important}.navBtn.navPressing .navIcon{transition:none!important;transform:none!important}}
 
-/* 4A.1 — move the profile rail higher on mobile. */
-@media (max-width:699px){body.wvGalleryHome .topbar{height:56px!important}body.wvGalleryHome{--wv-header-height:56px}body.wvGalleryHome .wvProfileRail{height:90px!important;padding-top:6px!important;padding-bottom:4px!important;margin-top:-65px!important}body.wvGalleryHome .wvProfileThumb{flex-basis:74px;width:74px;height:80px}}
+/* Mobile layout rules kept here, unrelated to navigation animation. */
+@media(max-width:699px){body.wvGalleryHome .topbar{height:56px!important}body.wvGalleryHome{--wv-header-height:56px}body.wvGalleryHome .wvProfileRail{height:90px!important;padding-top:6px!important;padding-bottom:4px!important;margin-top:-65px!important}body.wvGalleryHome .wvProfileThumb{flex-basis:74px;width:74px;height:80px}body.wvGalleryHome main{overflow:visible!important}body.wvGalleryHome .wvProfileRail,body.wvGalleryHome .categories{position:relative!important;left:50%!important;width:100vw!important;max-width:none!important;margin-left:0!important;margin-right:0!important}.wvProfileRail{transform:translateX(-50%)!important}.categories{transform:translateX(-50%)!important;margin-top:-8px!important}}
 
-/* 4A.6 — force the two horizontal rails to the viewport edges. */
-@media (max-width:699px){
-  body.wvGalleryHome main{overflow:visible!important}
-  body.wvGalleryHome .wvProfileRail,
-  body.wvGalleryHome .categories{
-    position:relative!important;
-    left:50%!important;
-    width:100vw!important;
-    max-width:none!important;
-    margin-left:0!important;
-    margin-right:0!important;
-  }
-  body.wvGalleryHome .wvProfileRail{
-    margin-top:0!important;
-    transform:translateX(-50%)!important;
-  }
-  body.wvGalleryHome .categories{
-    transform:translateX(-50%)!important;
-    margin-top:-8px!important;
-  }
-}
-
-/* WALLVERSE card micro-interactions — tactile, fast, no layout shift. */
-body.wvGalleryHome .wvCard{
-  transform-origin:center center;
-  transition:transform .22s cubic-bezier(.22,.8,.2,1),box-shadow .22s ease,border-color .22s ease,filter .22s ease;
-  will-change:transform;
-}
-@media (hover:hover){
-  body.wvGalleryHome .wvCard:hover{
-    transform:translateY(-3px) scale(1.012);
-    border-color:rgba(145,170,255,.24);
-    box-shadow:0 18px 42px rgba(0,0,0,.34),0 0 0 1px rgba(120,150,255,.045) inset;
-  }
-  body.wvGalleryHome .wvCard:hover img,
-  body.wvGalleryHome .wvCard:hover .wvMotion{filter:saturate(1.04) brightness(1.035)}
-}
-body.wvGalleryHome .wvCard:active{transform:scale(.965)!important;transition-duration:.08s!important;box-shadow:0 7px 18px rgba(0,0,0,.28)!important}
-body.wvGalleryHome .wvCard:active .wvCardMeta{transform:translateY(1px)}
-body.wvGalleryHome .wvCard .wvCardMeta{transition:transform .18s ease}
-body.wvGalleryHome .wvHeart{
-  transition:transform .16s cubic-bezier(.2,.8,.2,1),background .18s ease,border-color .18s ease,box-shadow .18s ease;
-  transform-origin:center;
-}
-body.wvGalleryHome .wvHeart:active{transform:scale(.78)!important}
-body.wvGalleryHome .wvHeart.liked{background:linear-gradient(145deg,rgba(255,75,216,.24),rgba(100,70,255,.22))!important;border-color:rgba(255,108,221,.4)!important;box-shadow:0 8px 22px rgba(150,70,190,.18)!important;animation:wvCardHeartPop .34s cubic-bezier(.2,.9,.25,1) both}
-@keyframes wvCardHeartPop{0%{transform:scale(.78)}42%{transform:scale(1.22)}70%{transform:scale(.94)}100%{transform:scale(1.05)}}
-@media(prefers-reduced-motion:reduce){
-  body.wvGalleryHome .wvCard,body.wvGalleryHome .wvCard .wvCardMeta,body.wvGalleryHome .wvHeart{transition:none!important;animation:none!important}
-}
+/* Wallpaper-card micro-interactions. */
+body.wvGalleryHome .wvCard{transform-origin:center center;transition:transform .22s cubic-bezier(.22,.8,.2,1),box-shadow .22s ease,border-color .22s ease,filter .22s ease;will-change:transform}
+@media(hover:hover){body.wvGalleryHome .wvCard:hover{transform:translateY(-3px) scale(1.012);border-color:rgba(145,170,255,.24);box-shadow:0 18px 42px rgba(0,0,0,.34),0 0 0 1px rgba(120,150,255,.045) inset}body.wvGalleryHome .wvCard:hover img,body.wvGalleryHome .wvCard:hover .wvMotion{filter:saturate(1.04) brightness(1.035)}}
+body.wvGalleryHome .wvCard:active{transform:scale(.965)!important;transition-duration:.08s!important;box-shadow:0 7px 18px rgba(0,0,0,.28)!important}.wvCard .wvCardMeta{transition:transform .18s ease}.wvHeart{transition:transform .16s cubic-bezier(.2,.8,.2,1),background .18s ease,border-color .18s ease,box-shadow .18s ease;transform-origin:center}.wvHeart:active{transform:scale(.78)!important}.wvHeart.liked{background:linear-gradient(145deg,rgba(255,75,216,.24),rgba(100,70,255,.22))!important;border-color:rgba(255,108,221,.4)!important;box-shadow:0 8px 22px rgba(150,70,190,.18)!important;animation:wvCardHeartPop .34s cubic-bezier(.2,.9,.25,1) both}@keyframes wvCardHeartPop{0%{transform:scale(.78)}42%{transform:scale(1.22)}70%{transform:scale(.94)}100%{transform:scale(1.05)}}
+@media(prefers-reduced-motion:reduce){body.wvGalleryHome .wvCard,body.wvGalleryHome .wvCard .wvCardMeta,body.wvGalleryHome .wvHeart{transition:none!important;animation:none!important}}
