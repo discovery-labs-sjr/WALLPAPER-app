@@ -1,22 +1,45 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
 <title id="title">WALLVERSE</title>
-<desc id="desc">Minimal premium WALLVERSE icon: luminous W ribbon, glass depth and small diamond star.</desc>
+<desc id="desc">Cyber Premium WALLVERSE app icon with a crystalline W, cyan and magenta accents, and a diamond star.</desc>
 <defs>
-  <linearGradient id="bg" x1="70" y1="40" x2="450" y2="480" gradientUnits="userSpaceOnUse"><stop stop-color="#09051A"/><stop offset=".5" stop-color="#101331"/><stop offset="1" stop-color="#030817"/></linearGradient>
-  <linearGradient id="w" x1="116" y1="145" x2="407" y2="370" gradientUnits="userSpaceOnUse"><stop stop-color="#FF55E6"/><stop offset=".34" stop-color="#A34BFF"/><stop offset=".68" stop-color="#477CFF"/><stop offset="1" stop-color="#32E7FF"/></linearGradient>
-  <linearGradient id="shine" x1="90" y1="60" x2="420" y2="440" gradientUnits="userSpaceOnUse"><stop stop-color="#FFF" stop-opacity=".25"/><stop offset=".42" stop-color="#FFF" stop-opacity="0"/><stop offset="1" stop-color="#7CEBFF" stop-opacity=".05"/></linearGradient>
-  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-  <filter id="soft" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <linearGradient id="bg" x1="64" y1="64" x2="448" y2="448" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#080A16"/><stop offset=".5" stop-color="#03040B"/><stop offset="1" stop-color="#090411"/>
+  </linearGradient>
+  <linearGradient id="rim" x1="48" y1="256" x2="464" y2="256" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#00E5FF"/><stop offset=".5" stop-color="#4D7CFF"/><stop offset="1" stop-color="#B026FF"/>
+  </linearGradient>
+  <linearGradient id="w" x1="116" y1="180" x2="396" y2="360" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#F7FBFF"/><stop offset=".28" stop-color="#DDE8F5"/><stop offset=".58" stop-color="#FFFFFF"/><stop offset=".82" stop-color="#DCE2F4"/><stop offset="1" stop-color="#FFFFFF"/>
+  </linearGradient>
+  <linearGradient id="edge" x1="104" y1="210" x2="408" y2="330" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#00E5FF"/><stop offset=".5" stop-color="#6B7CFF"/><stop offset="1" stop-color="#FF2BD6"/>
+  </linearGradient>
+  <linearGradient id="star" x1="224" y1="118" x2="288" y2="182" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#FF4FE3"/><stop offset=".5" stop-color="#A86BFF"/><stop offset="1" stop-color="#00E5FF"/>
+  </linearGradient>
+  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter>
 </defs>
-<rect x="12" y="12" width="488" height="488" rx="116" fill="url(#bg)"/>
-<rect x="17" y="17" width="478" height="478" rx="111" fill="none" stroke="url(#w)" stroke-width="3" opacity=".7" filter="url(#soft)"/>
-<ellipse cx="256" cy="272" rx="190" ry="145" fill="#5C62FF" opacity=".08" filter="url(#glow)"/>
-<!-- compact continuous W -->
-<path d="M116 180 C143 131 181 132 202 176 L246 300 C253 320 271 323 281 302 L300 260 C306 247 320 247 326 260 L345 302 C355 323 373 320 380 300 L424 176 C445 132 483 131 510 180" fill="none" stroke="#030611" stroke-width="67" stroke-linecap="round" stroke-linejoin="round" transform="translate(-9 0)"/>
-<path d="M116 180 C143 131 181 132 202 176 L246 300 C253 320 271 323 281 302 L300 260 C306 247 320 247 326 260 L345 302 C355 323 373 320 380 300 L424 176 C445 132 483 131 510 180" fill="none" stroke="url(#w)" stroke-width="49" stroke-linecap="round" stroke-linejoin="round" transform="translate(-9 0)" filter="url(#glow)"/>
-<path d="M113 170 C139 132 178 134 198 173 L241 296" fill="none" stroke="#FFF" stroke-width="4.5" opacity=".48" stroke-linecap="round"/>
-<path d="M331 296 L374 173 C394 134 433 132 459 170" fill="none" stroke="#FFF" stroke-width="3.5" opacity=".32" stroke-linecap="round"/>
-<!-- tiny signature diamond-star -->
-<g transform="translate(405 119)" filter="url(#soft)"><path d="M0-27 C4-12 12-4 27 0 C12 4 4 12 0 27 C-4 12-12 4-27 0 C-12-4-4-12 0-27Z" fill="url(#w)"/><circle r="3.1" fill="#FFF"/></g>
-<rect x="12" y="12" width="488" height="488" rx="116" fill="url(#shine)"/>
+<rect width="512" height="512" rx="112" fill="url(#bg)"/>
+<rect x="14" y="14" width="484" height="484" rx="102" fill="none" stroke="url(#rim)" stroke-width="7" opacity=".95" filter="url(#soft)"/>
+<rect x="18" y="18" width="476" height="476" rx="98" fill="none" stroke="url(#rim)" stroke-width="2.5" opacity=".9"/>
+<!-- cyan/magenta energy edge -->
+<path d="M111 161 L193 349 L256 270 L319 349 L401 161" fill="none" stroke="url(#edge)" stroke-width="76" stroke-linecap="round" stroke-linejoin="round" opacity=".8" filter="url(#glow)"/>
+<!-- crystalline W -->
+<path d="M111 161 L193 349 L256 270 L319 349 L401 161" fill="none" stroke="url(#w)" stroke-width="58" stroke-linecap="round" stroke-linejoin="round"/>
+<!-- geometric facet cuts -->
+<path d="M111 161 L193 349 L226 307 L147 181 Z" fill="#BFEFFF" opacity=".38"/>
+<path d="M401 161 L319 349 L286 307 L365 181 Z" fill="#E9D8FF" opacity=".42"/>
+<path d="M193 349 L256 270 L319 349 L288 312 L256 351 L224 312 Z" fill="#8CA6FF" opacity=".28"/>
+<path d="M125 157 L193 322" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity=".7"/>
+<path d="M387 157 L319 322" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity=".45"/>
+<!-- centered diamond star -->
+<g transform="translate(256 119)" filter="url(#glow)">
+  <path d="M0-38 C6-17 17-6 38 0 C17 6 6 17 0 38 C-6 17-17 6-38 0 C-17-6-6-17 0-38Z" fill="url(#star)"/>
+  <path d="M0-28 L0 28 M-28 0 L28 0" stroke="#FFFFFF" stroke-width="2.5" opacity=".75"/>
+  <circle r="4" fill="#FFFFFF"/>
+</g>
+<ellipse cx="256" cy="405" rx="118" ry="12" fill="#00E5FF" opacity=".14" filter="url(#glow)"/>
 </svg>
