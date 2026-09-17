@@ -19,7 +19,7 @@
     banner.className = 'wvInstallBanner';
     banner.setAttribute('aria-label', 'Installer WALLVERSE');
     banner.innerHTML = `
-      <div class="wvInstallIcon"><img src="/static/brand/wallverse-app-icon.svg?v=20260913-icon3" alt=""></div>
+      <div class="wvInstallIcon"><img src="/static/brand/wallverse-app-icon.svg?v=20260917-icon4" alt=""></div>
       <div class="wvInstallCopy"><strong>WALLVERSE sur ton téléphone</strong><span>Installe l'application Android gratuitement.</span></div>
       <button class="wvInstallButton" type="button">Installer</button>
       <button class="wvInstallClose" type="button" aria-label="Fermer">×</button>
