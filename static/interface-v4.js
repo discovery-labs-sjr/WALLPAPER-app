@@ -1,4 +1,4 @@
-/* WALLVERSE interface v5 — navigation interactions */
+/* WALLVERSE navigation interactions — one reliable click path */
 (() => {
   const NAV_CLASSES = ['navPlay','navHome','navExplore','navLive','navInspiration','navFavorites'];
   let bound = false;
@@ -20,10 +20,9 @@
     const tab = String(button.dataset.tab || '');
     const motion = `nav${tab.charAt(0).toUpperCase()}${tab.slice(1)}`;
     if (!NAV_CLASSES.includes(motion)) return;
-    // Removing then forcing layout guarantees a fresh animation on repeated taps.
     void button.offsetWidth;
     button.classList.add('navPlay', motion);
-    window.setTimeout(() => button.classList.remove(...NAV_CLASSES), 760);
+    window.setTimeout(() => button.classList.remove(...NAV_CLASSES), 800);
   }
 
   function bind(){
@@ -34,19 +33,19 @@
     observer.observe(document.body, {subtree:true, childList:true, characterData:true});
 
     document.addEventListener('pointerdown', event => {
-      const button = event.target.closest('.navBtn');
+      const button = event.target.closest?.('.navBtn');
       if (button) button.classList.add('navPressing');
     }, {passive:true});
 
-    document.addEventListener('pointerup', event => {
-      const button = event.target.closest('.navBtn');
+    document.addEventListener('click', event => {
+      const button = event.target.closest?.('.navBtn');
       if (!button) return;
       button.classList.remove('navPressing');
       play(button);
-    }, {passive:true});
+    });
 
     document.addEventListener('pointercancel', event => {
-      const button = event.target.closest('.navBtn');
+      const button = event.target.closest?.('.navBtn');
       if (button) button.classList.remove('navPressing');
     }, {passive:true});
 
