@@ -57,4 +57,4 @@ jobs:
           gh release create "$TAG" WALLVERSE.apk \
             --title "WALLVERSE Android $TAG" \
             --notes "WALLVERSE Android build. Website: ${{ inputs.base_url }}" \
-            --latest=false
+            --latest
