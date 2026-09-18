@@ -1,4 +1,5 @@
 name: Build WALLVERSE APK
+# AndroidX is enabled in android/gradle.properties
 
 on:
   push:
