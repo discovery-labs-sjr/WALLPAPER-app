@@ -1,6 +1,11 @@
 name: Build WALLVERSE APK
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "android/**"
+      - ".github/workflows/build-wallverse-apk.yml"
   workflow_dispatch:
     inputs:
       base_url:
@@ -29,16 +34,31 @@ jobs:
         uses: android-actions/setup-android@v3
 
       - name: Install Android 36 SDK
-        run: sdkmanager "platforms;android-36" "build-tools;35.0.0"
+        run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
 
+      - name: Select WALLVERSE base URL
+        id: config
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            BASE_URL="${{ inputs.base_url }}"
+          else
+            BASE_URL="https://wallpaper-app-bw12.onrender.com/"
+          fi
+          if [[ ! "$BASE_URL" =~ ^https:// ]]; then
+            echo "WALLVERSE_BASE_URL must use HTTPS."
+            exit 1
+          fi
+          echo "base_url=$BASE_URL" >> "$GITHUB_OUTPUT"
+
       - name: Build debug APK
         working-directory: android
-        run: gradle :app:assembleDebug --no-daemon -PWALLVERSE_BASE_URL="${{ inputs.base_url }}"
+        run: gradle :app:assembleDebug --no-daemon -PWALLVERSE_BASE_URL="${{ steps.config.outputs.base_url }}"
 
       - name: Prepare APK
         run: cp android/app/build/outputs/apk/debug/app-debug.apk WALLVERSE.apk
@@ -54,7 +74,4 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           TAG="android-v1.0.0-build-${GITHUB_RUN_NUMBER}"
-          gh release create "$TAG" WALLVERSE.apk \
-            --title "WALLVERSE Android $TAG" \
-            --notes "WALLVERSE Android build. Website: ${{ inputs.base_url }}" \
-            --latest
+          gh release create "$TAG" WALLVERSE.apk             --title "WALLVERSE Android $TAG"             --notes "WALLVERSE Android build. Website: ${{ steps.config.outputs.base_url }}"             --latest
