@@ -16,7 +16,7 @@
         <div>
           <p class="batchEyebrow">PUBLICATION RAPIDE</p>
           <h2>Publier plusieurs contenus</h2>
-          <p>Ajoute jusqu’à 20 images. WALLVERSE propose automatiquement un titre et des tags pour chaque image avant son enregistrement.</p>
+          <p>Ajoute jusqu’à 20 images. WALLVERSE prépare automatiquement les tags et la catégorie, sans te demander de nommer chaque image.</p>
         </div>
         <span class="batchBadge">LOT · RAPIDE</span>
       </div>
@@ -43,7 +43,7 @@
       <label class="batchPicker">
         <input id="batchFiles" type="file" accept="image/jpeg,image/png,image/webp" multiple>
         <strong>＋ Sélectionner les images</strong>
-        <small>Tu peux choisir 1, 5 ou 10 images à la fois. Les noms et tags seront proposés automatiquement.</small>
+        <small>Choisis 1, 5 ou 10 images à la fois. Les informations sont préparées automatiquement.</small>
       </label>
       <div id="batchQueue" class="batchQueue" aria-live="polite"></div>
       <div class="batchActions">
@@ -93,13 +93,13 @@
     if (!queue || !button || !progress) return;
     queue.innerHTML = state.files.map((file, index) => {
       const url = URL.createObjectURL(file);
-      return `<article class="batchFile"><img src="${url}" alt=""><div><strong>${escape(file.name)}</strong><small>${(file.size / 1048576).toFixed(1)} Mo</small></div><button class="batchRemove" type="button" data-index="${index}" aria-label="Retirer">×</button></article>`;
+      return `<article class="batchFile"><img src="${url}" alt=""><div><strong>Image ${index + 1}</strong><small>${(file.size / 1048576).toFixed(1)} Mo</small></div><button class="batchRemove" type="button" data-index="${index}" aria-label="Retirer">×</button></article>`;
     }).join('');
     $$('.batchRemove', queue).forEach(button => button.addEventListener('click', () => {
       state.files.splice(Number(button.dataset.index), 1);
       renderQueue();
     }));
-    progress.textContent = state.files.length ? `${state.files.length} fichier(s) prêt(s) à publier.` : 'Aucun fichier sélectionné.';
+    progress.textContent = state.files.length ? `${state.files.length} image(s) prête(s) à publier.` : 'Aucun fichier sélectionné.';
     button.disabled = !state.files.length || state.publishing;
   }
 
@@ -118,7 +118,7 @@
     const progress = $('#batchProgress');
     button.disabled = true;
     button.textContent = 'Publication…';
-    notice('WALLVERSE prépare et enregistre les fichiers. Ne ferme pas cette page.');
+    notice('WALLVERSE prépare et enregistre les images. Ne ferme pas cette page.');
     const form = new FormData();
     state.files.forEach(file => form.append('files', file, file.name));
     form.append('content_kind', $('#batchKind').value);
@@ -129,7 +129,7 @@
       const result = await api('/api/admin/wallpapers/batch-upload', {method: 'POST', body: form});
       const message = `${result.published || 0} publié(s) · ${result.failed || 0} échec(s).`;
       progress.textContent = message;
-      notice(message + (result.failed ? ' Vérifie les fichiers signalés dans la réponse du serveur.' : ' Tous les fichiers ont été enregistrés.'), Boolean(result.failed));
+      notice(message + (result.failed ? ' Vérifie les fichiers signalés dans la réponse du serveur.' : ' Toutes les images ont été enregistrées.'), Boolean(result.failed));
       if (!result.failed) state.files = [];
       renderQueue();
       if (typeof loadCatalog === 'function') await loadCatalog();
