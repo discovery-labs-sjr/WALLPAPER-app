@@ -17,7 +17,7 @@ from fastapi.responses import FileResponse, HTMLResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, EmailStr, Field
 from pwdlib import PasswordHash
-from sqlalchemy import Boolean, DateTime, ForeignKey, String, UniqueConstraint, create_engine, func, select
+from sqlalchemy import Boolean, DateTime, ForeignKey, String, UniqueConstraint, create_engine, func, select, text
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column, relationship, sessionmaker
 
 BASE = Path(__file__).resolve().parent
@@ -142,7 +142,10 @@ def home(): return (BASE/'static/index.html').read_text(encoding='utf-8')
 def health():
     with SessionLocal() as db:
         db.execute(select(1))
-        asset_count = int(db.scalar(select(func.count()).select_from(WallpaperAsset)) or 0) if 'WallpaperAsset' in globals() else None
+        try:
+            asset_count = int(db.scalar(text('SELECT COUNT(*) FROM wallpaper_assets')) or 0)
+        except Exception:
+            asset_count = None
     return {
         'status': 'ok',
         'wallpapers': len(WALLPAPERS),
