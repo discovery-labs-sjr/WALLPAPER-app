@@ -10,11 +10,11 @@
 <body>
 <main class="studio">
 <header class="studioHead"><a href="/" class="wordmark">WALLVERSE</a><span class="pill">STUDIO CRÉATEUR</span></header>
-<section id="gate" class="panel gate"><h1>Studio créateur</h1><p>Importe un wallpaper, recadre-le, prépare sa version téléphone et laisse WALLVERSE proposer le titre, les tags et la catégorie avant publication.</p><div id="gateMessage" class="status"></div></section>
+<section id="gate" class="panel gate"><h1>Studio créateur</h1><p>Importe un wallpaper, recadre-le, prépare sa version téléphone et laisse WALLVERSE proposer les tags et la catégorie avant publication.</p><div id="gateMessage" class="status"></div></section>
 <section id="studio" class="hidden">
 <div class="grid">
 <section class="panel uploadPanel">
-<div class="panelTop"><div><p class="eyebrow">NOUVEAU WALLPAPER</p><h2>Publier un fond</h2></div></div>
+<div class="panelTop"><div><p class="eyebrow">NOUVEAU CONTENU</p><h2>Publier un fond</h2></div></div>
 <form id="uploadForm">
 <label class="drop"><input id="image" type="file" accept="image/jpeg,image/png,image/webp,video/mp4,video/webm,video/quicktime"><span id="dropText">Choisir une image ou un Live</span><small>Image : JPG, PNG ou WEBP · Live : MP4, WebM ou MOV · max. 30 Mo</small></label>
 <div id="editorPanel" class="editorPanel hidden">
@@ -32,8 +32,8 @@
 </div>
 <div id="resolutionInfo" class="analysis hidden"></div>
 <div id="previewWrap" class="previewWrap hidden"><img id="preview" alt="Prévisualisation"><video id="videoPreview" class="hidden" muted loop autoplay playsinline controls></video></div>
-<label>Titre<input id="title" maxlength="180" placeholder="Titre proposé automatiquement…" required></label>
-<div class="aiHint"><span aria-hidden="true">✦</span><p id="aiHintText">Le titre, les tags et la catégorie pourront être proposés automatiquement après analyse.</p></div>
+<input id="title" type="hidden" value="WALLVERSE">
+<div class="aiHint"><span aria-hidden="true">✦</span><p id="aiHintText">Les tags et la catégorie pourront être proposés automatiquement après analyse.</p></div>
 <div class="row"><label>Catégorie<select id="category"></select></label><label>Type<select id="type"><option value="static">Standard</option><option value="live">Live</option></select></label></div>
 <label>Tags<input id="tags" maxlength="240" placeholder="Tags proposés automatiquement…"></label>
 <label class="enhanceToggle"><input id="enhance" type="checkbox" checked><span><strong>Préparation WallVerse</strong><small>Corrige l’orientation, optimise la netteté et produit un WEBP haute qualité pour le wallpaper standard.</small></span><b>ON</b></label>
@@ -42,12 +42,12 @@
 <button id="publishBtn" class="primary" type="submit">Publier le wallpaper</button><div id="formStatus" class="status"></div>
 </form>
 </section>
-<section class="panel catalogPanel"><div class="panelTop"><div><p class="eyebrow">CATALOGUE</p><h2>Mes uploads</h2></div><span id="count" class="count">0</span></div><div class="catalogTools"><input id="catalogSearch" type="search" placeholder="Rechercher…" autocomplete="off"><select id="catalogFilter"><option value="all">Tous les types</option><option value="static">Standard</option><option value="live">Live</option></select></div><div id="catalog" class="catalog"></div></section>
+<section class="panel catalogPanel"><div class="panelTop"><div><p class="eyebrow">CATALOGUE</p><h2>Mes uploads</h2></div><span id="count" class="count">0</span></div><div class="catalogTools"><input id="catalogSearch" type="search" placeholder="Rechercher par catégorie ou tag…" autocomplete="off"><select id="catalogFilter"><option value="all">Tous les types</option><option value="static">Standard</option><option value="live">Live</option></select></div><div id="catalog" class="catalog"></div></section>
 </div>
 </section>
 </main>
-<script src="/static/admin.js?v=20260917-studio3" defer></script>
-<script src="/static/studio-batch-v1.js?v=20260920-batch1" defer></script>
+<script src="/static/admin.js?v=20260920-studio4" defer></script>
+<script src="/static/studio-batch-v1.js?v=20260920-batch2" defer></script>
 <script src="/static/admin-ai-guard.js?v=20260917-ai1" defer></script>
 </body>
 </html>
