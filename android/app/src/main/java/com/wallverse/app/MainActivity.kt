@@ -1,54 +1,96 @@
 package com.wallverse.app
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import android.net.Uri
+import android.graphics.Color
 import android.os.Bundle
-import android.webkit.DownloadListener
+import android.view.Gravity
 import android.webkit.WebChromeClient
+import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var webView: WebView
+    private var webView: WebView? = null
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        webView = WebView(this).apply {
-            settings.javaScriptEnabled = true
-            settings.domStorageEnabled = true
-            settings.databaseEnabled = true
-            settings.mediaPlaybackRequiresUserGesture = false
-            settings.allowFileAccess = false
-            settings.allowContentAccess = true
-            settings.setSupportZoom(false)
-            webViewClient = object : WebViewClient() {
-                override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
-                    val url = request.url.toString()
-                    return if (url.startsWith("https://") || url.startsWith("http://")) {
-                        false
-                    } else {
-                        startActivity(Intent(Intent.ACTION_VIEW, request.url))
-                        true
+        try {
+            val view = WebView(applicationContext)
+            webView = view
+
+            view.settings.apply {
+                javaScriptEnabled = true
+                domStorageEnabled = true
+                databaseEnabled = true
+                mediaPlaybackRequiresUserGesture = false
+                allowFileAccess = false
+                allowContentAccess = true
+                setSupportZoom(false)
+            }
+
+            view.webViewClient = object : WebViewClient() {
+                override fun onReceivedError(
+                    view: WebView,
+                    request: WebResourceRequest,
+                    error: WebResourceError
+                ) {
+                    if (request.isForMainFrame) {
+                        showConnectionError()
                     }
                 }
             }
-            webChromeClient = WebChromeClient()
-            setDownloadListener(DownloadListener { url, _, _, _, _ ->
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-            })
-        }
+            view.webChromeClient = WebChromeClient()
 
-        setContentView(webView)
-        webView.loadUrl(BuildConfig.WALLVERSE_BASE_URL)
+            setContentView(view)
+            view.loadUrl(BuildConfig.WALLVERSE_BASE_URL)
+        } catch (error: Throwable) {
+            showStartupError()
+        }
+    }
+
+    private fun showConnectionError() {
+        val message = TextView(this).apply {
+            text = "WALLVERSE\n\nImpossible de charger le serveur pour le moment.\nVérifie ta connexion Internet puis réessaie."
+            setTextColor(Color.WHITE)
+            setBackgroundColor(Color.rgb(2, 3, 10))
+            textSize = 17f
+            gravity = Gravity.CENTER
+            setPadding(48, 48, 48, 48)
+        }
+        setContentView(message)
+    }
+
+    private fun showStartupError() {
+        val message = TextView(this).apply {
+            text = "WALLVERSE\n\nL'application n'a pas pu démarrer correctement.\nFerme puis relance l'application."
+            setTextColor(Color.WHITE)
+            setBackgroundColor(Color.rgb(2, 3, 10))
+            textSize = 17f
+            gravity = Gravity.CENTER
+            setPadding(48, 48, 48, 48)
+        }
+        setContentView(message)
+    }
+
+    override fun onDestroy() {
+        webView?.apply {
+            stopLoading()
+            webChromeClient = null
+            webViewClient = null
+            destroy()
+        }
+        webView = null
+        super.onDestroy()
     }
 
     @Deprecated("Deprecated in Android API; retained for WebView back navigation")
     override fun onBackPressed() {
-        if (webView.canGoBack()) webView.goBack() else super.onBackPressed()
+        val view = webView
+        if (view?.canGoBack() == true) view.goBack() else super.onBackPressed()
     }
 }
