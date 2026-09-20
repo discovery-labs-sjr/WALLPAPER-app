@@ -28,10 +28,21 @@ ACCESS_MINUTES = int(os.getenv("ACCESS_TOKEN_MINUTES", "15"))
 REFRESH_DAYS = int(os.getenv("REFRESH_TOKEN_DAYS", "30"))
 COOKIE_SECURE = os.getenv("COOKIE_SECURE", "false").lower() == "true"
 COOKIE_DOMAIN = os.getenv("COOKIE_DOMAIN") or None
-raw_db_url = os.getenv("DATABASE_URL", f"sqlite:///{BASE / 'wallverse.db'}")
-if raw_db_url.startswith("postgres://"): raw_db_url = "postgresql+psycopg://" + raw_db_url[len("postgres://"):]
-elif raw_db_url.startswith("postgresql://"): raw_db_url = "postgresql+psycopg://" + raw_db_url[len("postgresql://"):]
-connect_args = {"check_same_thread": False} if raw_db_url.startswith("sqlite") else {}
+
+# Production persistence is PostgreSQL. SQLite remains available only as a local-dev fallback.
+# Render PostgreSQL requires TLS; add sslmode=require when the supplied URL does not already
+# declare an SSL mode. Never log or expose the connection string itself.
+raw_db_url = os.getenv("DATABASE_URL", f"sqlite:///{BASE / 'wallverse.db'}").strip()
+if raw_db_url.startswith("postgres://"):
+    raw_db_url = "postgresql+psycopg://" + raw_db_url[len("postgres://"):]
+elif raw_db_url.startswith("postgresql://"):
+    raw_db_url = "postgresql+psycopg://" + raw_db_url[len("postgresql://"):]
+if raw_db_url.startswith("postgresql+psycopg://") and "sslmode=" not in raw_db_url:
+    raw_db_url += ("&" if "?" in raw_db_url else "?") + "sslmode=require"
+
+DATABASE_BACKEND = "postgresql" if raw_db_url.startswith("postgresql+psycopg://") else "sqlite"
+DATABASE_PERSISTENT = DATABASE_BACKEND == "postgresql"
+connect_args = {"check_same_thread": False} if DATABASE_BACKEND == "sqlite" else {}
 engine = create_engine(raw_db_url, connect_args=connect_args, pool_pre_ping=True)
 SessionLocal = sessionmaker(bind=engine, autoflush=False, expire_on_commit=False)
 password_hash = PasswordHash.recommended()
@@ -129,8 +140,17 @@ async def shutdown():
 def home(): return (BASE/'static/index.html').read_text(encoding='utf-8')
 @app.get('/health')
 def health():
-    with SessionLocal() as db: db.execute(select(1))
-    return {'status':'ok','wallpapers':len(WALLPAPERS),'database':'ok'}
+    with SessionLocal() as db:
+        db.execute(select(1))
+        asset_count = int(db.scalar(select(func.count()).select_from(WallpaperAsset)) or 0) if 'WallpaperAsset' in globals() else None
+    return {
+        'status': 'ok',
+        'wallpapers': len(WALLPAPERS),
+        'database': 'ok',
+        'database_backend': DATABASE_BACKEND,
+        'persistent_storage': DATABASE_PERSISTENT,
+        'stored_creator_assets': asset_count,
+    }
 @app.get('/api/wallpapers')
 def get_wallpapers(): return public_wallpapers()
 @app.get('/api/wallpapers/{wallpaper_id}')
