@@ -39,3 +39,10 @@
   #viewer.viewerEnhanced:not(.hidden) .viewerCopy h2{font-size:1.48rem!important}
 }
 @media(prefers-reduced-motion:reduce){#viewer.viewerEnhanced:not(.hidden) #viewerImg,#viewer.viewerEnhanced:not(.hidden) .roundBtn,#viewer.viewerEnhanced:not(.hidden) .downloadBtn{transition:none!important}}
+
+/* Metadata is intentionally hidden: the wallpaper remains the focus. */
+#viewer.viewerEnhanced:not(.hidden) .viewerCopy,
+#viewer.viewerEnhanced:not(.hidden) #viewerCategory,
+#viewer.viewerEnhanced:not(.hidden) #viewerTitle,
+#viewer.viewerEnhanced:not(.hidden) #viewerTags{display:none!important}
+#viewer.viewerEnhanced:not(.hidden) .viewerInfo{justify-content:flex-end!important}
