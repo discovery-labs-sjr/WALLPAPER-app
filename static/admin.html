@@ -17,38 +17,17 @@
 <div class="panelTop"><div><p class="eyebrow">NOUVEAU CONTENU</p><h2>Publier un fond</h2></div></div>
 <form id="uploadForm">
 <label class="drop"><input id="image" type="file" accept="image/jpeg,image/png,image/webp,video/mp4,video/webm,video/quicktime"><span id="dropText">Choisir une image ou un Live</span><small>Image : JPG, PNG ou WEBP · Live : MP4, WebM ou MOV · max. 30 Mo</small></label>
-<div id="editorPanel" class="editorPanel hidden">
-  <div class="editorToolbar">
-    <div><strong>Éditeur</strong><small>Cadre de sortie téléphone</small></div>
-    <div class="editorPresets" role="group" aria-label="Format de recadrage">
-      <button type="button" class="cropPreset active" data-ratio="0.461538">9:19.5</button>
-      <button type="button" class="cropPreset" data-ratio="0.5625">9:16</button>
-      <button type="button" class="cropPreset" data-ratio="1">1:1</button>
-      <button type="button" class="cropPreset" data-ratio="free">Libre</button>
-    </div>
-  </div>
-  <div id="cropStage" class="cropStage"><canvas id="cropCanvas" aria-label="Zone de recadrage"></canvas><div id="cropBox" class="cropBox"><span></span></div></div>
-  <div class="editorControls"><label>Zoom<input id="cropZoom" type="range" min="1" max="3" step="0.01" value="1"></label><div class="cropButtons"><button type="button" id="cropCenter" class="secondary">Recentrer</button><button type="button" id="cropApply" class="secondary">Appliquer le cadrage</button></div></div>
-</div>
-<div id="resolutionInfo" class="analysis hidden"></div>
-<div id="previewWrap" class="previewWrap hidden"><img id="preview" alt="Prévisualisation"><video id="videoPreview" class="hidden" muted loop autoplay playsinline controls></video></div>
-<input id="title" type="hidden" value="WALLVERSE">
-<div class="aiHint"><span aria-hidden="true">✦</span><p id="aiHintText">Les tags et la catégorie pourront être proposés automatiquement après analyse.</p></div>
-<div class="row"><label>Catégorie<select id="category"></select></label><label>Type<select id="type"><option value="static">Standard</option><option value="live">Live</option></select></label></div>
-<label>Tags<input id="tags" maxlength="240" placeholder="Tags proposés automatiquement…"></label>
-<label class="enhanceToggle"><input id="enhance" type="checkbox" checked><span><strong>Préparation WallVerse</strong><small>Corrige l’orientation, optimise la netteté et produit un WEBP haute qualité pour le wallpaper standard.</small></span><b>ON</b></label>
-<div id="enhancement" class="enhancement hidden"></div><div id="analysis" class="analysis hidden"></div>
-<div class="actionRow"><button id="analyzeBtn" class="secondary" type="button">Analyser & proposer</button><button id="enhanceBtn" class="secondary" type="button">Prévisualiser l’optimisation</button></div>
-<button id="publishBtn" class="primary" type="submit">Publier le wallpaper</button><div id="formStatus" class="status"></div>
-</form>
-</section>
+<div id="editorPanel" class="editorPanel hidden"><div class="editorToolbar"><div><strong>Éditeur</strong><small>Cadre de sortie téléphone</small></div><div class="editorPresets" role="group" aria-label="Format de recadrage"><button type="button" class="cropPreset active" data-ratio="0.461538">9:19.5</button><button type="button" class="cropPreset" data-ratio="0.5625">9:16</button><button type="button" class="cropPreset" data-ratio="1">1:1</button><button type="button" class="cropPreset" data-ratio="free">Libre</button></div></div><div id="cropStage" class="cropStage"><canvas id="cropCanvas" aria-label="Zone de recadrage"></canvas><div id="cropBox" class="cropBox"><span></span></div></div><div class="editorControls"><label>Zoom<input id="cropZoom" type="range" min="1" max="3" step="0.01" value="1"></label><div class="cropButtons"><button type="button" id="cropCenter" class="secondary">Recentrer</button><button type="button" id="cropApply" class="secondary">Appliquer le cadrage</button></div></div></div>
+<div id="resolutionInfo" class="analysis hidden"></div><div id="previewWrap" class="previewWrap hidden"><img id="preview" alt="Prévisualisation"><video id="videoPreview" class="hidden" muted loop autoplay playsinline controls></video></div>
+<input id="title" type="hidden" value="WALLVERSE"><div class="aiHint"><span aria-hidden="true">✦</span><p id="aiHintText">Les tags et la catégorie pourront être proposés automatiquement après analyse.</p></div>
+<div class="row"><label>Catégorie<select id="category"></select></label><label>Type<select id="type"><option value="static">Standard</option><option value="live">Live</option></select></label></div><label>Tags<input id="tags" maxlength="240" placeholder="Tags proposés automatiquement…"></label><label class="enhanceToggle"><input id="enhance" type="checkbox" checked><span><strong>Préparation WallVerse</strong><small>Corrige l’orientation, optimise la netteté et produit un WEBP haute qualité pour le wallpaper standard.</small></span><b>ON</b></label>
+<div id="enhancement" class="enhancement hidden"></div><div id="analysis" class="analysis hidden"></div><div class="actionRow"><button id="analyzeBtn" class="secondary" type="button">Analyser & proposer</button><button id="enhanceBtn" class="secondary" type="button">Prévisualiser l’optimisation</button></div><button id="publishBtn" class="primary" type="submit">Publier le wallpaper</button><div id="formStatus" class="status"></div>
+</form></section>
 <section class="panel catalogPanel"><div class="panelTop"><div><p class="eyebrow">CATALOGUE</p><h2>Mes uploads</h2></div><span id="count" class="count">0</span></div><div class="catalogTools"><input id="catalogSearch" type="search" placeholder="Rechercher par catégorie ou tag…" autocomplete="off"><select id="catalogFilter"><option value="all">Tous les types</option><option value="static">Standard</option><option value="live">Live</option></select></div><div id="catalog" class="catalog"></div></section>
-</div>
-</section>
-</main>
+</div></section></main>
 <script src="/static/admin.js?v=20260920-studio4" defer></script>
 <script src="/static/studio-batch-v1.js?v=20260920-batch2" defer></script>
 <script src="/static/studio-delete-v1.js?v=20260923-delete1" defer></script>
+<script src="/static/studio-admins-v1.js?v=20260923-admins1" defer></script>
 <script src="/static/admin-ai-guard.js?v=20260917-ai1" defer></script>
-</body>
-</html>
+</body></html>
