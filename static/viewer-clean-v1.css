@@ -1,0 +1,10 @@
+/* The wallpaper remains the focus in the full-screen viewer. Keep actions and LIVE badge. */
+#viewer .viewerCopy,
+#viewer #viewerCategory,
+#viewer #viewerTitle,
+#viewer #viewerTags {
+  display: none !important;
+}
+#viewer .viewerInfo {
+  justify-content: flex-end !important;
+}
