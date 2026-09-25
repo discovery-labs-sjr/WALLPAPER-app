@@ -85,6 +85,7 @@ def profile_catalog():
 
 
 @app.post('/api/admin/content/batch-upload')
+@app.post('/api/admin/wallpapers/batch-upload')
 async def batch_content_upload(
     files: list[UploadFile] = File(...),
     content_kind: str = Form('profile'),
