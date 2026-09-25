@@ -3,6 +3,15 @@
   const $ = (selector, root = document) => root.querySelector(selector);
   const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]));
 
+  function loadRailStyles() {
+    if (document.querySelector('link[data-profile-rail-style]')) return;
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = '/static/featured-widget-rail-v1.css?v=20260925-profile2';
+    link.dataset.profileRailStyle = 'true';
+    document.head.appendChild(link);
+  }
+
   function imageOf(item) { return item?.preview || item?.file || ''; }
 
   function mount(items) {
@@ -85,7 +94,9 @@
   }
 
   function boot() {
-    if (!$('#wvProfileRail')) return;
+    const root = $('#wvProfileRail');
+    if (!root) return;
+    loadRailStyles();
     load();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, {once: true});
