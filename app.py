@@ -7,6 +7,7 @@ import studio
 import studio_extensions
 import studio_delete
 import studio_admins
+import profile_studio
 import live_studio
 from wallpaper_engine import prepare_mobile_wallpaper
 from fastapi import Request
