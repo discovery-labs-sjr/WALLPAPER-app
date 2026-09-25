@@ -7,7 +7,7 @@
     if (document.querySelector('link[data-profile-rail-style]')) return;
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = '/static/featured-widget-rail-v1.css?v=20260925-profile2';
+    link.href = '/static/featured-widget-rail-v1.css?v=20260925-profile3';
     link.dataset.profileRailStyle = 'true';
     document.head.appendChild(link);
   }
@@ -18,11 +18,8 @@
     const root = $('#wvProfileRail');
     if (!root) return;
     const valid = (Array.isArray(items) ? items : []).filter(item => imageOf(item));
-    if (!valid.length) {
-      root.classList.add('is-empty');
-      root.innerHTML = '';
-      return;
-    }
+    // Do not erase the existing Featured rail when no real profile has been published yet.
+    if (!valid.length) return;
 
     const thumbs = valid.slice(0, 20).map(item => {
       const image = esc(imageOf(item));
@@ -87,16 +84,18 @@
     try {
       const response = await fetch('/api/profiles', {credentials: 'include', cache: 'no-store'});
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      mount(await response.json());
+      const profiles = await response.json();
+      if (Array.isArray(profiles) && profiles.some(item => imageOf(item))) {
+        loadRailStyles();
+        mount(profiles);
+      }
     } catch (error) {
       console.error('WALLVERSE profile rail:', error);
     }
   }
 
   function boot() {
-    const root = $('#wvProfileRail');
-    if (!root) return;
-    loadRailStyles();
+    if (!$('#wvProfileRail')) return;
     load();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, {once: true});
