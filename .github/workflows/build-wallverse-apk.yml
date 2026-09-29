@@ -7,12 +7,6 @@ on:
       - "android/**"
       - ".github/workflows/build-wallverse-apk.yml"
   workflow_dispatch:
-    inputs:
-      base_url:
-        description: "Public HTTPS URL of the WALLVERSE website"
-        required: true
-        type: string
-        default: "https://wallpaper-app-bw12.onrender.com/"
 
 permissions:
   contents: write
@@ -43,24 +37,9 @@ jobs:
         with:
           gradle-version: '8.10.2'
 
-      - name: Select WALLVERSE base URL
-        id: config
-        shell: bash
-        run: |
-          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-            BASE_URL="${{ inputs.base_url }}"
-          else
-            BASE_URL="https://wallpaper-app-bw12.onrender.com/"
-          fi
-          if [[ ! "$BASE_URL" =~ ^https:// ]]; then
-            echo "WALLVERSE_BASE_URL must use HTTPS."
-            exit 1
-          fi
-          echo "base_url=$BASE_URL" >> "$GITHUB_OUTPUT"
-
       - name: Build release APK
         working-directory: android
-        run: gradle :app:assembleRelease --no-daemon -PWALLVERSE_BASE_URL="${{ steps.config.outputs.base_url }}"
+        run: gradle :app:assembleRelease --no-daemon
 
       - name: Verify APK
         shell: bash
@@ -84,4 +63,4 @@ jobs:
           TAG="android-v1.1.0-build-${GITHUB_RUN_NUMBER}"
           gh release create "$TAG" android/app/build/outputs/apk/release/app-release.apk \
             --title "WALLVERSE Android $TAG" \
-            --notes "WALLVERSE Android release build. Website: ${{ steps.config.outputs.base_url }}"
+            --notes "WALLVERSE Android release build. Website: https://wallpaper-app-bw12.onrender.com/"
