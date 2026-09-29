@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         try {
-            val view = WebView(applicationContext)
+            val view = WebView(this)
             webView = view
 
             view.settings.apply {
@@ -81,7 +81,6 @@ class MainActivity : AppCompatActivity() {
         webView?.apply {
             stopLoading()
             webChromeClient = null
-            webViewClient = null
             destroy()
         }
         webView = null
