@@ -11,10 +11,12 @@ android {
         applicationId = "com.wallverse.app"
         minSdk = 23
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.1.0"
 
-        buildConfigField("String", "WALLVERSE_BASE_URL", "\"${project.findProperty("WALLVERSE_BASE_URL") ?: "https://YOUR-WALLVERSE-DOMAIN.example"}\"")
+        // The Android client talks to the public WALLVERSE web application.
+        // Keep the URL centralized here so the mobile shell and backend stay decoupled.
+        buildConfigField("String", "WALLVERSE_BASE_URL", "\"https://wallpaper-app-bw12.onrender.com\"")
     }
 
     compileOptions {
