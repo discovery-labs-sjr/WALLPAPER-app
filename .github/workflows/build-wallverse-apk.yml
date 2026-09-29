@@ -44,15 +44,15 @@ jobs:
       - name: Verify APK
         shell: bash
         run: |
-          APK="android/app/build/outputs/apk/release/app-release.apk"
+          APK="android/app/build/outputs/apk/release/app-release-unsigned.apk"
           test -s "$APK"
-          echo "Release APK generated: $APK"
+          echo "Unsigned release APK generated: $APK"
 
       - name: Upload release APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: WALLVERSE-Android-release
-          path: android/app/build/outputs/apk/release/app-release.apk
+          name: WALLVERSE-Android-release-unsigned
+          path: android/app/build/outputs/apk/release/app-release-unsigned.apk
           if-no-files-found: error
 
       - name: Publish GitHub release
@@ -61,6 +61,6 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           TAG="android-v1.1.0-build-${GITHUB_RUN_NUMBER}"
-          gh release create "$TAG" android/app/build/outputs/apk/release/app-release.apk \
+          gh release create "$TAG" android/app/build/outputs/apk/release/app-release-unsigned.apk \
             --title "WALLVERSE Android $TAG" \
-            --notes "WALLVERSE Android release build. Website: https://wallpaper-app-bw12.onrender.com/"
+            --notes "WALLVERSE Android release build (unsigned). Website: https://wallpaper-app-bw12.onrender.com/"
