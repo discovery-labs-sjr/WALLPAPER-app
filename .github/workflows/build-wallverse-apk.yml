@@ -1,5 +1,4 @@
-name: Build WALLVERSE APK
-# AndroidX is enabled in android/gradle.properties
+name: Build WALLVERSE Android
 
 on:
   push:
@@ -36,13 +35,13 @@ jobs:
         with:
           packages: platform-tools
 
-      - name: Install Android 36 SDK
+      - name: Install Android SDK
         run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: '8.9'
+          gradle-version: '8.10.2'
 
       - name: Select WALLVERSE base URL
         id: config
@@ -59,22 +58,30 @@ jobs:
           fi
           echo "base_url=$BASE_URL" >> "$GITHUB_OUTPUT"
 
-      - name: Build debug APK
+      - name: Build release APK
         working-directory: android
-        run: gradle :app:assembleDebug --no-daemon -PWALLVERSE_BASE_URL="${{ steps.config.outputs.base_url }}"
+        run: gradle :app:assembleRelease --no-daemon -PWALLVERSE_BASE_URL="${{ steps.config.outputs.base_url }}"
 
-      - name: Prepare APK
-        run: cp android/app/build/outputs/apk/debug/app-debug.apk WALLVERSE.apk
+      - name: Verify APK
+        shell: bash
+        run: |
+          APK="android/app/build/outputs/apk/release/app-release.apk"
+          test -s "$APK"
+          echo "Release APK generated: $APK"
 
-      - name: Upload workflow artifact
+      - name: Upload release APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: WALLVERSE-APK
-          path: WALLVERSE.apk
+          name: WALLVERSE-Android-release
+          path: android/app/build/outputs/apk/release/app-release.apk
+          if-no-files-found: error
 
-      - name: Publish downloadable GitHub release
+      - name: Publish GitHub release
+        if: github.event_name == 'workflow_dispatch'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          TAG="android-v1.0.0-build-${GITHUB_RUN_NUMBER}"
-          gh release create "$TAG" WALLVERSE.apk             --title "WALLVERSE Android $TAG"             --notes "WALLVERSE Android build. Website: ${{ steps.config.outputs.base_url }}"             --latest
+          TAG="android-v1.1.0-build-${GITHUB_RUN_NUMBER}"
+          gh release create "$TAG" android/app/build/outputs/apk/release/app-release.apk \
+            --title "WALLVERSE Android $TAG" \
+            --notes "WALLVERSE Android release build. Website: ${{ steps.config.outputs.base_url }}"
