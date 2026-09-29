@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                 setDescription("Téléchargement WALLVERSE")
                 setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
                 setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, filename)
-                if (!userAgent.isNullOrBlank()) setUserAgent(userAgent)
+                if (!userAgent.isNullOrBlank()) addRequestHeader("User-Agent", userAgent)
 
                 val cookie = CookieManager.getInstance().getCookie(url)
                 if (!cookie.isNullOrBlank()) addRequestHeader("Cookie", cookie)
