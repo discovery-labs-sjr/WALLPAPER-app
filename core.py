@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 import mimetypes
 import os
 import secrets
@@ -19,6 +20,7 @@ from pydantic import BaseModel, EmailStr, Field
 from pwdlib import PasswordHash
 from sqlalchemy import Boolean, DateTime, ForeignKey, String, UniqueConstraint, create_engine, func, select, text
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column, relationship, sessionmaker
+from sqlalchemy.exc import OperationalError
 
 BASE = Path(__file__).resolve().parent
 DATA = BASE / "wallpapers.json"
@@ -53,7 +55,22 @@ class Favorite(Base):
     __tablename__='favorites'; __table_args__=(UniqueConstraint('user_id','wallpaper_id',name='uq_user_wallpaper'),); id:Mapped[int]=mapped_column(primary_key=True); user_id:Mapped[int]=mapped_column(ForeignKey('users.id',ondelete='CASCADE'),index=True); wallpaper_id:Mapped[str]=mapped_column(String(80),index=True); created_at:Mapped[datetime]=mapped_column(DateTime(timezone=True),default=lambda:datetime.now(timezone.utc)); user:Mapped['User']=relationship(back_populates='favorites')
 class AuthSession(Base):
     __tablename__='auth_sessions'; id:Mapped[int]=mapped_column(primary_key=True); user_id:Mapped[int]=mapped_column(ForeignKey('users.id',ondelete='CASCADE'),index=True); refresh_hash:Mapped[str]=mapped_column(String(64),unique=True,index=True); expires_at:Mapped[datetime]=mapped_column(DateTime(timezone=True),index=True); revoked:Mapped[bool]=mapped_column(Boolean,default=False); created_at:Mapped[datetime]=mapped_column(DateTime(timezone=True),default=lambda:datetime.now(timezone.utc)); user:Mapped['User']=relationship(back_populates='sessions')
-Base.metadata.create_all(engine)
+try:
+    Base.metadata.create_all(engine)
+except OperationalError:
+    if DATABASE_BACKEND != "postgresql":
+        raise
+    logging.getLogger("wallverse.database").exception(
+        "PostgreSQL is unreachable during startup; falling back to local SQLite. "
+        "On Render's ephemeral filesystem, account and favorite data may not persist across restarts."
+    )
+    engine.dispose()
+    DATABASE_BACKEND = "sqlite"
+    DATABASE_PERSISTENT = False
+    connect_args = {"check_same_thread": False}
+    engine = create_engine(f"sqlite:///{BASE / 'wallverse.db'}", connect_args=connect_args, pool_pre_ping=True)
+    SessionLocal = sessionmaker(bind=engine, autoflush=False, expire_on_commit=False)
+    Base.metadata.create_all(engine)
 with DATA.open('r',encoding='utf-8') as handle: WALLPAPERS=json.load(handle)
 WALLPAPER_BY_ID={item['id']:item for item in WALLPAPERS}; WALLPAPER_IDS=set(WALLPAPER_BY_ID); ALLOWED_IMAGE_HOSTS={'images.unsplash.com','images.pexels.com'}
 app=FastAPI(title='WALLVERSE',version='7.0.0'); app.add_middleware(CORSMiddleware,allow_origins=[],allow_credentials=True); app.mount('/static',StaticFiles(directory=BASE/'static'),name='static')
